@@ -1,3 +1,3 @@
 # sport-php
 
-This is a social network developed in PHP with Bootstrap
+This is a social network developed in PHP with Bootstrap and MySQL.
