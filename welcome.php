@@ -19,7 +19,22 @@
         <link href="css/welcome_styles.css" rel="stylesheet" />
     </head>
     <body id="page-top">
-
+        <!-- barra de navegacion-->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow my-0 py-0" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand" href="#page-top"><img src="assets/static/LogoFS.png" height="64px" alt=""></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="bi-list"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
+                        <li class="nav-item"><a class="boton_sesion" href="iniciar_sesion.php">Iniciar Sesion</a></li>
+                        <li class="nav-item"><a class="boton_registro" href="registro.php">Registrarme</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

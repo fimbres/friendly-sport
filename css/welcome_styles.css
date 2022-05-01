@@ -1,0 +1,31 @@
+a.boton_sesion {
+  display: inline-block;
+  padding: 0.35em 1.2em;
+  margin: 0 1em 0.3em 0;
+  border-radius: 1em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  color: #ffffff;
+  background-color: #6c27e9;
+  text-align: center;
+  box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.25);
+}
+
+a.boton_registro {
+  display: inline-block;
+  padding: 0.35em 1.2em;
+  margin: 0 1em 0.3em 0;
+  border-radius: 1em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  color: #ffffff;
+  background-color: #2937f0;
+  text-align: center;
+  box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.25);
+}
