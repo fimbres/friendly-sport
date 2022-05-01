@@ -12,6 +12,12 @@ a.boton_sesion {
   background-color: #6c27e9;
   text-align: center;
   box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s;
+}
+
+a.boton_sesion:hover {
+  color: #000000;
+  background-color: #ffffff;
 }
 
 a.boton_registro {
@@ -28,4 +34,42 @@ a.boton_registro {
   background-color: #2937f0;
   text-align: center;
   box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s;
+}
+
+a.boton_registro:hover {
+  color: #000000;
+  background-color: #ffffff;
+}
+
+.grid_container {
+  display: grid;
+  gap: 3rem;
+  grid-template-columns: 1fr;
+  place-content: center;
+  margin: 4rem;
+
+  padding-block: 2rem;
+}
+
+.Texto {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.imagen {
+  max-width: 100%;
+  height: auto;
+}
+
+.gradiante {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(45deg, #2937f0, #9f1ae2);
+  color: #ffffff;
+  min-height: 200px;
+  padding: 2rem;
+  margin-bottom: 4rem;
 }

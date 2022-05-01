@@ -35,6 +35,32 @@
                 </div>
             </div>
         </nav>
+        <div class="contenido">
+            <div class="grid_container ">
+                <div class="Texto">
+                    <h1>Encuentra gente con los mismos gustos del deporte que tú!</h1>
+                    <p>Éste es un lugar donde podrás encontrar a más gente que comparte el 
+                    mismo gusto por el deporte y los eventos grupales contigo, siéntete libre 
+                    de organizar un evento o asistir a alguno organizado por algún otro miembro de 
+                    la comunidad.</p>
+                </div>
+                <div class="imagen">
+                    <img class="imagen" src="assets/static/alpinismo1.png" alt="">
+                </div>
+                <div class="imagen">
+                    <img class="imagen" src="assets/static/alpinismo2.png" alt="">
+                </div>
+                <div class="Texto">
+                    <h1>Invita a la gente de tu zona a reunirse y practicar algún deporte juntos</h1>
+                    <p>Dentro de éste espacio, podrás organizar reuniones en alguna zona de tu ciudad y 
+                        podrás conocer a muchas personas que compartan gustos contigo</p>
+                </div>
+            </div>
+            <div class = "gradiante">
+                <h1>Friendly Sport es un lugar en el cual podrás convivir con más personas que les encante hacer deporte como tú.</h1>
+            </div>
+        </div>
+        
 
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
