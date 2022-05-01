@@ -73,3 +73,12 @@ a.boton_registro:hover {
   padding: 2rem;
   margin-bottom: 4rem;
 }
+
+@media screen and (min-width: 60em) {
+  .grid_container {
+    display: grid;
+    gap: 3rem;
+    grid-template-columns: 1fr 1fr;
+    place-content: center;
+  }
+}
