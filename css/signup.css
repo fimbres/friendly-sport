@@ -83,5 +83,21 @@ label.form-label{
     font-size: 1.25rem;
 }
 .form-control{
-    border: 1px solid #232fcc;
+    border: 1.5px solid #ced4da;
+}
+.form-check-label{
+    font-size: 1.1rem;
+}
+.check-deportes{
+    padding-left: 3%;
+    padding-right: 3%;
+}
+.btn-success{
+    background-color: #28a745;
+}
+.btn-primary{
+    background-color: #2937f0;
+}
+.btn-secondary{
+    background-color: #9f1ae2;
 }
