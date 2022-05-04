@@ -7,7 +7,7 @@
 
         //En esta funcion verificaremos que las dos contraseñas dadas coincidan
         // y que tan siquiera 1 de check haya sido marcado
-        if(strcmp($post['contra'],$post['contra_rep']) != 0){
+        if(strcmp($post['contra'],$post['contra_re']) != 0){
             array_push($errores,'Las contraseñas no coinciden');
         }
 
@@ -21,10 +21,10 @@
     }
     function signup_obtener_check_inputs($post, $confirmar = false){
         $inputs = [];
-        if(isset($post['Futbol soccer']))
-            array_push($inputs,$post['Futbol soccer']);
-        if(isset($post['Futbol americano']))
-            array_push($inputs,$post['Futbol americano']);
+        if(isset($post['Futbol_soccer']))
+            array_push($inputs,$post['Futbol_soccer']);
+        if(isset($post['Futbol_americano']))
+            array_push($inputs,$post['Futbol_americano']);
         if(isset($post['Baloncesto']))
             array_push($inputs,$post['Baloncesto']);
         if(isset($post['Tenis']))
@@ -39,9 +39,8 @@
             array_push($inputs,$post['Ciclismo']);
         if(isset($post['Senderismo']))
             array_push($inputs,$post['Senderismo']);
-        
         if($confirmar){
-            if(isset($inputs)){
+            if(!empty($inputs)){
                 return true;
             } else{
                 return false;

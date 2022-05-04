@@ -9,13 +9,14 @@ $BD->next_result();
 array_push($genero, ($BD->query("call sp_buscar_genero_g('Femenino');"))->fetch_assoc());
 $BD->next_result();
 array_push($genero, ($BD->query("call sp_buscar_genero_g('Otro');"))->fetch_assoc());
-
-
+$BD->next_result();
+$deportes = signup_obtener_deportes($BD);
+$errores = false;
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $errores = signup_verificar_datos($_POST);
     if(!$errores){
         $BD->next_result();
-        signup_insertar_datos($_POST,$BD);
+        //signup_insertar_datos($_POST,$BD);
     }
 }
 $BD->close();
@@ -46,9 +47,21 @@ $BD->close();
                             <!-- LOGN IN FORM by Omar Dsoky -->
                             <form method="POST" class="col-md-8 needs-validation" novalidate>
                                 <header class="head-form">
+                                    <a href="index.php">
                                     <img src="assets/static/LogoFS-sin-fondo.png" class="img-fluid" style="max-width: 20%; padding-bottom: 30px">
+                                    </a>
                                     <h2>Registro</h2>
                                 </header>
+                                <?php if($errores){?>
+                                    <div class="alert alert-danger fade show" role="alert">
+                                        <strong>Parece que tuviste los siguientes errores:</strong> 
+                                        <?php foreach($errores as $error){?>
+                                        <br>
+                                        
+                                        <?php echo $error;
+                                        }?>
+                                    </div>
+                                <?php }?>
                                 <div class="form-row row">
                                     <div class="form-group col-md-6">
                                         <label class="form-label">Nombre de usuario</label>
@@ -173,66 +186,20 @@ $BD->close();
                                     Selecciona mínimo un deporte de tu interés
                                 </h3>
                                 <div class="form-row row check-deportes pt-4">
-
-                                    <div class="form-check col-3  text-center">
+                                    <?php 
+                                        $iterator = 0;
+                                        foreach($deportes as $dep){
+                                            if(!empty($dep)){
+                                    ?>
+                                        <div class="form-check col-3 text-center">
                                         <label class="form-check-label">
                                             <input class="form-check-input" 
-                                            type="checkbox" name="Futbol soccer">
-                                            Futbol soccer
+                                            type="checkbox" value="<?php echo $dep['id_deporte'];?>"
+                                            name="<?php echo $dep['nombre'];?>">
+                                            <?php echo $dep['nombre'];?>
                                         </label>
-                                    </div>
-                                    <div class="form-check col-3 text-center">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox" name="Futbol americano">
-                                            Futbol Americano
-                                        </label>
-                                    </div>
-                                    <div class="form-check col-3 text-center">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox" name="Baloncesto">
-                                            Baloncesto
-                                        </label>
-                                    </div>
-                                    <div class=" form-check col-3 text-center">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox" name="Tenis">
-                                            Tenis
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="form-row row pt-2">
-                                    <div class="form-check col-3  text-center">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox" name="Beisbol">
-                                            Beisbol
-                                        </label>
-                                    </div>
-                                    <div class="form-check col-3 text-center">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox" name="Petanca">
-                                            Petanca
-                                        </label>
-                                    </div>
-                                    <div class="form-check col-3 text-center">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox" name="Voleibol">
-                                            Voleibol
-                                        </label>
-                                    </div>
-                                    <div class=" form-check col-3 text-center">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox" name="Ciclismo">
-                                            Ciclismo
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="form-row row text-center p-2">
-                                    <div class=" form-check col-3 text-center">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox" name="Senderismo">
-                                            Senderismo
-                                        </label>
-                                    </div>
+                                        </div>
+                                    <?php }}?>
                                 </div>
                                 <div class="form-row row p-5 align-content-center align-items-center align-self-center">
                                     <div class="col-6 text-center">
