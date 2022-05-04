@@ -9,6 +9,15 @@ $BD->next_result();
 array_push($genero, ($BD->query("call sp_buscar_genero_g('Femenino');"))->fetch_assoc());
 $BD->next_result();
 array_push($genero, ($BD->query("call sp_buscar_genero_g('Otro');"))->fetch_assoc());
+
+
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $errores = signup_verificar_datos($_POST);
+    if(!$errores){
+        $BD->next_result();
+        signup_insertar_datos($_POST,$BD);
+    }
+}
 $BD->close();
 ?>
 <!DOCTYPE html>
@@ -49,7 +58,12 @@ $BD->close();
                                                     <i class="fa fa-user-circle"></i>
                                                 </div>
                                             </div>
-                                            <input class="form-control" type="text" placeholder="Persona55" maxlength="15" required>
+                                            <input  class="form-control" 
+                                                    type="text" 
+                                                    placeholder="Persona55" 
+                                                    maxlength="15" 
+                                                    name="nombre_usuario"
+                                                    required>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
@@ -60,7 +74,12 @@ $BD->close();
                                                     <i class="fa-solid fa-envelope"></i>
                                                 </div>
                                             </div>
-                                            <input class="form-input form-control" placeholder="persona@ejemplo.com.mx" type="email" maxlength="100" required>
+                                            <input  class="form-input form-control"
+                                                    placeholder="persona@ejemplo.com.mx" 
+                                                    type="email" 
+                                                    maxlength="100" 
+                                                    name="email"
+                                                    required>
                                         </div>
 
 
@@ -75,7 +94,11 @@ $BD->close();
                                                     <i class="fa-solid fa-location-dot"></i>
                                                 </div>
                                             </div>
-                                            <input class="form-input form-control" placeholder="Reforma #237, Colonia los pinos" type="text" required>
+                                            <input  class="form-input form-control" 
+                                                    placeholder="Reforma #237, Colonia los pinos" 
+                                                    type="text"
+                                                    name="direccion" 
+                                                    required>
                                         </div>
 
                                     </div>
@@ -89,7 +112,11 @@ $BD->close();
                                                     <i class="fa-solid fa-lock"></i>
                                                 </div>
                                             </div>
-                                            <input class="form-input form-control" maxlength="10" type="password" required>
+                                            <input  class="form-input form-control" 
+                                                    maxlength="10" 
+                                                    type="password" 
+                                                    name="contra"
+                                                    required>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
@@ -100,7 +127,11 @@ $BD->close();
                                                     <i class="fa fa-solid fa-lock"></i>
                                                 </div>
                                             </div>
-                                            <input class="form-input form-control" maxlength="10" type="password" required>
+                                            <input  class="form-input form-control" 
+                                                    maxlength="10" 
+                                                    type="password" 
+                                                    name="contra_re"
+                                                    required>
                                         </div>
                                     </div>
                                 </div>
@@ -113,7 +144,7 @@ $BD->close();
                                                     <i class="fa-solid fa-venus-mars"></i>
                                                 </div>
                                             </div>
-                                            <select class="fomr-input form-control" required>
+                                            <select class="fomr-input form-control" name="genero" required>
                                                 <?php
                                                 foreach ($genero as $row) {
                                                 ?>
@@ -132,7 +163,9 @@ $BD->close();
                                                     <i class="fa-solid fa-user"></i>
                                                 </div>
                                             </div>
-                                            <input class="form-input form-control" type="number" required>
+                                            <input  class="form-input form-control"
+                                                    name="edad"
+                                                    type="number">
                                         </div>
                                     </div>
                                 </div>
@@ -143,25 +176,26 @@ $BD->close();
 
                                     <div class="form-check col-3  text-center">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox">
+                                            <input class="form-check-input" 
+                                            type="checkbox" name="Futbol soccer">
                                             Futbol soccer
                                         </label>
                                     </div>
                                     <div class="form-check col-3 text-center">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox">
+                                            <input class="form-check-input" type="checkbox" name="Futbol americano">
                                             Futbol Americano
                                         </label>
                                     </div>
                                     <div class="form-check col-3 text-center">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox">
+                                            <input class="form-check-input" type="checkbox" name="Baloncesto">
                                             Baloncesto
                                         </label>
                                     </div>
                                     <div class=" form-check col-3 text-center">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox">
+                                            <input class="form-check-input" type="checkbox" name="Tenis">
                                             Tenis
                                         </label>
                                     </div>
@@ -169,25 +203,25 @@ $BD->close();
                                 <div class="form-row row pt-2">
                                     <div class="form-check col-3  text-center">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox">
+                                            <input class="form-check-input" type="checkbox" name="Beisbol">
                                             Beisbol
                                         </label>
                                     </div>
                                     <div class="form-check col-3 text-center">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox">
+                                            <input class="form-check-input" type="checkbox" name="Petanca">
                                             Petanca
                                         </label>
                                     </div>
                                     <div class="form-check col-3 text-center">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox">
+                                            <input class="form-check-input" type="checkbox" name="Voleibol">
                                             Voleibol
                                         </label>
                                     </div>
                                     <div class=" form-check col-3 text-center">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox">
+                                            <input class="form-check-input" type="checkbox" name="Ciclismo">
                                             Ciclismo
                                         </label>
                                     </div>
@@ -195,7 +229,7 @@ $BD->close();
                                 <div class="form-row row text-center p-2">
                                     <div class=" form-check col-3 text-center">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox">
+                                            <input class="form-check-input" type="checkbox" name="Senderismo">
                                             Senderismo
                                         </label>
                                     </div>
