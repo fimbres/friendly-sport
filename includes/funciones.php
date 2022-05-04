@@ -50,7 +50,41 @@
     }
     function signup_insertar_datos($datos,$BD){
 
-        //AQUI SE INSERTARAN LOS DATOS
+        $nombre = limpiar_string($datos['nombre_usuario'],$BD);
+        $email = limpiar_string($datos['email'],$BD);
+        $contra = $datos['contra'];
+        $genero = $datos['genero'];
+        $deportes = signup_obtener_check_inputs($datos);
+        $sql = "";
+        if(empty($datos['edad'])){
+            $sql = "call sp_insertar_usuario('$email','$nombre','$contra',NULL,NULL,0,$genero)";
+            
+        } else{
+            $edad = $datos['edad'];
+            $sql = "call sp_insertar_usuario('$email','$nombre','$contra',$edad,NULL,0,$genero)";
+        }
+        
+        if($BD->query($sql) === TRUE){
+            $BD->next_result();
+            // Obtenemos el ID del usuario que acabamos de agregar
+            $sql = "SELECT MAX(id_usuario) AS id FROM tb_usuario;";
+            $id = ($BD->query($sql))->fetch_assoc();
+            $id = $id['id'];
+            //Llenamos la tabla con las relaciones de los deportes que el usuario selcciono.
+            foreach($deportes as $dep){
+                $sql = "call sp_insertar_relacion_usuarios_deportes($id,$dep);";
+                $BD->query($sql);
+                $BD->next_result();
+            }
+            $BD->close();
+
+            header("location: login.php");
+        }
+        $error = [];
+        array_push($error,"Hubo un error inesperado al intentar darte de alta, intentalo de nuevo");
+        return $error;
+        
+        
     }
 
     function limpiar_string($str , $BD){

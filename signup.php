@@ -10,16 +10,20 @@ array_push($genero, ($BD->query("call sp_buscar_genero_g('Femenino');"))->fetch_
 $BD->next_result();
 array_push($genero, ($BD->query("call sp_buscar_genero_g('Otro');"))->fetch_assoc());
 $BD->next_result();
+
 $deportes = signup_obtener_deportes($BD);
 $errores = false;
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $errores = signup_verificar_datos($_POST);
     if(!$errores){
         $BD->next_result();
-        //signup_insertar_datos($_POST,$BD);
+        $errores = signup_insertar_datos($_POST,$BD);
     }
-}
+        
+    
+} 
 $BD->close();
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -54,7 +58,7 @@ $BD->close();
                                 </header>
                                 <?php if($errores){?>
                                     <div class="alert alert-danger fade show" role="alert">
-                                        <strong>Parece que tuviste los siguientes errores:</strong> 
+                                        <strong>Existieron los siguientes errores:</strong> 
                                         <?php foreach($errores as $error){?>
                                         <br>
                                         
@@ -95,24 +99,6 @@ $BD->close();
                                                     required>
                                         </div>
 
-
-                                    </div>
-                                </div>
-                                <div class="form-row row">
-                                    <div class="form-group col-md-12">
-                                        <label class="form-label">Dirección</label>
-                                        <div class="input-group mb-2">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text" style="display: block;">
-                                                    <i class="fa-solid fa-location-dot"></i>
-                                                </div>
-                                            </div>
-                                            <input  class="form-input form-control" 
-                                                    placeholder="Reforma #237, Colonia los pinos" 
-                                                    type="text"
-                                                    name="direccion" 
-                                                    required>
-                                        </div>
 
                                     </div>
                                 </div>
@@ -187,7 +173,6 @@ $BD->close();
                                 </h3>
                                 <div class="form-row row check-deportes pt-4">
                                     <?php 
-                                        $iterator = 0;
                                         foreach($deportes as $dep){
                                             if(!empty($dep)){
                                     ?>
