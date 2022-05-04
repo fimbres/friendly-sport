@@ -71,7 +71,7 @@ a.boton_registro:hover {
   color: #ffffff;
   min-height: 200px;
   padding: 2rem;
-  margin-bottom: 4rem;
+  margin-bottom: 0;
 }
 
 @media screen and (min-width: 60em) {
