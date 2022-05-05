@@ -1,0 +1,20 @@
+#loginForm{
+    box-shadow: 10px 10px 4px rgb(0 0 0 / 25%);
+}
+
+#btnLogin{
+    background-color: #6c27e9;
+}
+
+#btnCancelar{
+    background-color:#E92727;
+}
+
+#btnLogin,#btnCancelar{
+    color: #fff;
+    box-shadow: 6px 6px 2px rgb(0 0 0 / 25%);
+}
+
+#lblPurple,#lblCrear{
+    color: #4200FF;
+}
