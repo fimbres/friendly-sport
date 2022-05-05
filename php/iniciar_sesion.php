@@ -8,7 +8,9 @@
    
     if(!empty($correo_validado) && !empty($password_validado))
     {
-        include 'conexion.php';
+        include '../includes/funciones_BD.php';
+
+        $conexion = crear_conexion_variable();
 
         $sql = "SELECT * FROM tb_usuario WHERE email = '".$correo_validado."' AND contrasena = '".$password_validado."' ";
         $res = mysqli_query($conexion,$sql);

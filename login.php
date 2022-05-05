@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="col-12 container-fluid d-flex justify-content-center m-2 mb-4 pb-2">
-                <span>No tienes una cuenta?, <a id="lblCrear" class="text-decoration-none" href="register.php">Crea una aquí</a></span>
+                <span>No tienes una cuenta?, <a id="lblCrear" class="text-decoration-none" href="signup.php">Crea una aquí</a></span>
             </div>
         </form>
     </div>
