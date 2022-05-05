@@ -1,5 +1,4 @@
-/* Fonts Form Google Font ::- https://fonts.google.com/  -:: */
-@import url('https://fonts.googleapis.com/css?family=Abel|Abril+Fatface|Alegreya|Arima+Madurai|Dancing+Script|Dosis|Merriweather|Oleo+Script|Overlock|PT+Serif|Pacifico|Playball|Playfair+Display|Share|Unica+One|Vibur');
+
 /* End Fonts */
 /* Start Global rules */
 * {
@@ -16,9 +15,8 @@ background-image: linear-gradient(to top, #2937f0 0%, #9f1ae2 80%);
 background-attachment: fixed;
   background-repeat: no-repeat;
 
-    font-family: 'Vibur', cursive;
 /*   the main font */
-    font-family: 'Abel', sans-serif;
+    font-family: 'Adamina', serif;
     opacity: .95;
 /* background-image: linear-gradient(to top, #d9afd9 0%, #97d9e1 100%); */
 }
@@ -29,7 +27,7 @@ background-attachment: fixed;
 /* //////////////////////////////////////////// */
 
 /* Start form  attributes */
-form {
+form , .carta-blanca{
     min-height: 500px;
     height: auto;
     border-radius: 5px;
