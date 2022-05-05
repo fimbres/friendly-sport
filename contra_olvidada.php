@@ -1,3 +1,37 @@
+<?php 
+    include("includes/config.php");
+
+    $error_post = true;
+    $errores = [];
+    if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        $nom = $_POST['nombre_usuario'];
+        $email = $_POST['email'];
+        $BD = crear_conexion_clase();
+        $str ="call sp_buscar_usuario_n('$nom')";
+        $row = $BD->query($str);
+        $BD->close();
+        if($row->num_rows > 0){
+            
+            $res = $row->fetch_assoc();
+            if(strcmp($res['email'],$email) == 0){
+                $error_post = false;
+                $contra = $res['contrasena'];
+                mail($res['email'],"Contraseña olvidada - Friendly Sport",$contra);
+                include("includes/widgets/correo_enviado.php");
+            } else{
+                array_push($errores, "El email no coincide, vuelva a intentarlo");
+            }
+            
+        } else{
+            array_push($errores, "El nombre de usuario no existe");
+        }
+    } 
+    
+    if($error_post) {
+
+    
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -31,6 +65,16 @@
                                     <img src="assets/static/LogoFS-sin-fondo.png" class="img-fluid" style="max-width: 20%; padding-bottom: 30px">
                                     </a>
                                     <h2>Restablecer contraseña</h2>
+                                    <?php if($errores){?>
+                                    <div class="alert alert-danger fade show" role="alert">
+                                        <strong>Existieron los siguientes errores:</strong> 
+                                        <?php foreach($errores as $error){?>
+                                        <br>
+                                        
+                                        <?php echo $error;
+                                        }?>
+                                    </div>
+                                <?php }?>
                                 </header>
                                 <div class="form-row row">
                                     <div class="form-group col-md-6">
@@ -113,3 +157,4 @@
 </body>
 
 </html>
+<?php }?>
