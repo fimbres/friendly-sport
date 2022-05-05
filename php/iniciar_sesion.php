@@ -16,18 +16,12 @@
    
         if($row > 0){
             session_start();
-
-            $_SESSION['user'] = array(
-                'usuario_Id' => $row['id_usuario'],
-                'usuario_Nombre' => $row['nombre_usuario'],
-                'usuario_Email' => $row['email'],
-                'usuario_Edad' => $row['edad'],
-            );
-                /*$_SESSION['user'] = array(
-                                        'userLevel' => $row['userType'],
-                                      'fullname' => $row['userName'],
-                                      'IsLoggeD' => true 
-                                        );*/
+            $info = mysqli_fetch_array($res);
+           
+            $_SESSION['usuario_Id'] = $info['id_usuario'];
+            $_SESSION['usuario_Nombre'] = $info['nombre_usuario'];
+            $_SESSION['usuario_Email'] = $info['email'];
+            $_SESSION['usuario_Edad'] = $info['edad'];
      
             $response = array("response" => "Success");
         
