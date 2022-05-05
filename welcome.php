@@ -29,8 +29,8 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-                        <li class="nav-item"><a class="boton_sesion" href="iniciar_sesion.php">Iniciar Sesion</a></li>
-                        <li class="nav-item"><a class="boton_registro" href="registro.php">Registrarme</a></li>
+                        <li class="nav-item"><a class="boton_sesion" href="login.php">Iniciar Sesion</a></li>
+                        <li class="nav-item"><a class="boton_registro" href="signup.php">Registrarme</a></li>
                     </ul>
                 </div>
             </div>

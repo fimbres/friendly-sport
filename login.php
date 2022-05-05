@@ -19,8 +19,8 @@
                 <h1 class="text-center">Login</h1>
             </div>
             <div class="col-12 text-center">
-                <input id="txtCorreo" class="w-100 mr-3 ml-3 mt-1 mb-2 p-2  form-control rounded-3" name="correo"  autocomplete="off" type="text" placeholder="Correo"/>
-                <input id="txtPassword" class="w-100 mr-3 ml-3 mt-2 mb-1 p-2 form-control rounded-3" name="password"  autocomplete="off" type="password" placeholder="Contraseña"/>
+                <input id="txtCorreo" class="w-100 mr-3 ml-3 mt-1 mb-2 p-2  form-control rounded-3" name="correo" maxlength="100"  autocomplete="off" type="text" placeholder="Correo"/>
+                <input id="txtPassword" class="w-100 mr-3 ml-3 mt-2 mb-1 p-2 form-control rounded-3" name="password" maxlength="15" autocomplete="off" type="password" placeholder="Contraseña"/>
             </div>
             <div class="col-12">
                 <p id="notificacion" class="mt-2 text-danger text-center d-none">Etiqueta de notificación</p>
@@ -59,9 +59,8 @@
                                 window.location="welcome.php";
                             }   
                             else if (data.response == "Invalid") {
-                                $('#notificacion').text('Correo o contraseña incorrectos');
+                                $('#notificacion').text(data.message);
                                 $('#notificacion').removeClass('d-none');
-                            
                             }
                         },
                         error: function (xhr, exception) {
@@ -78,9 +77,7 @@
 
 
             $('#btnCancelar').on('click', function() {
-                $('#txtCorreo').val('');
-                $('#txtPassword').val('');
-                $('#notificacion').addClass('d-none');
+                window.location="welcome.php";
             });
     </script>
     <script src="js/scripts.js"></script>
