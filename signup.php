@@ -15,7 +15,6 @@ $deportes = signup_obtener_deportes($BD);
 $errores = false;
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $errores = signup_verificar_datos($_POST);
-    echo $_POST['contra'];
     if(!$errores){
         $BD->next_result();
         $errores = signup_insertar_datos($_POST,$BD);
