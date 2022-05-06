@@ -16,7 +16,9 @@
             if(strcmp($res['email'],$email) == 0){
                 $error_post = false;
                 $contra = $res['contrasena'];
-                mail($res['email'],"Contraseña olvidada - Friendly Sport",$contra);
+                //$cuerpo = crear_base_html("<h4>Tu contraseña olvidada es:<br> ".$contra ."</h4>");
+                $cuerpo = $contra;
+                mail($res['email'],"Contraseña olvidada - Friendly Sport",$cuerpo);
                 include("includes/widgets/correo_enviado.php");
             } else{
                 array_push($errores, "El email no coincide, vuelva a intentarlo");
@@ -43,12 +45,13 @@
     <meta name="author" content="472 UABC Group" />
     <title>Crear cuenta</title>
 
-    <link rel="icon" type="image/x-icon" href="assets/FS-icono.ico" />
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/signup.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Adamina&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="assets/FS-icono.ico" />
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/signup.css">
+    
 </head>
 
 <body class="bg-light">
