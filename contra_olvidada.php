@@ -1,8 +1,15 @@
 <?php 
     include("includes/config.php");
 
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+
+    require 'path/to/PHPMailer/src/Exception.php';
+    require 'path/to/PHPMailer/src/PHPMailer.php';
+
     $error_post = true;
     $errores = [];
+
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $nom = $_POST['nombre_usuario'];
         $email = $_POST['email'];
@@ -10,16 +17,27 @@
         $str ="call sp_buscar_usuario_n('$nom')";
         $row = $BD->query($str);
         $BD->close();
-        if($row->num_rows > 0){
-            
+        //Hacemos un if para confirmar de que el nombre de usuario si existe
+        if($row){   
+
             $res = $row->fetch_assoc();
+            //Hacemos una confimracion de que el email del nombre de usuario es el
+            // mismo que el usuario puso en el formulario
             if(strcmp($res['email'],$email) == 0){
                 $error_post = false;
                 $contra = $res['contrasena'];
-                //$cuerpo = crear_base_html("<h4>Tu contraseña olvidada es:<br> ".$contra ."</h4>");
                 $cuerpo = $contra;
-                mail($res['email'],"Contraseña olvidada - Friendly Sport",$cuerpo);
-                include("includes/widgets/correo_enviado.php");
+
+                /* */
+                $correo = php_mailer_clase();
+                $correo->AddAddress($email,'Receiver');
+                $correo->isHTML(true);
+                $correo->Subject = "Contraseña olvidada - Friendly Sport";
+                $correo->Body = crear_base_html("<h4>Tu contraseña olvidada es:<br> ".$contra ."</h4>");
+                if(!$correo->Send()){
+                    include("includes/widgets/correo_enviado.php");
+                }
+                
             } else{
                 array_push($errores, "El email no coincide, vuelva a intentarlo");
             }
