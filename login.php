@@ -35,14 +35,14 @@
                     <form id="loginForm">
                         <div class="form-group">
                             <div class="form-icon-wrapper">
-                                <input type="email" class="form-control" id="email" max-length="100" placeholder="Correo" autofocus
+                                <input type="text" class="form-control border border-dark" id="username" maxlength="15" placeholder="Usuario" autofocus
                                     required>
-                                <i class="form-icon-left mdi mdi-email"></i>
+                                <i class="form-icon-left mdi mdi-face-profile"></i>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="form-icon-wrapper">
-                                <input type="password" class="form-control" id="password" max-length="15" placeholder="Contraseña"
+                                <input type="password" class="form-control border border-dark" id="password" maxlength="15" placeholder="Contraseña"
                                     required>
                                 <i class="form-icon-left mdi mdi-lock"></i>
                                 <a href="#" class="form-icon-right password-show-hide" title="Hide or show password">
@@ -80,17 +80,18 @@
     <script>
         $('#loginForm').on('submit', function(e) {
             e.preventDefault();
-            var email = $('#email').val();
+            var username = $('#username').val();
             var password = $('#password').val();
 
-            if(email!="" && password!="" )
+            if(username!="" && password!="" )
             {
                 $.ajax({
                         type:'POST',
                         url:'includes/iniciar_sesion.php',
                         dataType:'JSON',
-                        data: {email: email,password:password},
+                        data: {username: username,password:password},
                         beforeSend:function(data){
+                            $('#notificacion').addClass('d-none');
                     
                         },  
                         success:function(data){
