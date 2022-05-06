@@ -15,6 +15,7 @@ $deportes = signup_obtener_deportes($BD);
 $errores = false;
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $errores = signup_verificar_datos($_POST);
+    echo $_POST['contra'];
     if(!$errores){
         $BD->next_result();
         $errores = signup_insertar_datos($_POST,$BD);
@@ -35,6 +36,10 @@ $BD->close();
     <meta name="description" content="Crear tu cuenta en la nueva red social Friendly Sport, donde podras encontrar personas para jugar tus deportes favoritos." />
     <meta name="author" content="472 UABC Group" />
     <title>Crear cuenta</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Adamina&display=swap" rel="stylesheet">
 
     <link rel="icon" type="image/x-icon" href="assets/FS-icono.ico" />
     <link rel="stylesheet" href="css/styles.css">
@@ -112,7 +117,7 @@ $BD->close();
                                                 </div>
                                             </div>
                                             <input  class="form-input form-control" 
-                                                    maxlength="10" 
+                                                    maxlength="15" 
                                                     type="password" 
                                                     name="contra"
                                                     required>
@@ -127,7 +132,7 @@ $BD->close();
                                                 </div>
                                             </div>
                                             <input  class="form-input form-control" 
-                                                    maxlength="10" 
+                                                    maxlength="15" 
                                                     type="password" 
                                                     name="contra_re"
                                                     required>
