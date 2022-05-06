@@ -37,8 +37,8 @@ $BD->close();
     <title>Crear cuenta</title>
 
     <link rel="icon" type="image/x-icon" href="assets/FS-icono.ico" />
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/signup.css">
+    <link rel="stylesheet" href="dist/css/styles.css">
+    <link rel="stylesheet" href="dist/css/signup.css">
 </head>
 
 <body class="bg-light">
