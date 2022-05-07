@@ -1,27 +1,27 @@
 <?php
-    $correo = $_POST['email'];
+    $username = $_POST['username'];
     $password = $_POST['password'];
 
     //Filtro eliminar caracteres introducidos
     $caracteres_especiales = array("'",'"',"+","-","?","¿","[","]","{","}"," ");
-    $correo_validado = str_replace($caracteres_especiales,"",$correo);
+    $username_validado = str_replace($caracteres_especiales,"",$username);
     $password_validado = str_replace($caracteres_especiales,"",$password);
 
     //Verificar que los campos no esten vacios
-    if(!empty($correo_validado) && !empty($password_validado))
+    if(!empty($username_validado) && !empty($password_validado))
     {
         include '../includes/funciones_BD.php';
 
-        $tamano_correo = strlen($correo_validado);
+        $tamano_username = strlen($username_validado);
         $tamano_pass = strlen($password_validado);
 
         //Verificacion del tamaño de los datos introducidos
-        if($tamano_correo < 100 && $tamano_pass <  15)
+        if($tamano_username <= 15 && $tamano_pass <=  15)
         {
 
             //Buscar usuario
             $conexion = crear_conexion_variable();
-            $sql = "SELECT * FROM tb_usuario WHERE email = '".$correo_validado."' AND contrasena = '".$password_validado."' ";
+            $sql = "SELECT * FROM tb_usuario WHERE nombre_usuario = '".$username_validado."' AND contrasena = '".$password_validado."' ";
             $res = mysqli_query($conexion,$sql);
             $row = mysqli_num_rows($res);
     
@@ -39,7 +39,7 @@
             }
             else//Usuario no encontrado
             {
-                $response = array("response" => "Invalid","message" => "Correo o Contraseña invalida");
+                $response = array("response" => "Invalid","message" => "Usuario o Contraseña invalida");
             }
         }
         else//Tamaño maximo de caracteres superado
