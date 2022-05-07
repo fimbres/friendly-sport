@@ -36,6 +36,10 @@ $BD->close();
     <meta name="author" content="472 UABC Group" />
     <title>Crear cuenta</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Adamina&display=swap" rel="stylesheet">
+
     <link rel="icon" type="image/x-icon" href="assets/FS-icono.ico" />
     <link rel="stylesheet" href="dist/css/styles.css">
     <link rel="stylesheet" href="dist/css/signup.css">
@@ -112,7 +116,7 @@ $BD->close();
                                                 </div>
                                             </div>
                                             <input  class="form-input form-control" 
-                                                    maxlength="10" 
+                                                    maxlength="15" 
                                                     type="password" 
                                                     name="contra"
                                                     required>
@@ -127,7 +131,7 @@ $BD->close();
                                                 </div>
                                             </div>
                                             <input  class="form-input form-control" 
-                                                    maxlength="10" 
+                                                    maxlength="15" 
                                                     type="password" 
                                                     name="contra_re"
                                                     required>
