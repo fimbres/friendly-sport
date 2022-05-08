@@ -83,21 +83,18 @@
         $error = [];
         $BD->next_result();
         $str = "call sp_buscar_usuario_n('$nombre')";
-        $row = $BD->query($str);
 
-        if($row->num_rows > 0){
+        if($BD->query($str)){
             $BD->next_result();
             $str = "SELECT * FROM tb_usuario where email = '$email'";
-            $row = $BD->query($str);
-            if($row->num_rows > 0){
+            if($BD->query($str)){
                 array_push($error,"El correo que ingresaste, ya ha sido ingresado anteriormente, intenta uno diferente");
             }
             array_push($error,"El nombre de usuario que ingresaste ya esta ocupado, intenta uno diferente");
         } else{
             $BD->next_result();
             $str = "SELECT * FROM tb_usuario where email = '$email'";
-            $row = $BD->query($str);
-            if($row->num_rows > 0){
+            if($BD->query($str)){
                 array_push($error,"El correo que ingresaste, ya ha sido ingresado anteriormente, intenta uno diferente");
             } else{
                 array_push($error,"Hubo un error inesperado al intentar darte de alta, intentalo de nuevo");
