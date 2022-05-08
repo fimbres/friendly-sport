@@ -51,7 +51,7 @@ $BD->close();
                             <!-- LOGN IN FORM by Omar Dsoky -->
                             <form method="POST" class="col-md-8 needs-validation" novalidate>
                                 <header class="head-form">
-                                    <a href="index.php">
+                                    <a href="welcome.php">
                                     <img src="assets/static/LogoFS-sin-fondo.png" class="img-fluid" style="max-width: 20%; padding-bottom: 30px">
                                     </a>
                                     <h2>Registro</h2>

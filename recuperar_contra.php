@@ -1,11 +1,12 @@
 <?php 
-    include("includes/config.php");
-
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
+    use PHPMailer\PHPMailer\SMTP;
+    include("includes/config.php");
+    require "dist/vendor/phpmailer/phpmailer/src/PHPMailer.php";
+    require "dist/vendor/phpmailer/phpmailer/src/Exception.php";
+    require "dist/vendor/phpmailer/phpmailer/src/SMTP.php";
 
-    require 'path/to/PHPMailer/src/Exception.php';
-    require 'path/to/PHPMailer/src/PHPMailer.php';
 
     $error_post = true;
     $errores = [];
@@ -27,15 +28,39 @@
                 $error_post = false;
                 $contra = $res['contrasena'];
                 $cuerpo = $contra;
-
+                try{
                 /* */
-                $correo = php_mailer_clase();
-                $correo->AddAddress($email,'Receiver');
-                $correo->isHTML(true);
-                $correo->Subject = "Contraseña olvidada - Friendly Sport";
-                $correo->Body = crear_base_html("<h4>Tu contraseña olvidada es:<br> ".$contra ."</h4>");
-                if(!$correo->Send()){
-                    include("includes/widgets/correo_enviado.php");
+                    $correo = new PHPMailer();
+                    
+                    $correo->isSMTP();
+                    $correo->SMTPAuth = true;
+
+                    $correo->SMTPSecure = 'tls';
+                    $correo->SMTPAutoTLS = false;
+                    $correo->Port = 25;
+                    $correo->Host = "smtp.gmail.com";
+                    $correo->Username = "metafusion.tech@gmail.com";
+                    $correo->Password = "aucexcqcwfnfuspa";
+
+                    $correo->isHTML(true);
+                    //$correo->setFrom("metafusion.tech@gmail.com");
+                    $correo->AddAddress($email);
+                    
+                    
+                    $correo->Subject = "Contrasena olvidada - Friendly Sport";
+                    //$correo->msgHTML();
+                    $correo->Body = "<h2>Tu contrasena olvidada es:<br> ".$contra ."</h2>";
+                    if($correo->Send()){
+
+                        include("includes/widgets/correo_enviado.php");
+                    } else{
+                        $error_post = true;
+                        array_push($errores,$correo->ErrorInfo);
+                    }
+                    
+                } catch(Exception $e){
+                    $error_post = true;
+                    echo $e;
                 }
                 
             } else{
@@ -63,12 +88,13 @@
     <meta name="author" content="472 UABC Group" />
     <title>Crear cuenta</title>
 
+    <link rel="icon" type="image/x-icon" href="assets/FS-icono.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Adamina&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="assets/FS-icono.ico" />
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/signup.css">
+    <link rel="stylesheet" href="dist/css/styles.css">
+    <link rel="stylesheet" href="dist/css/signup.css">
     
 </head>
 
@@ -82,7 +108,7 @@
                             <!-- LOGN IN FORM by Omar Dsoky -->
                             <form method="POST" class="col-md-8 needs-validation" novalidate>
                                 <header class="head-form">
-                                    <a href="index.php">
+                                    <a href="welcome.php">
                                     <img src="assets/static/LogoFS-sin-fondo.png" class="img-fluid" style="max-width: 20%; padding-bottom: 30px">
                                     </a>
                                     <h2>Restablecer contraseña</h2>

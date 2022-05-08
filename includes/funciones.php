@@ -92,16 +92,4 @@
         $data = $BD->real_escape_string($str);
         return $data;
     }
-    function php_mailer_clase(){
-        $res = new PHPMailer(true);
-        $res->isSMTP();
-        $res->STMPAuth = true;
-        $res->STMPSecure ='tls';
-        $res->Host = "smtp.gmail.com";
-        $res->Port = 587;
-
-        $res->Username = "metafusion.tech@gmail.com";
-        $res->Password = "fusiontech472";
-        return $res;
-    }
 ?>

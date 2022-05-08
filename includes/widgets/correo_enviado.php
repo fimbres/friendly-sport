@@ -9,8 +9,8 @@
     <title>Crear cuenta</title>
 
     <link rel="icon" type="image/x-icon" href="assets/FS-icono.ico" />
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/signup.css">
+    <link rel="stylesheet" href="dist/css/styles.css">
+    <link rel="stylesheet" href="dist/css/signup.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Adamina&display=swap" rel="stylesheet">
@@ -26,7 +26,7 @@
                             <!-- LOGN IN FORM by Omar Dsoky -->
                             <div class="carta-blanca">
                                 <header class="head-form">
-                                    <a href="index.php">
+                                    <a href="welcome.php">
                                     <img src="assets/static/LogoFS-sin-fondo.png" class="img-fluid" style="max-width: 20%; padding-bottom: 30px">
                                     </a>
                                     <h2>Correo enviado</h2>
