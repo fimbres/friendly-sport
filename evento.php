@@ -15,7 +15,6 @@
 
     $BD->close();
 
-
 ?>
 <html lang="en">
     <head>
@@ -59,7 +58,7 @@
                     <h2>Crear evento</h2>
                 </div>
                 <div class="card-body text-center">
-                    <form method="POST" class="" >
+                    <form method="POST" class="needs-validation" novalidate>
                         <div class="row">
                             <!-- 
                             <div style="float: left; width: 20%">
@@ -76,12 +75,12 @@
                             <div style="float: left; width: 65%; text-align: left; padding-left: 50px;">
                                 <div class="form-group">
                                     <label>Titulo del evento</label>
-                                    <input type="text" class="form-control" name="nombre" >
+                                    <input type="text" class="form-control" name="nombre" required>
                                 </div>
                                 <div class="row pt-4">
                                     <div class="form-group col-6 ">
                                         <label class="">Categoría</label>
-                                        <select name="deporte" class="form-input form-control" >
+                                        <select name="deporte" class="form-input form-control" required>
                                             <?php while($dep = mysqli_fetch_array($deportes)){?>
                                                 <option value="<?php echo $dep['id_deporte'];?>">
                                                     <?php echo $dep['nombre'];?>
@@ -91,7 +90,7 @@
                                     </div>
                                     <div class="form-group col-6">
                                         <label class="">Dia y hora</label>
-                                        <input class="form-control form-dia-hora" type="datetime-local" name="fecha" >
+                                        <input class="form-control form-dia-hora" type="datetime-local" name="fecha" required>
                                     </div>
                                 </div>
                                 <div class="row pt-4">
@@ -137,5 +136,25 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="dist/js/jquery-3.6.0.min.js"></script>
         <script src="dist/js/script_jquery.js"></script>
+        <script>
+        (function() {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
     </body>
 </html>
