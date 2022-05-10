@@ -4,7 +4,8 @@
     }
     */
     include("includes/config.php");
-
+    $error = [];
+    $exito = true;
     $BD = crear_conexion_clase();
     /* SE SACAN LOS DATOS DEL USUARIO */
     /*  */
@@ -12,7 +13,22 @@
     $usuario = ($BD->query("call sp_buscar_usuario(10)"))->fetch_assoc();
     $BD->next_result();
     $deportes = ($BD->query("SELECT * FROM tb_deporte;"));
+    $BD->next_result();
+    
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $resultado = evento_formulario_verificar($_POST,$BD);
+        if($resultado[0]){
+            $res = agregar_evento($resultado[1],$usuario,$BD);
+            if($res[0]){
+                $exito = true;
+            } else{
+                $error = $res[1];
+            }
+        } else{
+            $error = $resultado[1];
+        }
 
+    }
     $BD->close();
 
 ?>
@@ -58,6 +74,13 @@
                     <h2>Crear evento</h2>
                 </div>
                 <div class="card-body text-center">
+                    <?php 
+                        if($exito){
+                    ?>
+                    <div class="col-12 alert alert-success text-center">
+                        <h3>Se agrego el evento de manera exitosa</h3>
+                    </div>
+                    <?php }?>
                     <form method="POST" class="needs-validation" novalidate>
                         <div class="row">
                             <!-- 
@@ -75,7 +98,7 @@
                             <div style="float: left; width: 65%; text-align: left; padding-left: 50px;">
                                 <div class="form-group">
                                     <label>Titulo del evento</label>
-                                    <input type="text" class="form-control" name="nombre" required>
+                                    <input type="text" class="form-control" name="nombre" required maxlength="45">
                                 </div>
                                 <div class="row pt-4">
                                     <div class="form-group col-6 ">
@@ -107,7 +130,23 @@
                                 </div>
                             </div>
                         </div>
+                        <?php if(!empty($error)){ ?>
+                            <div class="p-4">
+                                <div class="aler alert-danger">
+                                    <h4 style="font-weight: bold;">Se encontraron los siguientes errores:</h4>
+                                    <?php 
+                                        foreach($error as $er){
+                                    
+                                    ?>
+                                        <br>
+                                        <p><?php echo $er;?></p>
+                                    <?php }?>
+                                </div>
+                            </div>
+                        <?php }?>
                         <div class="pt-4 ">
+                            <input type="hidden" id="fecha_min" name="fecha_min">
+                            <input type="hidden" id="fecha_max" name="fecha_max">
                             <button type="submit" class="btn btn-primary">Crear evento</button>
                             <button type="button" class="btn btn-danger">Cancelar</button>
                         </div>

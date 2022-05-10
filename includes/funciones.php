@@ -110,4 +110,98 @@
         $data = $BD->real_escape_string($str);
         return $data;
     }
+
+    function evento_formulario_verificar($datos,$BD){
+        $res = [];
+        $errores = [];
+        $res['nombre'] = limpiar_string($datos['nombre'],$BD);
+        $res['deporte'] = $datos['deporte'];
+        if(comprobar_fecha($datos['fecha_min'],$datos['fecha_max'])){
+            $temp = explode("T",$datos['fecha']);
+            $res['fecha'] = $temp[0];
+            $res['hora_inicio'] = $temp[1];
+        } else{
+            array_push($errores,"La fecha ingresada es incorrecta, vuelve a ingresar otra");
+        }
+        $res['descripcion'] = limpiar_string($datos['descripcion'],$BD);
+        if(empty($errores)){
+            return [true,$res];
+        } else{
+            return [false,$errores];
+        }
+    }
+    
+    function comprobar_fecha($fecha_min , $fecha_max){
+        $fecha_php = new DateTime('now');
+        $fecha_js = explode("T",$fecha_min);
+        $str = $fecha_js[0] . " " . $fecha_js[1];
+        $minimo = new DateTime($str);
+
+        $fecha_js = explode("T",$fecha_max);
+        $str = $fecha_js[0] . " " . $fecha_js[1];
+        $maximo = new DateTime($str);
+
+        if($fecha_php < $minimo){
+            return false;
+        }
+        if($fecha_php > $maximo){
+            return false;
+        }
+        return true;
+    }
+
+    function agregar_evento($datos,$usuario,$BD){
+        $nombre = $fecha = $hora_inicio = $hora_final = NULL;
+        $descripcion = $ciudad = $direccion = NULL;
+        $error = [];
+
+        $nombre = $datos['nombre'];
+        $fecha = $datos['fecha'];
+        $hora_inicio = $datos['hora_inicio'];
+
+        if(!empty($datos['descripcion'])){
+            $descripcion = $datos['descripcion'];
+        } else{
+            $descripcion = 'NULL';
+        }
+        //LA CIUDAD Y HORA_FINAL NO FUERON PEDIDAS EN EL FORMULARIO
+        // POSIBLEMENTE ESO SE AGREGARA DENTRO DE LA EDICION
+        $hora_final = $ciudad = 'NULL';
+        /*POR EL MOMENTO NO SE AGREGARA LA DIRECCION */
+
+        $sql = "call sp_insertar_evento('$nombre','$fecha','$hora_inicio',$hora_final,";
+        if(!empty($datos['descripcion'])){
+            $sql .= "'$descripcion',";
+        } else{
+            $sql .= "NULL,";
+        }
+        $sql .= "$ciudad,NULL);";
+
+        if($BD->query($sql) === TRUE){
+            $BD->next_result();
+            $sql = "SELECT MAX(id_evento) AS id FROM tb_evento;";
+            $id = ($BD->query($sql))->fetch_assoc();
+            $BD->next_result();
+            $id = $id['id'];
+            $usu_id = $usuario['id_usuario'];
+            $sql = "call sp_insertar_relacion_usuarios_eventos($id,$usu_id,1)";
+            if($BD->query($sql) === TRUE){
+                $BD->next_result();
+                $dep_id = $datos['deporte'];
+                $sql = "call sp_insertar_relacion_deportes_eventos($id,$dep_id)";
+                if($BD->query($sql) === TRUE){
+                    return [true];
+                } else{
+                    array_push($error, 'Hubo un error al intentar crear una relación entre deporte/evento, inténtalo de nuevo!');
+                }
+            } else{
+                array_push($error,'Hubo un error al intentar crear una relación entre usuario/evento, inténtalo de nuevo!');
+            }
+        } else{
+            array_push($error, 'Hubo un error al intentar registrar el evento, inténtalo de nuevo!');
+        }
+
+        
+        return [false,$error];
+    }
 ?>
