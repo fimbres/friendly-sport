@@ -19,32 +19,45 @@
         <link href="dist/css/index_styles.css" rel="stylesheet" />
     </head>
     <body id="page-top">
+        <div class="barra">
         <!-- barra de navegacion-->
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow my-0 py-0" id="mainNav">
-            <div class="container">
-                <a class="navbar-brand" href="#page-top"><img src="assets/static/LogoFS.png" height="64px" alt=""></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="bi-list"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-                        <li class="nav-item"><a class="boton_salir" href="#">Salir de la Sesion</a></li>
-                        <li class="nav-item"><a class="boton_perfil" href="#">Mostrar Perfil</a></li>
-                    </ul>
+            <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow py-0 mb-5" id="mainNav">
+                <div class="container">
+                    <a class="navbar-brand" href="#page-top"><img src="assets/static/LogoFS.png" height="64px" alt=""></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                        Menu
+                        <i class="bi-list"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
+                            <li class="nav-item"><a class="boton_salir" href="#">Salir de la Sesion</a></li>
+                            <li class="nav-item"><a class="boton_perfil" href="#">Mostrar Perfil</a></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
+        </div>
         <!-- contenido de la pagina-->        
         <div class="contenido">
-            <div class="rectangulo">
-                
-
-
+            <div class="division1">
+                <div class="rectangulo">
+                    <div class="icono">
+                        <img src="assets/static/user_icon.png" alt="">
+                    </div>
+                    <a class="boton_crear" href="#">
+                        Organizar un evento
+                    </a>
+                </div>
+            </div>
+            <div class="division2">
+                <div class="vacio">
+                    <img class="imagen" src="assets/static/lupa.png" alt="">
+                    <p>Vaya!, no pudimos encontrar eventos en tu zona 😢, ¿Te gustaría crear uno?</p>
+                </div>
             </div>
         </div>
         <!-- Footer-->
-        <footer class="bg-black text-center py-3">
+        <footer class="bg-black text-center  mt-3 py-3">
             <div class="container px-5">
                 <div class="text-white-50 small">
                     <p>© FriendlySport, 2022. Todos los derechos reservados.</p>
