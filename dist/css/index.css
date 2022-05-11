@@ -119,3 +119,7 @@ a.boton_crear:hover {
   max-width: 100%;
   height: auto;
 }
+
+.algo{
+  align-items: flex-end;
+}

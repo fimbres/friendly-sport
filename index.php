@@ -1,3 +1,10 @@
+<?php    
+    session_start();
+
+    if(! isset($_SESSION['usuario_Id'])){
+        header("location: welcome.php");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -16,12 +23,12 @@
         <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="dist/css/styles.css" rel="stylesheet" />
-        <link href="dist/css/index_styles.css" rel="stylesheet" />
+        <link href="dist/css/index.css" rel="stylesheet" />
     </head>
     <body id="page-top">
         <div class="barra">
         <!-- barra de navegacion-->
-            <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow py-0 mb-5" id="mainNav">
+            <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow py-0" id="mainNav">
                 <div class="container">
                     <a class="navbar-brand" href="#page-top"><img src="assets/static/LogoFS.png" height="64px" alt=""></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,8 +43,14 @@
                     </div>
                 </div>
             </nav>
+            
         </div>
-        <!-- contenido de la pagina-->        
+        <!-- contenido de la pagina-->   
+        <?php  
+            
+
+
+        ?>     
         <div class="contenido">
             <div class="division1">
                 <div class="rectangulo">
@@ -50,14 +63,41 @@
                 </div>
             </div>
             <div class="division2">
-                <div class="vacio">
-                    <img class="imagen" src="assets/static/lupa.png" alt="">
-                    <p>Vaya!, no pudimos encontrar eventos en tu zona 😢, ¿Te gustaría crear uno?</p>
-                </div>
+                <?php if (True): ?>
+                    
+                    <div class="contenedor soccer">
+                        <div class="contenido">
+                            <div class="tarjeta">
+                               <div class="card" style="width: 18rem; border-radius: 15px; box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.25);">
+                                    <img class="card-img-top" src="assets/static/soccer.png" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Nombre del evento</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">Soccer</h6>
+                                        <h5 class="card-title" style="color: #FF6B00;">fecha y hora del evento</h5>
+                                        <h5 class="card-title">Lugar del evento</h5>
+                                    </div>
+                                     <div class="card-footer" style="display:flex; align-items: baseline; ">
+                                        <img src="assets/static/user_icon.png" style="width:27px; margin-right:3px;">
+                                        <h6> numero </h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <?php else: ?>
+
+                    <div class="vacio">
+                        <img class="imagen" src="assets/static/lupa.png" alt="">
+                        <p>Vaya!, no pudimos encontrar eventos en tu zona 😢, ¿Te gustaría crear uno?</p>
+                    </div>
+
+                <?php endif ?>
+                
             </div>
         </div>
         <!-- Footer-->
-        <footer class="bg-black text-center  mt-3 py-3">
+        <footer class="bg-black text-center  mt-5 py-3">
             <div class="container px-5">
                 <div class="text-white-50 small">
                     <p>© FriendlySport, 2022. Todos los derechos reservados.</p>

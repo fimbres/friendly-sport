@@ -2,7 +2,7 @@
     session_start();
     
     if(isset($_SESSION['usuario_Id'])){
-        header("location: welcome.php");
+        header("location: index.php");
     }
 ?>
 <!DOCTYPE html>
@@ -96,7 +96,7 @@
                         },  
                         success:function(data){
                             if(data.response == "Success"){     
-                                window.location="welcome.php";
+                                window.location="index.php";
                             }   
                             else if (data.response == "Invalid") {
                                 $('#notificacion').text(data.message);
