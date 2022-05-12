@@ -5,7 +5,7 @@
     */
     include("includes/config.php");
     $error = [];
-    $exito = true;
+    $exito = false;
     $BD = crear_conexion_clase();
     /* SE SACAN LOS DATOS DEL USUARIO */
     /*  */
@@ -47,6 +47,8 @@
         <link href="dist/css/styles.css" rel="stylesheet" />
         <link href="dist/css/welcome_styles.css" rel="stylesheet" />
         <link href="dist/css/evento_agregar.css" rel="stylesheet" />
+
+        
     </head>
     <body id="page-top">
         <!-- barra de navegacion-->
@@ -60,8 +62,8 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-                            <li class="nav-item"><a class="boton_sesion" href="login.php">Iniciar Sesión</a></li>
-                            <li class="nav-item"><a class="boton_registro" href="signup.php">Registrarme</a></li>
+                            <li class="nav-item"><a class="boton_sesion" href="login.php">Mi cuenta</a></li>
+                            <li class="nav-item"><a class="boton_registro" href="signup.php">Cerrar sesion</a></li>
                         </ul>
                     </div>
                 </div>
@@ -81,7 +83,7 @@
                         <h3>Se agrego el evento de manera exitosa</h3>
                     </div>
                     <?php }?>
-                    <form method="POST" class="needs-validation" novalidate>
+                    <form method="POST" class="needs-validation mb-5" novalidate>
                         <div class="row">
                             <!-- 
                             <div style="float: left; width: 20%">
@@ -95,7 +97,7 @@
                             </div>
                             -->
                             
-                            <div style="float: left; width: 65%; text-align: left; padding-left: 50px;">
+                            <div id="formulario-izq" style="float: left; width: 65%; text-align: left; padding-left: 50px;">
                                 <div class="form-group">
                                     <label>Titulo del evento</label>
                                     <input type="text" class="form-control" name="nombre" required maxlength="45">
@@ -124,10 +126,15 @@
 
                                 </div>
                             </div>
-                            <div style="float: right; width: 35%">
+                            <div  id="formulario-der" style="float: center; width: 35%" class="pl-4 pr-4">
+                                <div class="text-center col-12"  id="mapa" style="width: 100%; height: 100%;" >
+
+                                </div>
+                                <!-- 
                                 <div>
                                     <img src="assets/img/google_maps.jpg" style="width: 80%;">
                                 </div>
+                                -->
                             </div>
                         </div>
                         <?php if(!empty($error)){ ?>
@@ -145,6 +152,7 @@
                             </div>
                         <?php }?>
                         <div class="pt-4 ">
+                            <input type="hidden" id="direccion" name="direccion">
                             <input type="hidden" id="fecha_min" name="fecha_min">
                             <input type="hidden" id="fecha_max" name="fecha_max">
                             <button type="submit" class="btn btn-primary">Crear evento</button>
@@ -170,11 +178,17 @@
                 </div>
             </div>
         </footer>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+        <script defer src="https://maps.googleapis.com/maps/api/js?key=&callback=initMapa"></script>
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        
         <script src="dist/js/jquery-3.6.0.min.js"></script>
+
         <script src="dist/js/script_jquery.js"></script>
+        
+        
         <script>
         (function() {
             'use strict'

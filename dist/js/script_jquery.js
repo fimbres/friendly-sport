@@ -1,4 +1,52 @@
+let map
+let marcador
+let geoLoc
+let latitud
+let longitude
+function initMapa(){
+    if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition( function(position){
+            latitud = position.coords.latitude;
+            longitude = position.coords.longitude;
+            
+            const myLating = new google.maps.LatLng(latitud, longitude);
+            map = new google.maps.Map(document.getElementById("mapa"), {
+                center: myLating,
+                mapTypeControl: true,
+                zoom: 13,
+                navigationControlOptions: {
+                    style: google.maps.NavigationControlStyle.SMALL
+                },
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+            marcador = new google.maps.Marker({
+                position: myLating,
+                map: map,
+                title: "Mi seleccion",
+                draggable: true
+            })
+            google.maps.event.addListener(marcador,'drag', function(event){
+                let str = `${event.latLng.lat()},${event.latLng.lng()}`;
+                $("#direccion").attr('val',str)
+            })
+            let str = `${latitud},${longitude}`;
+            $("#direccion").attr('val',str);
+        }, function(){
+            alert("No se pudo obtener las cordenadas")
+        })
+    }
+}
+function showLocationOnMap(position){
+    const myLating = {lat: latitud, lng: longitude};
+    marcador.setPosition(myLating);
+    mapa.setCenter(myLating);
+}
+
+//window.iniciar_mapa = iniciar_mapa;
 $(document).ready(function(){
+    if(navigator.geolocation){
+        //initMapa()
+    }
     if($('.form-dia-hora').length){
         let fecha = new Date();
             let anio = fecha.getFullYear();
@@ -84,5 +132,42 @@ $(document).ready(function(){
             $('.form-dia-hora').attr('max',fecha_max);
             $('#fecha_min').attr('value',fecha_min);
             $('#fecha_max').attr('value',fecha_max);
+
+            $(window).on('resize',function(){
+                let tam = $('body').width();
+                if(tam <=1200 ){
+                    $("#formulario-izq").attr('style','text-align: left');
+                    $("#formulario-der").attr('style','text-align: center; float: center; width: 100% ; height: 200px');
+                    $("#formulario-der").addClass('col-12')
+                    $("#formulario-der").addClass('pt-5')
+                    $("#formulario-izq").addClass('col-12')
+                    $("footer").css("position"," auto");
+                    $("footer").css("bottom","auto");
+
+                } else {
+                    $("#formulario-izq").attr('style','float: left; width: 65%; text-align: left; padding-left: 50px;');
+                    $("#formulario-der").attr('style','float: left; width: 35%');
+                    $("#formulario-der").removeClass('col-12')
+                    $("#formulario-der").removeClass('pt-5')
+                    $("#formulario-izq").removeClass('col-12')
+
+                }
+            })
+            if($('body').width() <= 1200){
+                $("#formulario-izq").attr('style','text-align: left');
+                $("#formulario-der").attr('style','text-align: center; float: center; width: 100% ; height: 200px');
+                $("#formulario-der").addClass('col-12')
+                $("#formulario-der").addClass('pt-5')
+                $("#formulario-izq").addClass('col-12')
+                $("footer").css("position","auto");
+                $("footer").css("bottom","auto");
+            } else {
+                $("#formulario-izq").attr('style','float: left; width: 65%; text-align: left; padding-left: 50px;');
+                $("#formulario-der").attr('style','float: left; width: 35%');
+                $("#formulario-der").removeClass('col-12')
+                $("#formulario-der").removeClass('pt-5')
+                $("#formulario-izq").removeClass('col-12')
+                
+            }
     }
 });
