@@ -47,8 +47,13 @@
         </div>
         <!-- contenido de la pagina-->   
         <?php  
-            
+            include("includes/config.php");
+            $BD = crear_conexion_clase();
 
+            $query = "SELECT * FROM tb_evento";
+            $res = mysqli_query($BD,$query);
+            
+            $BD->close();
 
         ?>     
         <div class="contenido">
@@ -63,8 +68,9 @@
                 </div>
             </div>
             <div class="division2">
-                <?php if (True): ?>
-                    
+                <?php if ($res): 
+                    while($fila = mysqli_fetch_array($res))
+                    {?>
                     <div class="contenedor soccer">
                         <div class="contenido">
                             <div class="tarjeta">
@@ -85,7 +91,7 @@
                         </div>
                     </div>
 
-                <?php else: ?>
+                <?php }else: ?>
 
                     <div class="vacio">
                         <img class="imagen" src="assets/static/lupa.png" alt="">
