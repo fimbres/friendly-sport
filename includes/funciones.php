@@ -124,6 +124,7 @@
             array_push($errores,"La fecha ingresada es incorrecta, vuelve a ingresar otra");
         }
         $res['descripcion'] = limpiar_string($datos['descripcion'],$BD);
+        $res['direccion'] = $datos['direccion'];
         if(empty($errores)){
             return [true,$res];
         } else{
@@ -150,7 +151,14 @@
         return true;
     }
 
-    function agregar_evento($datos,$usuario,$BD){
+    function agregar_evento($datos,$BD){
+        $id = $_SESSION['usuario_Id'];
+        $sql = "SELECT * FROM tb_relacion_usuarios_eventos where id_usuario = $id and es_organizador = 1";
+        $d = $BD->query($sql);
+        echo $d->num_rows;
+        if($d->num_rows >= 3){
+            return [false,['El usuario cuenta con mas de 3 eventos creados, no puede crear mas']];
+        }
         $nombre = $fecha = $hora_inicio = $hora_final = NULL;
         $descripcion = $ciudad = $direccion = NULL;
         $error = [];
@@ -168,6 +176,7 @@
         // POSIBLEMENTE ESO SE AGREGARA DENTRO DE LA EDICION
         $hora_final = $ciudad = 'NULL';
         /*POR EL MOMENTO NO SE AGREGARA LA DIRECCION */
+        $direccion = $datos['direccion'];
 
         $sql = "call sp_insertar_evento('$nombre','$fecha','$hora_inicio',$hora_final,";
         if(!empty($datos['descripcion'])){
@@ -175,7 +184,7 @@
         } else{
             $sql .= "NULL,";
         }
-        $sql .= "$ciudad,NULL);";
+        $sql .= "$ciudad,'$direccion');";
 
         if($BD->query($sql) === TRUE){
             $BD->next_result();
@@ -183,7 +192,7 @@
             $id = ($BD->query($sql))->fetch_assoc();
             $BD->next_result();
             $id = $id['id'];
-            $usu_id = $usuario['id_usuario'];
+            $usu_id = $_SESSION['usuario_Id'];
             $sql = "call sp_insertar_relacion_usuarios_eventos($id,$usu_id,1)";
             if($BD->query($sql) === TRUE){
                 $BD->next_result();
@@ -203,5 +212,19 @@
 
         
         return [false,$error];
+    }
+    function comprobar_sesion(){
+        
+        if(!empty($_SESSION['usuario_Id'])){
+            return true;
+        }
+        return false;
+    }
+
+    function cerrar_sesion(){
+        $_SESSION['usuario_Id'] = '';
+        $_SESSION['usuario_Nombre'] = '';
+        $_SESSION['usuario_Email'] = '';
+        $_SESSION['usuario_Edad'] = '';
     }
 ?>

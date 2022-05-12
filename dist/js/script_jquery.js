@@ -27,10 +27,10 @@ function initMapa(){
             })
             google.maps.event.addListener(marcador,'drag', function(event){
                 let str = `${event.latLng.lat()},${event.latLng.lng()}`;
-                $("#direccion").attr('val',str)
+                $("#direccion").attr('value',str)
             })
             let str = `${latitud},${longitude}`;
-            $("#direccion").attr('val',str);
+            $("#direccion").attr('value',str);
         }, function(){
             alert("No se pudo obtener las cordenadas")
         })

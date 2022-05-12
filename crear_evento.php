@@ -1,16 +1,17 @@
 <?php 
-    /*if(!inicio_de_sesion()){
+    include("includes/config.php");
+    session_start();
+    if(!comprobar_sesion()){
         header("location: welcome.php");
     }
-    */
-    include("includes/config.php");
+    
+    
     $error = [];
     $exito = false;
     $BD = crear_conexion_clase();
     /* SE SACAN LOS DATOS DEL USUARIO */
     /*  */
     //Por el momento siempre sacaremos los datos de un mismo usuario
-    $usuario = ($BD->query("call sp_buscar_usuario(10)"))->fetch_assoc();
     $BD->next_result();
     $deportes = ($BD->query("SELECT * FROM tb_deporte;"));
     $BD->next_result();
@@ -18,7 +19,7 @@
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $resultado = evento_formulario_verificar($_POST,$BD);
         if($resultado[0]){
-            $res = agregar_evento($resultado[1],$usuario,$BD);
+            $res = agregar_evento($resultado[1],$BD);
             if($res[0]){
                 $exito = true;
             } else{
@@ -62,8 +63,8 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-                            <li class="nav-item"><a class="boton_sesion" href="login.php">Mi cuenta</a></li>
-                            <li class="nav-item"><a class="boton_registro" href="signup.php">Cerrar sesion</a></li>
+                            <li class="nav-item"><a class="boton_sesion" href="">Mi cuenta</a></li>
+                            <li class="nav-item"><a class="boton_registro" href="includes/utils/cerrar_sesion.php">Cerrar sesion</a></li>
                         </ul>
                     </div>
                 </div>
@@ -76,6 +77,20 @@
                     <h2>Crear evento</h2>
                 </div>
                 <div class="card-body text-center">
+                    <?php if(!empty($error)){ ?>
+                            <div class="p-4">
+                                <div class="aler alert-danger">
+                                    <h4 style="font-weight: bold;">Se encontraron los siguientes errores:</h4>
+                                    <?php 
+                                        foreach($error as $er){
+                                    
+                                    ?>
+                                        <br>
+                                        <p><?php echo $er;?></p>
+                                    <?php }?>
+                                </div>
+                            </div>
+                        <?php }?>
                     <?php 
                         if($exito){
                     ?>
@@ -137,20 +152,7 @@
                                 -->
                             </div>
                         </div>
-                        <?php if(!empty($error)){ ?>
-                            <div class="p-4">
-                                <div class="aler alert-danger">
-                                    <h4 style="font-weight: bold;">Se encontraron los siguientes errores:</h4>
-                                    <?php 
-                                        foreach($error as $er){
-                                    
-                                    ?>
-                                        <br>
-                                        <p><?php echo $er;?></p>
-                                    <?php }?>
-                                </div>
-                            </div>
-                        <?php }?>
+                        
                         <div class="pt-4 ">
                             <input type="hidden" id="direccion" name="direccion">
                             <input type="hidden" id="fecha_min" name="fecha_min">
