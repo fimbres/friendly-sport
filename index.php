@@ -22,8 +22,9 @@
         <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,500;0,600;0,700;1,300;1,500;1,600;1,700&amp;display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="dist/css/styles.css" rel="stylesheet" />
-        <link href="dist/css/index.css" rel="stylesheet" />
+        <link href="dist/css/index.css" rel="stylesheet"/>
+        <link href="dist/css/styles.css" rel="stylesheet"/>
+        <link href="dist/css/index.css" rel="stylesheet"/>
     </head>
     <body id="page-top">
         <div class="barra">
@@ -68,30 +69,34 @@
                 </div>
             </div>
             <div class="division2">
-                <?php if ($res): 
-                    while($fila = mysqli_fetch_array($res))
-                    {?>
+                <?php if ($res):?>
                     <div class="contenedor soccer">
-                        <div class="contenido">
+                        <div class="swiper atras">
+                            <div class="triangulo"></div>
+                        </div>
+                        <div class="eventos">
+                            <?php while($fila = mysqli_fetch_array($res)){?>
                             <div class="tarjeta">
-                               <div class="card" style="width: 18rem; border-radius: 15px; box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.25);">
-                                    <img class="card-img-top" src="assets/static/soccer.png" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Nombre del evento</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted">Soccer</h6>
-                                        <h5 class="card-title" style="color: #FF6B00;">fecha y hora del evento</h5>
-                                        <h5 class="card-title">Lugar del evento</h5>
-                                    </div>
-                                     <div class="card-footer" style="display:flex; align-items: baseline; ">
-                                        <img src="assets/static/user_icon.png" style="width:27px; margin-right:3px;">
-                                        <h6> numero </h6>
+                                <img src="assets/static/soccer.png">
+                                <div class="Cuerpo">
+                                    <h5>Nombre del evento</h5>
+                                    <h5>Categoria</h5>
+                                    <h5>Fecha y hora del evento</h5>
+                                    <h5>Lugar del evento</h5>
+                                    <div class="cantidad">
+                                        <img class="icono-mini" src="assets/static/user_icon.png" alt="">
+                                        <h5>cantidad</h5>
                                     </div>
                                 </div>
                             </div>
+                            <?php }?>
+                        </div>
+                        <div class="swiper enfrente">
+                            <div class="triangulo"></div>
                         </div>
                     </div>
 
-                <?php }else: ?>
+                <?php else: ?>
 
                     <div class="vacio">
                         <img class="imagen" src="assets/static/lupa.png" alt="">

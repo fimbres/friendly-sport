@@ -52,13 +52,15 @@ a.boton_perfil:hover {
 
   margin-bottom: 20px;
 }
+.division2 {
+  display: flex;
+}
 
 .rectangulo {
   display: flex;
   width: 864px;
   height: 163px;
-  left: 288px;
-  top: 185px;
+
   background: #f0f0f0;
   border-radius: 25px;
   margin: auto;
@@ -70,8 +72,7 @@ a.boton_perfil:hover {
   display: flex;
   width: 99px;
   height: 99px;
-  left: 324px;
-  top: 214px;
+
   border-radius: 50%;
   align-items: center;
   justify-content: center;
@@ -81,8 +82,6 @@ a.boton_perfil:hover {
 a.boton_crear {
   width: 557px;
   height: 82px;
-  left: 516px;
-  top: 223px;
 
   background: #6c27e9;
   border-radius: 15px;
@@ -120,6 +119,65 @@ a.boton_crear:hover {
   height: auto;
 }
 
-.algo{
-  align-items: flex-end;
+.contenedor {
+  width: 100vw;
+  height: 343px;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 70px 1fr 70px;
+  margin: 1rem;
+}
+.swiper {
+  background: #e6e6e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 70px;
+}
+
+.swiper.atras {
+  transform: rotate(180deg);
+}
+
+.triangulo {
+  width: 0;
+  height: 0;
+  border-top: 40px solid transparent;
+  border-bottom: 40px solid transparent;
+
+  border-left: 40px solid white;
+}
+
+.eventos {
+  display: flex;
+  width: 100%;
+  justify-content: left;
+  flex: 1 1 auto;
+}
+
+.tarjeta {
+  width: 297px;
+  height: 343px;
+
+  box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+
+  margin: 0.5rem;
+  transition: all 0.2s;
+}
+
+.tarjeta:hover {
+  transform: scale(1.05);
+}
+
+.cantidad {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.icono-mini {
+  max-width: 50%;
+  height: auto;
 }
