@@ -124,19 +124,58 @@ a.boton_crear:hover {
   align-items: flex-end;
 }
 
+
+/*Comienzan los estilos de inscribirse a evento*/
+
 .banner-event
 {
   background-image:url('../../assets/static/basket.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   height:100px;
   width:100%;
 }
 
 .bg-transparence
 {
-  background:rgba(255,255,255,0.8);
+  background:rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
 }
 
 .ins-bg-info
 {
   background:rgb(200,200,200);
 }
+
+.z-index-bg
+{
+  z-index:10000;
+  
+}
+
+.z-index-form
+{
+  z-index:10001;
+}
+
+.scroll{
+  overflow-y: auto;
+}
+
+.img-banner
+{
+  width:100%;
+  height:100px;
+  object-fit:cover;
+}
+
+.btn-custom-primary
+{
+  background-color:#6c27e9;
+}
+
+.btn-custom-primary:hover{
+  background-color:#4f1cab;
+}
+/*Terminan los estilos de inscribirse a evento*/

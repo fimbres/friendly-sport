@@ -20,8 +20,51 @@
         <link rel="stylesheet" href="dist/icons/material-design-icons/css/mdi.min.css" type="text/css">
     </head>
     <body id="page-top">
-        <div class="barra">
-        <!-- barra de navegacion-->
+    <div class="container-fluid">
+            <h1>TABLA</h1>
+                <table id="datatablesSimple">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>NOMBRE</th>
+                                            <th>FECHA</th>
+                                            <th>DIRECCION</th> 
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>NOMBRE</th>
+                                            <th>FECHA</th>
+                                            <th>DIRECCION</th> 
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <?php
+                                            require 'includes/funciones_BD.php';
+                                            $conexion = crear_conexion_clase();
+                                            $query = "SELECT * FROM tb_evento";
+                                            $res = mysqli_query($conexion,$query);
+                                            while($fila = mysqli_fetch_array($res))
+                                            {
+                                        ?>
+                                            <tr>
+                                                <td><?php echo $fila['id_evento'];?></td>
+                                                <td><?php echo $fila['nombre'];?></td>
+                                                <td><?php echo $fila['fecha'];?></td>
+                                                <td><?php echo $fila['direccion'];?></td>
+                                                
+                                            </tr>
+                                        <?php
+                                            }
+                                        ?>
+                                    </tbody>
+                                </table>
+        </div>
+
+
+        <!--<div class="barra">
+        barra de navegacion
             <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow py-0" id="mainNav">
                 <div class="container">
                     <a class="navbar-brand" href="#page-top"><img src="assets/static/LogoFS.png" height="64px" alt=""></a>
@@ -38,7 +81,7 @@
                 </div>
             </nav>
             
-        </div>
+        </div>-->
         <!-- contenido de la pagina-->   
         <?php  
             
@@ -91,13 +134,15 @@
             </div>
         </div>
 
-        <div class="bg-transparence container-fluid w-100 h-100 position-absolute top-0 start-0 d-flex justify-content-center align-items-center align-self-center">
-            <div class="container w-50 h-50">
-                <?php
-                    include 'includes/inscribirse_Evento.php';
-                ?>
+        <div id="container-show-event" class="z-index-bg bg-transparence position-fixed top-0 bottom-0 start-0 end-0 d-flex justify-content-center align-items-center align-self-center ">
+            <div class="z-index-form form-wrapper">
+                    <?php
+                        include 'includes/inscribirse_Evento.php';
+                    ?>
             </div>
         </div>
+
+
         <!-- Footer-->
         <footer class="bg-black text-center  mt-5 py-3">
             <div class="container px-5">
@@ -115,5 +160,13 @@
                 
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            const closeEvent = document.querySelector("#btnCloseEvent");
+            const containerEvent = document.querySelector("#container-show-event");
+            
+            closeEvent.addEventListener("click", function(evento){
+                containerEvent.classList.add('d-none');
+            });
+        </script>
     </body>
 </html>
