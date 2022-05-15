@@ -8,6 +8,10 @@
         return $BD;
     }
 
+    function crear_conexion(){
+        $BD = mysqli_connect('baowmnoivuwfypslrhgk-mysql.services.clever-cloud.com','uik8l0gvyto4wyft','OEbaukoiM2VXYQO9dvUy','baowmnoivuwfypslrhgk');
+    }
+
     function signup_obtener_deportes($BD){
         $deportes = [];
         $deportes['Futbol soccer'] = ($BD->query("call sp_buscar_deporte_n('Futbol soccer');"))->fetch_assoc();
