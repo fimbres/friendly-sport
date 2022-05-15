@@ -34,7 +34,7 @@
         {
             $fila = $query->fetch_assoc();
             $nombre_deporte = $fila['nombre'];
-            //$response = array("response" => "Success","Nombre_deporte" => $nombre_deporte,"Nombre_evento" => $info_evento['nombre'], "Fecha_evento" => $info_evento['fecha'], "Hora_inicio" => $h_hora_inicio, "Minutos_inicio" => $minutos_hora_inicio, "Segundos_inicio" => $segundos_hora_inicio,"Direccion_latitud" => $latitud,"Direccion_longitud" => $longitud);
+            $response = array("response" => "Success","Nombre_deporte" => $nombre_deporte,"Nombre_evento" => $info_evento['nombre'], "Fecha_evento" => $info_evento['fecha'], "Hora_inicio" => $h_hora_inicio, "Minutos_inicio" => $minutos_hora_inicio, "Segundos_inicio" => $segundos_hora_inicio,"Direccion_latitud" => $latitud,"Direccion_longitud" => $longitud);
         }
       
         
