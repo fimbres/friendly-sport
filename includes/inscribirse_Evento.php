@@ -10,35 +10,27 @@
         session_start();
         $idUsuario = $_SESSION['usuario_Id'];
 
-        $sql_comprobar = 'SELECT * FROM tb_relacion_usuarios_eventos WHERE id_evento='.$idEvento.' AND  id_usuario='.$idUsuario.'';
-        $relSqlComprobar = mysqli_query($conexion,$sql_comprobar);
-        $row_cnt = $relSqlComprobar->num_rows;
+        //VALIDAR SI EL USUARIO YA ESTA INSCRITO AL EVENTO
+        $statusInscripcionEvento = $conexion->query("SELECT * FROM tb_relacion_usuarios_eventos WHERE id_evento=".$idEvento." AND  id_usuario=".$idUsuario."");
+        $statusInscripcionEncontrados = $statusInscripcionEvento->num_rows;
 
-        if($row_cnt <= 0)
-        {
-            $sql = "INSERT INTO tb_relacion_usuarios_eventos (id_evento,id_usuario,es_organizador) VALUES ('".$idEvento."','".$_SESSION['usuario_Id']."','0')";
-            $relSql = mysqli_query($conexion,$sql);
-
-            if($relSql)
-            {
+        if($statusInscripcionEncontrados <= 0){
+            //INSCRIBIR USUARIO
+            if($inscribirUsuario = $conexion->query("INSERT INTO tb_relacion_usuarios_eventos (id_evento,id_usuario,es_organizador) VALUES ('".$idEvento."','".$idUsuario."','0')")){
                 $response = array("response" => "Success","message" => "Te has inscrito correctamente");
                 echo json_encode($response);
                 exit();
-            }
-            else
-            {
+
+            }else{
                 $response = array("response" => "Invalid","message" => "Ha ocurrido un error");
             }
-        }
-        else
-        {
+        }else{
             $response = array("response" => "Invalid","message" => "Ya estas inscrito");
         }
     }
-    else
-    {
-        $response = array("response" => "Invalid","message" => "Invalido");
-    }
+
 
     echo json_encode($response);
+
+    mysqli_close($conexion);
 ?>

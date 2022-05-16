@@ -122,7 +122,7 @@
                         
                     </div>
 
-                    <h1 id="info-inscribirse-notificacion" class="text-dark d-none p-4">Mensaje</h1>
+                    <h1 id="info-inscribirse-notificacion" class="text-dark d-none p-4"></h1>
 
                     <div id="div-info-banner" class=" banner-event text-center d-none">
                         <?php 
@@ -160,13 +160,13 @@
 
                                     <div class="form-group mt-3">
                                         <div class="form-icon-wrapper">
-                                            <div class="container-fluid d-flex justify-content-center"><div class="container"><span class="fw-bold py-2">Participantes:</span></div><div class="container ins-bg-info rounded-3"><span class=""></span></div></div>
+                                            <div class="container-fluid d-flex justify-content-center"><div class="container"><span class="fw-bold py-2">Participantes:</span></div><div class="container ins-bg-info rounded-3"><span id="span-lista-inscritos" class=""></span></div></div>
                                         </div>
                                     </div>
 
                                     <div class="form-group mt-3">
                                         <div class="form-icon-wrapper">
-                                            <div class="container-fluid d-flex justify-content-center"><div class="container"><span class="fw-bold py-2">Usuarios inscritos:</span></div></div>
+                                            <div class="container-fluid d-flex justify-content-center"><div class="container"><span class="fw-bold py-2">Usuarios inscritos:</span></div><div class="container ins-bg-info rounded-3"><span id="span-cantidad-inscritos" class=""></span></div></div>
                                         </div>
                                     </div>
                                     
@@ -184,11 +184,12 @@
                                     
                                     <div class="container-fluid">
                                         <p class="fw-bold fs-6 text-center">Organizado por</p>
-                                        <p class="text-center"> Ariel</p>
+                                        <p class="text-center"><span id="span-info-organizador">Ariel</span></p>
                                     </div>
 
                                     <div class="container-fluid mt-4">
                                         <input id="btnInscribirse" class="btn btn-custom-primary m-1 text-light w-100" type="button" value="Inscribirte"/>
+                                        <input id="btnRetirarse" class="btn btn-warning m-1 text-light w-100 d-none" type="button" value="Retirarse"/>
                                         <input id="btnCloseEvent" class="btn btn-danger m-1 w-100" type="button" value="Salir"/>
                                     </div>
                                 </div>
@@ -224,8 +225,11 @@
             const containerEvent = document.querySelector("#container-show-event");
             
             closeEvent.addEventListener("click", function(evento){
-                containerEvent.classList.add('d-none');
+                $('#info-inscribirse-notificacion').text(" ");
+                $('#container-show-event').addClass('d-none');
                 $('#page-top').removeClass('overflow-hidden');
+                $('#btnRetirarse').addClass('d-none');
+                $('#btnInscribirse').removeClass('d-none');
             });
         </script>
         <script>
@@ -257,9 +261,21 @@
                                     $('#span-info-hora-inicio').text(data.Hora_inicio);
                                     $('#span-info-minutos-inicio').text(data.Minutos_inicio);
                                     $('#span-info-segundos-inicio').text(data.Segundos_inicio);
+                                    $('#span-info-organizador').text(data.Nombre_organizador);
+                                    $('#span-cantidad-inscritos').text(data.cantidad_inscritos);
+                                    $('#span-lista-inscritos').text(data.lista_participantes);
+
                                     $('#div-info-loading').addClass("d-none");
                                     $('#div-info-banner').removeClass('d-none');
                                     $('#div-info-body').removeClass('d-none');
+
+                                    if(data.status_inscripcion){
+                                        $('#btnRetirarse').removeClass('d-none');
+                                        $('#btnInscribirse').addClass('d-none');
+                                    }else{
+
+                                    }
+
                                     console.log(data);
                                 }   
                                 else if (data.response == "Invalid") {
@@ -285,14 +301,15 @@
                 {
                     $.ajax({
                             type:'POST',
-                            url:'includes/inscribirse_Evento.php',
+                            url:'includes/inscribirse_evento.php',
                             dataType:'JSON',
                             data: {idEvento: idEvento},
                             beforeSend:function(data){
                                 $('#div-info-banner').addClass('d-none');
                                 $('#div-info-body').addClass('d-none');
                                 $('#div-info-loading').removeClass("d-none");
-                                
+                                $('#btnInscribirse').attr('disabled');
+                                console.log(data);
                             },  
                             success:function(data){
                                 if(data.response == "Success"){  
@@ -306,6 +323,7 @@
                                         $('#div-info-body').removeClass('d-none');
                                     }, 2000);
                                     
+                                    console.log(data);
                                 }   
                                 else if (data.response == "Invalid") {
                                     $('#div-info-loading').addClass("d-none");
@@ -318,10 +336,11 @@
                                         $('#div-info-body').removeClass('d-none');
                                     }, 2000);
                                    
+                                    console.log(data);
                                 }
                             },
                             error: function (xhr, exception) {
-                               
+                                console.log(exception);
 
                             }
                         });

@@ -24,17 +24,55 @@
         $latitud = $direccion_dividida[0]; //LATITUD
         $longitud = $direccion_dividida[1]; //LONGITUD
 
-        //OBTENER NOMBRE CATEGORIA DEPORTE
-        if($nombreDeporteRes = $conexion->query('CALL sp_nombre_deporte("'.$idEvento.'")')){
-            $fila = $nombreDeporteRes->fetch_assoc();
-            $nombre_deporte = $fila['nombre'];
+        //LIBERAR ESPACIO
+        mysqli_free_result($resultado);
+
+        //OBTENER ORGANIZADOR DEL EVENTO
+        if ($organizadorNombre = $conexion->query("SELECT nombre_usuario FROM tb_usuario WHERE id_usuario IN (SELECT id_usuario FROM tb_relacion_usuarios_eventos WHERE id_evento = ".$idEvento." AND es_organizador='1')")){
+            $filaOrganizador = $organizadorNombre->fetch_assoc();
+            $organizador_evento = $filaOrganizador['nombre_usuario'];
 
             //LIBERAR ESPACIO
-            mysqli_free_result($nombreDeporteRes);
-            mysqli_free_result($resultado);
+            mysqli_free_result($organizadorNombre);
+
+            //VALIDAR SI EL USUARIO YA ESTA INSCRITO AL EVENTO
+            $statusInscripcionEvento = $conexion->query("SELECT * FROM tb_relacion_usuarios_eventos WHERE id_evento=".$idEvento." AND  id_usuario=".$idUsuario."");
+            $statusInscripcionEncontrados = $statusInscripcionEvento->num_rows;
+
+            if($statusInscripcionEncontrados > 0){
+                $inscrito = true;
+            }else{
+                $inscrito = false;
+            }
+
+            //OBTENER CANTIDAD DE USUARIOS INSCRITOS AL EVENTO
+            $cantidadInscritosQuery = $conexion->query("SELECT id_evento FROM tb_relacion_usuarios_eventos WHERE id_evento=".$idEvento."");
+            $cantidadInscritos = $cantidadInscritosQuery->num_rows;
+               
+
+            //OBTENER PARTICIPANTES DEL EVENTO
+            $participantesQuery = $conexion->query("SELECT nombre_usuario FROM tb_usuario WHERE id_usuario IN (SELECT id_usuario FROM tb_relacion_usuarios_eventos WHERE id_evento = ".$idEvento.")");
+            $participantes = array();
+            while($filaParticipante = mysqli_fetch_array($participantesQuery))
+            {
+                array_push($participantes,$filaParticipante['nombre_usuario']);
+            }
             
-            $response = array("response" => "Success","Nombre_deporte" => $nombre_deporte,"Nombre_evento" => $info_evento['nombre'], "Fecha_evento" => $info_evento['fecha'], "Hora_inicio" => $h_hora_inicio, "Minutos_inicio" => $minutos_hora_inicio, "Segundos_inicio" => $segundos_hora_inicio,"Direccion_latitud" => $latitud,"Nombre_organizador" => '');
-            
+            $stringParticipantes = implode(",",$participantes);
+
+            //LIBERAR ESPACIO
+            mysqli_free_result($participantesQuery);
+
+            //OBTENER NOMBRE CATEGORIA DEPORTE
+            if($nombreDeporteRes = $conexion->query('CALL sp_nombre_deporte("'.$idEvento.'")')){
+                $filaDeportes = $nombreDeporteRes->fetch_assoc();
+                $nombre_deporte = $filaDeportes['nombre'];
+
+                $response = array("response" => "Success","Nombre_deporte" => $nombre_deporte,"Nombre_evento" => $info_evento['nombre'], "Fecha_evento" => $info_evento['fecha'], "Hora_inicio" => $h_hora_inicio, "Minutos_inicio" => $minutos_hora_inicio, "Segundos_inicio" => $segundos_hora_inicio,"Direccion_latitud" => $latitud,"Nombre_organizador" => $organizador_evento,"status_inscripcion" => $inscrito,"cantidad_inscritos"=>$cantidadInscritos,"lista_participantes"=>$stringParticipantes);
+            }
+
+        }else{
+            $response = array("response" => "Invalid","message" => "Error al buscar organizador");
         }
 
     }else{
