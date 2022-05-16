@@ -57,6 +57,7 @@
             $soccer = mysqli_query($BD,$query_soccer);
             $query_americano = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =2";
             $americano = mysqli_query($BD,$query_americano);
+           
             $query_baloncesto = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =3";
             $baloncesto = mysqli_query($BD,$query_baloncesto);
             $query_tenis = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =4";
@@ -88,7 +89,7 @@
             <div class="division2">
                 <?php if ($res):?>
                     <!-- SOCCER-->   
-                    <?php if ($soccer):{?>
+                    <?php if ($soccer->num_rows):{?>
                     <div class="soccer">
                         <h6>Futbol Soccer</h6>
                         <div class="contenedor">
@@ -128,7 +129,7 @@
                     </div>
                     <?php }endif ?>
                         <!-- AMERICANO-->
-                    <?php if ($americano):{?>
+                    <?php if ($americano->num_rows):{?>
                     <div class="americano">
                         <h6>Futbol Americano</h6>
                         <div class="contenedor">
@@ -168,7 +169,7 @@
                 </div>
                 <?php }endif ?>
                     <!-- BALONCESTO-->
-                    <?php if ($baloncesto):?>
+                    <?php if ($baloncesto->num_rows):?>
                       <div class="baloncesto">
                         <h6>Baloncesto</h6>
                     <div class="contenedor">
@@ -208,7 +209,7 @@
                     </div>
                     <?php endif ?>
                     <!-- TENIS-->
-                    <?php if ($tenis):?>
+                    <?php if ($tenis->num_rows):?>
                     <div class="tenis">
                         <h6>Tenis</h6>
                     <div class="contenedor">
@@ -248,7 +249,7 @@
                     </div> 
                     <?php endif ?>  
                     <!-- BEISBOL-->
-                    <?php if ($beisbol):?>
+                    <?php if ($beisbol->num_rows):?>
                       <div class="beisbol">
                         <h6>Beisbol</h6>
                     <div class="contenedor">
@@ -288,7 +289,7 @@
                     </div>  
                     <?php endif ?>
                     <!-- PETANCA-->
-                    <?php if ($petanca):?>
+                    <?php if ($petanca->num_rows):?>
                     <div class="petanca">
                         <h6>Petanca</h6>
                     <div class="contenedor">
@@ -328,7 +329,7 @@
                     </div>
                     <?php endif ?>    
                     <!-- VOLEIBOL-->
-                    <?php if ($voleibol):?>
+                    <?php if ($voleibol->num_rows):?>
                       <div class="voleibol">
                         <h6>Voleibol</h6>
                     <div class="contenedor">
@@ -368,7 +369,7 @@
                     </div>  
                     <?php endif ?>  
                     <!-- CICLISMO-->
-                    <?php if ($ciclismo):?>
+                    <?php if ($ciclismo->num_rows):?>
                       <div class="ciclismo">
                         <h6>Ciclismo</h6>
                     <div class="contenedor">
@@ -408,7 +409,7 @@
                     </div>   
                     <?php endif ?>  
                     <!-- SENDERISMO--> 
-                    <?php if ($senderismo):?>
+                    <?php if ($senderismo->num_rows):?>
                     <div class="senderismo">
                         <h6>Senderismo</h6>
                     <div class="contenedor">
