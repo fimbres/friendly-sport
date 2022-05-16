@@ -233,10 +233,11 @@
             });
         </script>
         <script>
-            $('.tarjeta').on('click', function(event) {
+            $('.tarjeta').on('click', function(event) 
+            {
                 $('#container-show-event').removeClass('d-none');
 
-                var idEvento = jQuery(this).attr("id");
+                window.idEvento = jQuery(this).attr("id");
 
 
                 if(idEvento != "")
@@ -286,76 +287,136 @@
                                 console.log(exception);
 
                             }
-                        });
+                    });
                 }
-                else
-                {
-                    
-                }
+                
 
+            });
 
-                $('#btnInscribirse').on('click', function(event) {
-                console.log(idEvento);
+            $('#btnInscribirse').on('click', function(event) {
 
-                if(idEvento != "")
-                {
-                    $.ajax({
-                            type:'POST',
-                            url:'includes/inscribirse_evento.php',
-                            dataType:'JSON',
-                            data: {idEvento: idEvento},
-                            beforeSend:function(data){
-                                $('#div-info-banner').addClass('d-none');
-                                $('#div-info-body').addClass('d-none');
-                                $('#div-info-loading').removeClass("d-none");
-                                $('#btnInscribirse').attr('disabled');
-                                console.log(data);
-                            },  
-                            success:function(data){
-                                if(data.response == "Success"){  
+                    if(idEvento != "")
+                    {
+                        $.ajax({
+                                type:'POST',
+                                url:'includes/inscribirse_evento.php',
+                                dataType:'JSON',
+                                data: {idEvento: idEvento},
+                                beforeSend:function(data){
+                                    $('#div-info-banner').addClass('d-none');
+                                    $('#div-info-body').addClass('d-none');
+                                    $('#div-info-loading').removeClass("d-none");
+                                    $('#btnInscribirse').attr('disabled');
+                                    $('#info-inscribirse-notificacion').text(" ");
+                                },  
+                                success:function(data){
+                                    if(data.response == "Success"){  
 
-                                    $('#div-info-loading').addClass("d-none");
-                                    $('#info-inscribirse-notificacion').removeClass("d-none");
-                                    $('#info-inscribirse-notificacion').text(data.message);
-                                    setTimeout(function() { 
-                                        $('#info-inscribirse-notificacion').addClass("d-none");
-                                        $('#div-info-banner').removeClass('d-none');
-                                        $('#div-info-body').removeClass('d-none');
-                                    }, 2000);
+                                        $('#div-info-loading').addClass("d-none");
+                                        $('#info-inscribirse-notificacion').removeClass("d-none");
+                                        $('#info-inscribirse-notificacion').text(data.message);
+                                        setTimeout(function() { 
+                                            $('#info-inscribirse-notificacion').addClass("d-none");
+                                            $('#div-info-banner').removeClass('d-none');
+                                            $('#div-info-body').removeClass('d-none');
+                                            $('#btnInscribirse').addClass('d-none');
+                                            $('#btnRetirarse').removeClass('d-none');
+                                            $('#span-lista-inscritos').text(data.lista_participantes);
+                                        }, 2000);
+                                        
+                                        console.log("SUCCESS");
+                                        console.log(data);
+                                    }   
+                                    else{
+                                        console.log("INVALID DATA");
+                                        console.log(data);
+
+                                        $('#div-info-loading').addClass("d-none");
+                                        $('#info-inscribirse-notificacion').removeClass("d-none");
+                                        $('#info-inscribirse-notificacion').text(data.message);
+
+                                        setTimeout(function() { 
+                                            $('#info-inscribirse-notificacion').addClass("d-none");
+                                            $('#div-info-banner').removeClass('d-none');
+                                            $('#div-info-body').removeClass('d-none');
+                                            delete data;
+                                        }, 2000);
                                     
-                                    console.log(data);
-                                }   
-                                else if (data.response == "Invalid") {
-                                    $('#div-info-loading').addClass("d-none");
-                                    $('#info-inscribirse-notificacion').removeClass("d-none");
-                                    $('#info-inscribirse-notificacion').text(data.message);
+                                        
+                                    }
+                                },
+                                error: function (xhr, exception) {
+                                    console.log(exception);
 
-                                    setTimeout(function() { 
-                                        $('#info-inscribirse-notificacion').addClass("d-none");
-                                        $('#div-info-banner').removeClass('d-none');
-                                        $('#div-info-body').removeClass('d-none');
-                                    }, 2000);
-                                   
-                                    console.log(data);
                                 }
-                            },
-                            error: function (xhr, exception) {
-                                console.log(exception);
-
-                            }
-                        });
-                }
-                else
-                {
-                    
-                }
-
-            });
+                            });
+                    }
+                });
 
 
 
-            });
+                $('#btnRetirarse').on('click', function(event) {
+                    console.log(idEvento);
 
+                    if(idEvento != "")
+                    {
+                        $.ajax({
+                                type:'POST',
+                                url:'includes/cancelar_inscripcion_evento.php',
+                                dataType:'JSON',
+                                data: {idEvento: idEvento},
+                                beforeSend:function(data){
+                                    $('#div-info-banner').addClass('d-none');
+                                    $('#div-info-body').addClass('d-none');
+                                    $('#div-info-loading').removeClass("d-none");
+                                    $('#btnInscribirse').attr('disabled');
+                                    $('#info-inscribirse-notificacion').text(" ");
+                                    console.log("BeforeSend");
+                                    console.log(data);
+                                },  
+                                success:function(data){
+                                    if(data.response == "Success"){  
+
+                                        $('#div-info-loading').addClass("d-none");
+                                        $('#info-inscribirse-notificacion').removeClass("d-none");
+                                        $('#info-inscribirse-notificacion').text(data.message);
+                                        setTimeout(function() { 
+                                            $('#info-inscribirse-notificacion').addClass("d-none");
+                                            $('#div-info-banner').removeClass('d-none');
+                                            $('#div-info-body').removeClass('d-none');
+                                            $('#btnInscribirse').removeClass('d-none');
+                                            $('#btnRetirarse').addClass('d-none');
+                                            $('#span-lista-inscritos').text(data.lista_participantes);
+                                        }, 2000);
+                                        
+                                        console.log("SUCCESS");
+                                        console.log(data);
+                                    }   
+                                    else{
+                                        console.log("INVALID DATA");
+                                        console.log(data);
+
+                                        $('#div-info-loading').addClass("d-none");
+                                        $('#info-inscribirse-notificacion').removeClass("d-none");
+                                        $('#info-inscribirse-notificacion').text(data.message);
+
+                                        setTimeout(function() { 
+                                            $('#info-inscribirse-notificacion').addClass("d-none");
+                                            $('#div-info-banner').removeClass('d-none');
+                                            $('#div-info-body').removeClass('d-none');
+                                            delete data;
+                                        }, 2000);
+                                    
+                                        
+                                    }
+                                },
+                                error: function (xhr, exception) {
+                                    console.log(exception);
+
+                                }
+                            });
+                    }
+                });
 
         </script>
 
