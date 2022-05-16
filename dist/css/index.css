@@ -52,6 +52,7 @@ a.boton_perfil:hover {
 
   margin-bottom: 20px;
 }
+
 .division2 {
   display: flex;
 }
@@ -121,18 +122,20 @@ a.boton_crear:hover {
 
 .contenedor {
   width: 100vw;
-  height: 343px;
+  height: 380px;
   display: grid;
   gap: 1rem;
-  grid-template-columns: 70px 1fr 70px;
+  grid-template-columns: 70px calc(100vw - calc(140px + 5rem)) 70px;
   margin: 1rem;
+  position: relative;
+  overflow: hidden;
 }
+
 .swiper {
   background: #e6e6e6;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 0 0 70px;
 }
 
 .swiper.atras {
@@ -150,34 +153,48 @@ a.boton_crear:hover {
 
 .eventos {
   display: flex;
-  width: 100%;
-  justify-content: left;
-  flex: 1 1 auto;
+  width: calc(100vw - calc(140px + 5rem));
+  overflow-x: auto;
+  scroll-behavior: smooth;
 }
-
+.eventos::-webkit-scrollbar {
+  display: none;
+}
 .tarjeta {
   width: 297px;
   height: 343px;
+
+  flex: 0 0 auto;
 
   box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
 
   margin: 0.5rem;
   transition: all 0.2s;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .tarjeta:hover {
   transform: scale(1.05);
 }
 
+.cuerpo {
+  display: grid;
+  grid-template-rows: 1fr 41px;
+
+  word-wrap: break-word;
+}
+
 .cantidad {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   flex-direction: row;
-  justify-content: center;
+  justify-content: left;
 }
 
 .icono-mini {
-  max-width: 50%;
-  height: auto;
+  width: 26px;
+  height: 26px;
 }
