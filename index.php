@@ -81,7 +81,7 @@
                     <div class="icono">
                         <img src="assets/static/user_icon.png" alt="">
                     </div>
-                    <a class="boton_crear" href="agregar_evento.php">
+                    <a class="boton_crear" href="crear_evento.php">
                         Organizar un evento
                     </a>
                 </div>
