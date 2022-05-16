@@ -215,7 +215,7 @@ a.boton_crear:hover {
 }
 
 .scroll{
-  overflow: scroll;
+  overflow: auto;
 }
 
 .img-banner
