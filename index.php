@@ -24,7 +24,6 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="dist/css/index.css" rel="stylesheet"/>
         <link href="dist/css/styles.css" rel="stylesheet"/>
-        <link href="dist/css/index.css" rel="stylesheet"/>
     </head>
     <body id="page-top">
         <div class="barra">
@@ -54,23 +53,23 @@
             $query = "SELECT * FROM tb_evento";
             $res = mysqli_query($BD,$query);
             
-            $query_soccer = "SELECT tb_evento.id_evento, nombre, fecha, hora_inicio, hora_final, descripcion, ciudad, direccion FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =1";
+            $query_soccer = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =1";
             $soccer = mysqli_query($BD,$query_soccer);
-            $query_americano = "SELECT tb_evento.id_evento, nombre, fecha, hora_inicio, hora_final, descripcion, ciudad, direccion FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =2";
+            $query_americano = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =2";
             $americano = mysqli_query($BD,$query_americano);
-            $query_baloncesto = "SELECT tb_evento.id_evento, nombre, fecha, hora_inicio, hora_final, descripcion, ciudad, direccion FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =3";
+            $query_baloncesto = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =3";
             $baloncesto = mysqli_query($BD,$query_baloncesto);
-            $query_tenis = "SELECT tb_evento.id_evento, nombre, fecha, hora_inicio, hora_final, descripcion, ciudad, direccion FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =4";
+            $query_tenis = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =4";
             $tenis = mysqli_query($BD,$query_tenis);
-            $query_beisbol = "SELECT tb_evento.id_evento, nombre, fecha, hora_inicio, hora_final, descripcion, ciudad, direccion FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =5";
+            $query_beisbol = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =5";
             $beisbol = mysqli_query($BD,$query_beisbol);
-            $query_petanca = "SELECT tb_evento.id_evento, nombre, fecha, hora_inicio, hora_final, descripcion, ciudad, direccion FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =6";
+            $query_petanca = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =6";
             $petanca = mysqli_query($BD,$query_petanca);
-            $query_voleibol = "SELECT tb_evento.id_evento, nombre, fecha, hora_inicio, hora_final, descripcion, ciudad, direccion FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =7";
+            $query_voleibol = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =7";
             $voleibol = mysqli_query($BD,$query_voleibol);
-            $query_ciclismo = "SELECT tb_evento.id_evento, nombre, fecha, hora_inicio, hora_final, descripcion, ciudad, direccion FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =8";
+            $query_ciclismo = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =8";
             $ciclismo = mysqli_query($BD,$query_ciclismo);
-            $query_senderismo = "SELECT tb_evento.id_evento, nombre, fecha, hora_inicio, hora_final, descripcion, ciudad, direccion FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =9";
+            $query_senderismo = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =9";
             $senderismo = mysqli_query($BD,$query_senderismo);
 
 
@@ -89,61 +88,21 @@
             <div class="division2">
                 <?php if ($res):?>
                     <!-- SOCCER-->   
-                    <?php if ($soccer):?>
+                    <?php if ($soccer):{?>
                     <div class="soccer">
                         <h6>Futbol Soccer</h6>
-                            <div class="contenedor">
-                                <button class="swiper atras">
-                                    <div class="triangulo"></div>
-                                </button>
-                                <div class="eventos">
-                                    <?php while($fila = mysqli_fetch_array($soccer)){?>
-                                    <div class="tarjeta">
-                                        <img src="assets/static/soccer.png" styles="max-width: 100%;">
-                                        <div class="cuerpo">
-                                            <div class="descripciones">
-                                                <h5><?php echo $fila['nombre'];?></h5>   
-                                                <h5 style="color:orange;">Futbol Soccer</h5>
-                                                <h5><?php echo $fila['fecha'];?></h5>
-                                                <h6><?php echo $fila['direccion'];?></h6>
-                                            </div>
-                                            <div class="cantidad">
-                                                <?php  
-                                                    $id_evento2 = $fila['id_evento'];
-                                                    $query2 = "SELECT COUNT(id_usuario) FROM tb_relacion_usuarios_eventos WHERE id_evento = $id_evento2";
-                                                    $res2 = mysqli_query($BD,$query2);
-                                                    $row2 = $res2->fetch_array();
-                                                    $out2 = $row2[0]; 
-                                                ?>     
-                                                <img class="icono-mini" src="assets/static/user_icon.png" alt="">
-                                                <h6><?php echo $out2?></h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php }?>
-                                </div>
-                                <button class="swiper enfrente">
-                                    <div class="triangulo"></div>
-                                </button>
-                            </div>
-                        </div>
-                    <?php endif ?>
-                        <!-- AMERICANO-->
-                    <?php if ($americano):?>
-                        <div class="americano">
-                            <h6>Futbol Americano</h6>
-                            <div class="contenedor">
+                        <div class="contenedor">
                             <button class="swiper atras">
                                 <div class="triangulo"></div>
                             </button>
                             <div class="eventos">
-                                <?php while($fila = mysqli_fetch_array($americano)){?>
+                                <?php while($fila = mysqli_fetch_array($soccer)){?>
                                 <div class="tarjeta">
                                     <img src="assets/static/soccer.png" styles="max-width: 100%;">
                                     <div class="cuerpo">
                                         <div class="descripciones">
-                                            <h5><?php echo $fila['nombre'];?></h5>    
-                                            <h5 style="color:orange;">Futbol Americano</h5>
+                                            <h5><?php echo $fila['nombre'];?></h5>   
+                                            <h5 style="color:orange;">Futbol Soccer</h5>
                                             <h5><?php echo $fila['fecha'];?></h5>
                                             <h6><?php echo $fila['direccion'];?></h6>
                                         </div>
@@ -167,7 +126,47 @@
                             </button>
                         </div>
                     </div>
-                    <?php endif ?>
+                    <?php }endif ?>
+                        <!-- AMERICANO-->
+                    <?php if ($americano):{?>
+                    <div class="americano">
+                        <h6>Futbol Americano</h6>
+                        <div class="contenedor">
+                        <button class="swiper atras">
+                            <div class="triangulo"></div>
+                        </button>
+                        <div class="eventos">
+                            <?php while($fila = mysqli_fetch_array($americano)){?>
+                            <div class="tarjeta">
+                                <img src="assets/static/soccer.png" styles="max-width: 100%;">
+                                <div class="cuerpo">
+                                    <div class="descripciones">
+                                        <h5><?php echo $fila['nombre'];?></h5>    
+                                        <h5 style="color:orange;">Futbol Americano</h5>
+                                        <h5><?php echo $fila['fecha'];?></h5>
+                                        <h6><?php echo $fila['direccion'];?></h6>
+                                    </div>
+                                    <div class="cantidad">
+                                        <?php  
+                                            $id_evento2 = $fila['id_evento'];
+                                            $query2 = "SELECT COUNT(id_usuario) FROM tb_relacion_usuarios_eventos WHERE id_evento = $id_evento2";
+                                            $res2 = mysqli_query($BD,$query2);
+                                            $row2 = $res2->fetch_array();
+                                            $out2 = $row2[0]; 
+                                        ?>     
+                                        <img class="icono-mini" src="assets/static/user_icon.png" alt="">
+                                        <h6><?php echo $out2?></h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php }?>
+                        </div>
+                        <button class="swiper enfrente">
+                            <div class="triangulo"></div>
+                        </button>
+                    </div>
+                </div>
+                <?php }endif ?>
                     <!-- BALONCESTO-->
                     <?php if ($baloncesto):?>
                       <div class="baloncesto">

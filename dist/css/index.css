@@ -122,7 +122,6 @@ a.boton_crear:hover {
 }
 
 .contenedor {
-  width: 100vw;
   height: 380px;
   display: grid;
   gap: 1rem;
