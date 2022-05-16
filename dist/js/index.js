@@ -4,7 +4,7 @@ const atras = [...document.querySelectorAll(".atras")];
 
 contenedorTarjetas.forEach((item, i) => {
   let dimensiones = item.getBoundingClientRect();
-  let ancho = dimensiones.width;
+  let ancho = dimensiones.width / 2;
 
   enfrente[i].addEventListener("click", () => {
     item.scrollLeft += ancho;
