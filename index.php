@@ -22,8 +22,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,500;0,600;0,700;1,300;1,500;1,600;1,700&amp;display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="dist/css/index.css" rel="stylesheet"/>
         <link href="dist/css/styles.css" rel="stylesheet"/>
+        <link href="dist/css/index.css" rel="stylesheet"/>
     </head>
     <body id="page-top" class="">
         <div class="barra">
@@ -98,7 +98,7 @@
                             </button>
                             <div class="eventos">
                                 <?php while($fila = mysqli_fetch_array($soccer)){?>
-                                <div class="tarjeta">
+                                <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
                                     <img src="assets/static/soccer.png" styles="max-width: 100%;">
                                     <div class="cuerpo">
                                         <div class="descripciones">
@@ -138,7 +138,7 @@
                         </button>
                         <div class="eventos">
                             <?php while($fila = mysqli_fetch_array($americano)){?>
-                            <div class="tarjeta">
+                            <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
                                 <img src="assets/static/football.png" styles="max-width: 100%;">
                                 <div class="cuerpo">
                                     <div class="descripciones">
@@ -178,7 +178,7 @@
                         </button>
                         <div class="eventos">
                             <?php while($fila = mysqli_fetch_array($baloncesto)){?>
-                            <div class="tarjeta">
+                            <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
                                 <img src="assets/static/basketball.png" styles="max-width: 100%;">
                                 <div class="cuerpo">
                                     <div class="descripciones">
@@ -218,7 +218,7 @@
                         </button>
                         <div class="eventos">
                             <?php while($fila = mysqli_fetch_array($tenis)){?>
-                            <div class="tarjeta">
+                            <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
                                 <img src="assets/static/tenis.png" styles="max-width: 100%;">
                                 <div class="cuerpo">
                                     <div class="descripciones">
@@ -258,7 +258,7 @@
                         </button>
                         <div class="eventos">
                             <?php while($fila = mysqli_fetch_array($beisbol)){?>
-                            <div class="tarjeta">
+                            <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
                                 <img src="assets/static/beisbol.png" styles="max-width: 100%;">
                                 <div class="cuerpo">
                                     <div class="descripciones">
@@ -298,7 +298,7 @@
                         </button>
                         <div class="eventos">
                             <?php while($fila = mysqli_fetch_array($petanca)){?>
-                            <div class="tarjeta">
+                            <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
                                 <img src="assets/static/petanca.png" styles="max-width: 100%;">
                                 <div class="cuerpo">
                                     <div class="descripciones">
@@ -338,7 +338,7 @@
                         </button>
                         <div class="eventos">
                             <?php while($fila = mysqli_fetch_array($voleibol)){?>
-                            <div class="tarjeta">
+                            <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
                                 <img src="assets/static/voleibol.png" styles="max-width: 100%;">
                                 <div class="cuerpo">
                                     <div class="descripciones">
@@ -378,7 +378,7 @@
                         </button>
                         <div class="eventos">
                             <?php while($fila = mysqli_fetch_array($ciclismo)){?>
-                            <div class="tarjeta">
+                            <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
                                 <img src="assets/static/ciclismo.png" styles="max-width: 100%;">
                                 <div class="cuerpo">
                                     <div class="descripciones">
@@ -418,7 +418,7 @@
                         </button>
                         <div class="eventos">
                             <?php while($fila = mysqli_fetch_array($senderismo)){?>
-                            <div class="tarjeta">
+                            <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
                                 <img src="assets/static/senderismo.png" styles="max-width: 100%;">
                                 <div class="cuerpo">
                                     <div class="descripciones">
@@ -606,6 +606,7 @@
                                 $('#div-info-body').addClass('d-none');
                                 $('#div-info-loading').removeClass("d-none");
                                 $('#page-top').addClass('overflow-hidden');
+                                console.log(idEvento);
                             },  
                             success:function(data){
                                 if(data.response == "Success"){     
