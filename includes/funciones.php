@@ -110,7 +110,6 @@
         $data = $BD->real_escape_string($str);
         return $data;
     }
-
     function evento_formulario_verificar($datos,$BD){
         $res = [];
         $errores = [];
@@ -121,7 +120,7 @@
             $res['fecha'] = $temp[0];
             $res['hora_inicio'] = $temp[1];
         } else{
-            array_push($errores,"La fecha ingresada es incorrecta, vuelve a ingresar otra");
+            array_push($errores,"La fecha ingresada no es posible de aceptar, por favor ingrese otra fecha y horario");
         }
         $res['descripcion'] = limpiar_string($datos['descripcion'],$BD);
         if(!empty($datos['direccion'])){
@@ -160,7 +159,6 @@
         $id = $_SESSION['usuario_Id'];
         $sql = "SELECT * FROM tb_relacion_usuarios_eventos where id_usuario = $id and es_organizador = 1";
         $d = $BD->query($sql);
-        echo $d->num_rows;
         if($d->num_rows >= 3){
             return [false,['El usuario cuenta con mas de 3 eventos creados, no puede crear mas']];
         }
@@ -217,6 +215,41 @@
         
         return [false,$error];
     }
+    function editar_evento($datos,$BD){
+        $nombre = $fecha = $hora_inicio = $hora_final = NULL;
+        $descripcion = $ciudad = $direccion = $id = NULL;
+        $error = [];
+
+        $id = $datos['id_evento'];
+        $nombre = $datos['nombre'];
+        $fecha = $datos['fecha'];
+        $hora_inicio = $datos['hora_inicio'];
+
+        if(!empty($datos['descripcion'])){
+            $descripcion = $datos['descripcion'];
+        } else{
+            $descripcion = 'NULL';
+        }
+        $hora_final = $ciudad = 'NULL';
+        $direccion = $datos['direccion'];
+
+        $sql = "call sp_editar_evento($id,'$nombre','$fecha','$hora_inicio',$hora_final,";
+        if(!empty($datos['descripcion'])){
+            $sql .= "'$descripcion',";
+        } else{
+            $sql .= "NULL,";
+        }
+        $sql .= "$ciudad,'$direccion');";
+
+        if($BD->query($sql) === TRUE){
+            return [true];
+        } else{
+            $er = $BD->error;
+            array_push($error, $er);
+        }
+        
+        return [false,$error];
+    }
     function comprobar_sesion(){
         
         if(!empty($_SESSION['usuario_Id'])){
@@ -230,5 +263,21 @@
         $_SESSION['usuario_Nombre'] = '';
         $_SESSION['usuario_Email'] = '';
         $_SESSION['usuario_Edad'] = '';
+    }
+
+    function comprobar_usuario_evento($even,$BD){
+        $id = $even['id_evento'];
+        $res = $BD->query("call sp_buscar_relacion_usuarios_eventos_e($id)");
+        $BD->next_result();
+        if(!empty($res)){
+            $res = $res->fetch_array();
+            if(intval($res['id_usuario']) == intval($_SESSION['usuario_Id'])){
+                if(intval($res['es_organizador']) == 1){
+                    return true;
+                }
+            }
+            
+        }
+        return false;
     }
 ?>
