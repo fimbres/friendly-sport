@@ -5,7 +5,7 @@ let latitud
 let longitude
 function initMapa(){
     if(navigator.geolocation){
-    navigator.geolocation.getCurrentPosition( function(position){
+        navigator.geolocation.getCurrentPosition( function(position){
             latitud = position.coords.latitude;
             longitude = position.coords.longitude;
             
@@ -32,8 +32,33 @@ function initMapa(){
             let str = `${latitud},${longitude}`;
             $("#direccion").attr('value',str);
         }, function(){
-            alert("No se pudo obtener las cordenadas")
+            latitud = 0;
+            longitude = 0;
+            const myLating = new google.maps.LatLng(latitud, longitude);
+            map = new google.maps.Map(document.getElementById("mapa"), {
+                center: myLating,
+                mapTypeControl: true,
+                zoom: 1,
+                navigationControlOptions: {
+                    style: google.maps.NavigationControlStyle.SMALL
+                },
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+            marcador = new google.maps.Marker({
+                position: myLating,
+                map: map,
+                title: "Mi seleccion",
+                draggable: true
+            })
+            google.maps.event.addListener(marcador,'drag', function(event){
+                let str = `${event.latLng.lat()},${event.latLng.lng()}`;
+                $("#direccion").attr('value',str)
+            })
+            let str = `${latitud},${longitude}`;
+            $("#direccion").attr('value',str);
         })
+    } else{
+        
     }
 }
 function showLocationOnMap(position){
@@ -150,7 +175,8 @@ $(document).ready(function(){
                     $("#formulario-der").removeClass('col-12')
                     $("#formulario-der").removeClass('pt-5')
                     $("#formulario-izq").removeClass('col-12')
-
+                    $("footer").css("bottom","0");
+                    $("footer").css("position","absolute");
                 }
             })
             if($('body').width() <= 1200){
@@ -167,7 +193,8 @@ $(document).ready(function(){
                 $("#formulario-der").removeClass('col-12')
                 $("#formulario-der").removeClass('pt-5')
                 $("#formulario-izq").removeClass('col-12')
-                
+                $("footer").css("bottom","0");
+                $("footer").css("position","absolute");
             }
     }
 });

@@ -56,7 +56,7 @@
         <aside>
             <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow my-0 py-0" id="mainNav">
                 <div class="container">
-                    <a class="navbar-brand" href="#page-top"><img src="assets/static/LogoFS.png" height="64px" alt=""></a>
+                    <a class="navbar-brand" href="index.php"><img src="assets/static/LogoFS.png" height="64px" alt=""></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                         Menu
                         <i class="bi-list"></i>
@@ -135,7 +135,7 @@
                                 </div>
                                 <div class="row pt-4">
                                     <div class="form-group">
-                                        <label>Descripcion</label>
+                                        <label>Descripción</label>
                                         <textarea name="descripcion" class="form-control" rows="4"></textarea>
                                     </div>
 
@@ -158,7 +158,7 @@
                             <input type="hidden" id="fecha_min" name="fecha_min">
                             <input type="hidden" id="fecha_max" name="fecha_max">
                             <button type="submit" class="btn btn-primary">Crear evento</button>
-                            <button type="button" class="btn btn-danger">Cancelar</button>
+                            <a href="index.php"><button type="button" class="btn btn-danger">Cancelar</button></a>
                         </div>
                     </form>
 
