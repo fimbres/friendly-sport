@@ -50,7 +50,8 @@
             date_default_timezone_set('America/Tijuana');
             $date = date('Y-m-d');
             $time = date('H:i:s');
-
+           //(31.870758, -116.619713, 31.861054, -116.585638)
+            include("includes/geolocation.php");            
             include("includes/config.php");
             $BD = crear_conexion_clase();
             $soccer = [];
@@ -63,6 +64,8 @@
             $ciclismo = [];
             $senderismo = [];
 
+            $max = 6;
+
             $query = "SELECT * FROM tb_evento";
             $res = mysqli_query($BD,$query);
             
@@ -70,63 +73,82 @@
             $pre_soccer = mysqli_query($BD,$query_soccer);
             while($row=mysqli_fetch_array($pre_soccer)) {
                 if((strcmp($row['fecha'],$date) >= 0 && strcmp($row['hora_inicio'],$time) >= 0) || strcmp($row['fecha'],$date) > 0){
-                    $soccer[] = $row;
+                    if(distancia($lat,$lon,$row["direccion"]) <= $max){
+                        $soccer[] = $row;
+                    }
                 }
             }
+
             $query_americano = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =2 ORDER BY fecha";
             $pre_americano = mysqli_query($BD,$query_americano);
             while($row=mysqli_fetch_array($pre_americano)) {
                 if((strcmp($row['fecha'],$date) >= 0 && strcmp($row['hora_inicio'],$time) >= 0) || strcmp($row['fecha'],$date) > 0){
-                    $americano[] = $row;
+                    if(distancia($lat,$lon,$row["direccion"]) <= $max){
+                        $americano[] = $row;
+                    }
                 }
             }
             $query_baloncesto = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =3 ORDER BY fecha";
             $pre_baloncesto = mysqli_query($BD,$query_baloncesto);
             while($row=mysqli_fetch_array($pre_baloncesto)) {
                 if((strcmp($row['fecha'],$date) >= 0 && strcmp($row['hora_inicio'],$time) >= 0) || strcmp($row['fecha'],$date) > 0){
-                    $baloncesto[] = $row;
+                    if(distancia($lat,$lon,$row["direccion"]) <= $max){
+                        $baloncesto[] = $row;
+                    }
                 }
             }
             $query_tenis = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =4 ORDER BY fecha";
             $pre_tenis = mysqli_query($BD,$query_tenis);
             while($row=mysqli_fetch_array($pre_tenis)) {
                 if((strcmp($row['fecha'],$date) >= 0 && strcmp($row['hora_inicio'],$time) >= 0) || strcmp($row['fecha'],$date) > 0){
-                    $tenis[] = $row;
+                    if(distancia($lat,$lon,$row["direccion"]) <= $max){
+                        $tenis[] = $row;
+                    }
                 }
             }
             $query_beisbol = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =5 ORDER BY fecha";
             $pre_beisbol = mysqli_query($BD,$query_beisbol);
             while($row=mysqli_fetch_array($pre_beisbol)) {
                 if((strcmp($row['fecha'],$date) >= 0 && strcmp($row['hora_inicio'],$time) >= 0) || strcmp($row['fecha'],$date) > 0){
-                    $beisbol[] = $row;
+                    if(distancia($lat,$lon,$row["direccion"]) <= $max){
+                        $beisbol[] = $row;
+                    }
                 }
             }
             $query_petanca = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =6 ORDER BY fecha";
             $pre_petanca = mysqli_query($BD,$query_petanca);
             while($row=mysqli_fetch_array($pre_petanca)) {
                 if((strcmp($row['fecha'],$date) >= 0 && strcmp($row['hora_inicio'],$time) >= 0) || strcmp($row['fecha'],$date) > 0){
-                    $petanca[] = $row;
+                    if(distancia($lat,$lon,$row["direccion"]) <= $max){
+                        $petanca[] = $row;
+                    }
                 }
             }
             $query_voleibol = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =7 ORDER BY fecha";
             $pre_voleibol = mysqli_query($BD,$query_voleibol);
             while($row=mysqli_fetch_array($pre_voleibol)) {
                 if((strcmp($row['fecha'],$date) >= 0 && strcmp($row['hora_inicio'],$time) >= 0) || strcmp($row['fecha'],$date) > 0){
-                    $voleibol[] = $row;
+                    if(distancia($lat,$lon,$row["direccion"]) <= $max){
+                        $voleibol[] = $row;
+                    }
                 }
             }
             $query_ciclismo = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =8 ORDER BY fecha";
             $pre_ciclismo = mysqli_query($BD,$query_ciclismo);
             while($row=mysqli_fetch_array($pre_ciclismo)) {
                 if((strcmp($row['fecha'],$date) >= 0 && strcmp($row['hora_inicio'],$time) >= 0) || strcmp($row['fecha'],$date) > 0){
-                    $ciclismo[] = $row;
+                    if(distancia($lat,$lon,$row["direccion"]) <= $max){
+                        $ciclismo[] = $row;
+                    }
                 }
             }
             $query_senderismo = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =9 ORDER BY fecha";
             $pre_senderismo = mysqli_query($BD,$query_senderismo);
             while($row=mysqli_fetch_array($pre_senderismo)) {
                 if((strcmp($row['fecha'],$date) >= 0 && strcmp($row['hora_inicio'],$time) >= 0) || strcmp($row['fecha'],$date) > 0){
-                    $senderismo[] = $row;
+                    if(distancia($lat,$lon,$row["direccion"]) <= $max){
+                        $senderismo[] = $row;
+                    }
                 }
             }
         ?>     
@@ -829,9 +851,6 @@
                 });
 
         </script>
-
-        <script>
-        
-        </script>
+       
     </body>
 </html>
