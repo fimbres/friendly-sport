@@ -9,9 +9,6 @@
     $error = [];
     $exito = false;
     $BD = crear_conexion_clase();
-    /* SE SACAN LOS DATOS DEL USUARIO */
-    /*  */
-    //Por el momento siempre sacaremos los datos de un mismo usuario
     $BD->next_result();
     $deportes = ($BD->query("SELECT * FROM tb_deporte;"));
     $BD->next_result();

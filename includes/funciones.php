@@ -231,4 +231,20 @@
         $_SESSION['usuario_Email'] = '';
         $_SESSION['usuario_Edad'] = '';
     }
+
+    function comprobar_usuario_evento($even,$BD){
+        $id = $even['id_evento'];
+        $res = $BD->query("call sp_buscar_relacion_usuarios_eventos_e($id)");
+        $BD->next_result();
+        if(!empty($res)){
+            $res = $res->fetch_array();
+            if(intval($res['id_usuario']) == intval($_SESSION['usuario_Id'])){
+                if(intval($res['es_organizador']) == 1){
+                    return true;
+                }
+            }
+            
+        }
+        return false;
+    }
 ?>

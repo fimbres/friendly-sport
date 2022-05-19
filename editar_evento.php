@@ -4,16 +4,37 @@
     if(!comprobar_sesion()){
         header("location: welcome.php");
     }
+    if(empty($_GET)){
+        header("location: index.php");
+    }
+    if(empty($_GET['evento'])){
+        header("location: index.php");
+    }
     
-    
+
+
+    $id_evento = $_GET['evento'];
     $error = [];
     $exito = false;
     $BD = crear_conexion_clase();
-    /* SE SACAN LOS DATOS DEL USUARIO */
-    /*  */
-    //Por el momento siempre sacaremos los datos de un mismo usuario
     $BD->next_result();
+    $evento = ($BD->query("call sp_buscar_evento($id_evento)"))->fetch_array();
+    $BD->next_result();
+    
+
+    if(!comprobar_usuario_evento($evento,$BD)){
+        $BD->close();
+        header("location: index.php");
+    }
+
     $deportes = ($BD->query("SELECT * FROM tb_deporte;"));
+    $BD->next_result();
+
+    $temp = ($BD->query("call sp_buscar_relacion_deportes_eventos_e($id_evento)"));
+    $evento_dep = array();
+    while($data = mysqli_fetch_assoc($temp)){
+        $evento_dep[] = $data;
+    }
     $BD->next_result();
     /*
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -100,29 +121,23 @@
                     <?php }?>
                     <form method="POST" class="needs-validation mb-5" novalidate>
                         <div class="row">
-                            <!-- 
-                            <div style="float: left; width: 20%">
-                                <?php 
-                                    //if($usuario['foto']){
-                                ?>
-                                <img src="<?php //echo $usuario['foto']; ?>">
-                                <?php //} else{ ?>
-                                    <i class="fa-solid fa-user" style="font-size: 10rem;"></i>
-                                <?php //}?>
-                            </div>
-                            -->
-                            
                             <div id="formulario-izq" style="float: left; width: 65%; text-align: left; padding-left: 50px;">
                                 <div class="form-group">
                                     <label>Titulo del evento</label>
-                                    <input type="text" class="form-control" name="nombre" required maxlength="45">
+                                    <input type="text" class="form-control" name="nombre" required maxlength="45"
+                                            value="<?php echo $evento['nombre'];?>">
                                 </div>
                                 <div class="row pt-4">
                                     <div class="form-group col-6 ">
-                                        <label class="">Categoría</label>
-                                        <select name="deporte" class="form-input form-control" required>
+                                        <label class="">Categoría/Deporte</label>
+                                        <select name="deporte" class="form-input form-control" disabled >
                                             <?php while($dep = mysqli_fetch_array($deportes)){?>
-                                                <option value="<?php echo $dep['id_deporte'];?>">
+                                                <option value="<?php echo $dep['id_deporte'];?>"  
+                                                    <?php foreach($evento_dep as $eve_dep){
+                                                        if($eve_dep['id_deporte'] == $dep['id_deporte']){
+                                                            echo 'selected';
+                                                        }
+                                                    }?> >
                                                     <?php echo $dep['nombre'];?>
                                                 </option>
                                             <?php }?>
@@ -130,13 +145,18 @@
                                     </div>
                                     <div class="form-group col-6">
                                         <label class="">Dia y hora</label>
-                                        <input class="form-control form-dia-hora" type="datetime-local" name="fecha" required>
+                                        <input class="form-control form-dia-hora" type="datetime-local" name="fecha" 
+                                         value="<?php echo $evento['fecha'] . 'T' . $evento['hora_inicio'];?>"
+                                        required>
                                     </div>
                                 </div>
                                 <div class="row pt-4">
                                     <div class="form-group">
                                         <label>Descripción</label>
-                                        <textarea name="descripcion" class="form-control" rows="4"></textarea>
+                                        <textarea 
+                                            name="descripcion" 
+                                            class="form-control" 
+                                            rows="4"><?php if(!empty($evento['descripcion'])){ echo $evento['descripcion'];}?></textarea>
                                     </div>
 
                                 </div>
@@ -154,11 +174,10 @@
                         </div>
                         
                         <div class="pt-4 ">
-                            <input type="hidden" id="direccion" name="direccion">
+                            <input type="hidden" id="direccion" name="direccion" value="<?php echo $evento['direccion']?>">
                             <input type="hidden" id="fecha_min" name="fecha_min">
                             <input type="hidden" id="fecha_max" name="fecha_max">
-                            <button type="submit" class="btn btn-primary">Crear evento</button>
-                            <a href="index.php"><button type="button" class="btn btn-danger">Cancelar</button></a>
+                            <button type="submit" class="btn btn-primary">Editar evento</button>
                         </div>
                     </form>
 
@@ -181,7 +200,7 @@
             </div>
         </footer>
         <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-        <script defer src="https://maps.googleapis.com/maps/api/js?key=&callback=initMapa"></script>
+        <script defer src="https://maps.googleapis.com/maps/api/js?key=&callback=initMapa_edicion_evento"></script>
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
