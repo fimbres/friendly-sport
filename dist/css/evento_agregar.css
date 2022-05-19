@@ -12,6 +12,7 @@
 
 /* Start body rules */
 body {
+  position: relative;
   background-attachment: fixed;
   background-repeat: no-repeat;
 
@@ -41,9 +42,9 @@ div {
     background-image: linear-gradient(to left, #2937f0 0%, #9f1ae2 80%);*/
 }
 footer {
-  margin-top: 2rem;
-  bottom: 0;
+  position: relative;
+  display: inline-block;
+  bottom: -45px;
   width: 100%;
-  @media screen (max: 800px) {
-  }
+  margin-top: 2rem;
 }

@@ -195,8 +195,8 @@ $(document).ready(function () {
                 $("#formulario-der").addClass('col-12')
                 $("#formulario-der").addClass('pt-5')
                 $("#formulario-izq").addClass('col-12')
-                $("footer").css("position", " auto");
-                $("footer").css("bottom", "auto");
+                //$("footer").css("position", " auto");
+                //$("footer").css("bottom", "auto");
 
             } else {
                 $("#formulario-izq").attr('style', 'float: left; width: 65%; text-align: left; padding-left: 50px;');
@@ -204,8 +204,8 @@ $(document).ready(function () {
                 $("#formulario-der").removeClass('col-12')
                 $("#formulario-der").removeClass('pt-5')
                 $("#formulario-izq").removeClass('col-12')
-                $("footer").css("bottom", "0");
-                $("footer").css("position", "absolute");
+                //$("footer").css("bottom", "-127");
+                //$("footer").css("position", "absolute");
             }
         })
         if ($('body').width() <= 1200) {
@@ -214,16 +214,16 @@ $(document).ready(function () {
             $("#formulario-der").addClass('col-12')
             $("#formulario-der").addClass('pt-5')
             $("#formulario-izq").addClass('col-12')
-            $("footer").css("position", "auto");
-            $("footer").css("bottom", "auto");
+            //$("footer").css("position", "auto");
+            //$("footer").css("bottom", "auto");
         } else {
             $("#formulario-izq").attr('style', 'float: left; width: 65%; text-align: left; padding-left: 50px;');
             $("#formulario-der").attr('style', 'float: left; width: 35%');
             $("#formulario-der").removeClass('col-12')
             $("#formulario-der").removeClass('pt-5')
             $("#formulario-izq").removeClass('col-12')
-            $("footer").css("bottom", "0");
-            $("footer").css("position", "absolute");
+            //$("footer").css("bottom", "-127");
+            //$("footer").css("position", "absolute");
         }
     }
 });

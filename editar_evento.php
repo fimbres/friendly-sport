@@ -10,14 +10,29 @@
     if(empty($_GET['evento'])){
         header("location: index.php");
     }
-    
-
-
     $id_evento = $_GET['evento'];
     $error = [];
     $exito = false;
     $BD = crear_conexion_clase();
     $BD->next_result();
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $resultado = evento_formulario_verificar($_POST,$BD);
+        if($resultado[0]){
+            $resultado[1]['id_evento'] = $_POST['id_evento'];
+            $res = editar_evento($resultado[1],$BD);
+            if($res[0]){
+                $exito = true;
+            } else{
+                $error = $res[1];
+            }
+        } else{
+            $error = $resultado[1];
+        }
+
+    }
+    $BD->next_result();
+
+    
     $evento = ($BD->query("call sp_buscar_evento($id_evento)"))->fetch_array();
     $BD->next_result();
     
@@ -36,25 +51,12 @@
         $evento_dep[] = $data;
     }
     $BD->next_result();
-    /*
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        $resultado = evento_formulario_verificar($_POST,$BD);
-        if($resultado[0]){
-            $res = agregar_evento($resultado[1],$BD);
-            if($res[0]){
-                $exito = true;
-            } else{
-                $error = $res[1];
-            }
-        } else{
-            $error = $resultado[1];
-        }
-
-    }*/
+    
+   
     $BD->close();
 
 ?>
-<html lang="en">
+<html lang="es">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -100,7 +102,7 @@
                 <div class="card-body text-center">
                     <?php if(!empty($error)){ ?>
                             <div class="p-4">
-                                <div class="aler alert-danger">
+                                <div class="alert alert-danger">
                                     <h4 style="font-weight: bold;">Se encontraron los siguientes errores:</h4>
                                     <?php 
                                         foreach($error as $er){
@@ -115,8 +117,10 @@
                     <?php 
                         if($exito){
                     ?>
-                    <div class="col-12 alert alert-success text-center">
-                        <h3>El evento ha sido editado de manera exitosa</h3>
+                    <div class="p-4">
+                        <div class="col-12 alert alert-success text-center">
+                            <h3>El evento ha sido actualizado de manera exitosa</h3>
+                        </div>
                     </div>
                     <?php }?>
                     <form method="POST" class="needs-validation mb-5" novalidate>
@@ -177,6 +181,7 @@
                             <input type="hidden" id="direccion" name="direccion" value="<?php echo $evento['direccion']?>">
                             <input type="hidden" id="fecha_min" name="fecha_min">
                             <input type="hidden" id="fecha_max" name="fecha_max">
+                            <input type="hidden" name="id_evento" value="<?php echo $evento['id_evento']?>">
                             <button type="submit" class="btn btn-primary">Editar evento</button>
                         </div>
                     </form>

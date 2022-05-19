@@ -76,7 +76,7 @@
                 <div class="card-body text-center">
                     <?php if(!empty($error)){ ?>
                             <div class="p-4">
-                                <div class="aler alert-danger">
+                                <div class="alert alert-danger">
                                     <h4 style="font-weight: bold;">Se encontraron los siguientes errores:</h4>
                                     <?php 
                                         foreach($error as $er){
@@ -91,9 +91,12 @@
                     <?php 
                         if($exito){
                     ?>
-                    <div class="col-12 alert alert-success text-center">
-                        <h3>Se agrego el evento de manera exitosa</h3>
+                    <div class="p-4">
+                        <div class="col-12 alert alert-success text-center">
+                            <h3>Se agrego el evento de manera exitosa</h3>
+                        </div>
                     </div>
+                    
                     <?php }?>
                     <form method="POST" class="needs-validation mb-5" novalidate>
                         <div class="row">
