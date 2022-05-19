@@ -124,7 +124,12 @@
             array_push($errores,"La fecha ingresada es incorrecta, vuelve a ingresar otra");
         }
         $res['descripcion'] = limpiar_string($datos['descripcion'],$BD);
-        $res['direccion'] = $datos['direccion'];
+        if(!empty($datos['direccion'])){
+            $res['direccion'] = $datos['direccion'];
+        } else{
+            array_push($errores,"No se ha dado una direccion para el evento");
+        }
+       
         if(empty($errores)){
             return [true,$res];
         } else{
@@ -175,7 +180,6 @@
         //LA CIUDAD Y HORA_FINAL NO FUERON PEDIDAS EN EL FORMULARIO
         // POSIBLEMENTE ESO SE AGREGARA DENTRO DE LA EDICION
         $hora_final = $ciudad = 'NULL';
-        /*POR EL MOMENTO NO SE AGREGARA LA DIRECCION */
         $direccion = $datos['direccion'];
 
         $sql = "call sp_insertar_evento('$nombre','$fecha','$hora_inicio',$hora_final,";
