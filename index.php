@@ -46,34 +46,111 @@
             
         </div>
         <!-- contenido de la pagina-->   
-        <?php  
+        <?php
+            date_default_timezone_set('America/Tijuana');
+            $date = date('Y-m-d');
+            $time = date('H:i:s');
+           //(31.870758, -116.619713, 31.861054, -116.585638)
+            include("includes/geolocation.php");            
             include("includes/config.php");
             $BD = crear_conexion_clase();
+            $soccer = [];
+            $americano = [];
+            $baloncesto = [];
+            $tenis = [];
+            $beisbol = [];
+            $petanca = [];
+            $voleibol = [];
+            $ciclismo = [];
+            $senderismo = [];
+
+            $max = 6;
 
             $query = "SELECT * FROM tb_evento";
             $res = mysqli_query($BD,$query);
             
-            $query_soccer = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =1";
-            $soccer = mysqli_query($BD,$query_soccer);
-            $query_americano = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =2";
-            $americano = mysqli_query($BD,$query_americano);
-           
-            $query_baloncesto = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =3";
-            $baloncesto = mysqli_query($BD,$query_baloncesto);
-            $query_tenis = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =4";
-            $tenis = mysqli_query($BD,$query_tenis);
-            $query_beisbol = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =5";
-            $beisbol = mysqli_query($BD,$query_beisbol);
-            $query_petanca = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =6";
-            $petanca = mysqli_query($BD,$query_petanca);
-            $query_voleibol = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =7";
-            $voleibol = mysqli_query($BD,$query_voleibol);
-            $query_ciclismo = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =8";
-            $ciclismo = mysqli_query($BD,$query_ciclismo);
-            $query_senderismo = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =9";
-            $senderismo = mysqli_query($BD,$query_senderismo);
+            $query_soccer = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =1 ORDER BY fecha";
+            $pre_soccer = mysqli_query($BD,$query_soccer);
+            while($row=mysqli_fetch_array($pre_soccer)) {
+                if((strcmp($row['fecha'],$date) >= 0 && strcmp($row['hora_inicio'],$time) >= 0) || strcmp($row['fecha'],$date) > 0){
+                    if(distancia($lat,$lon,$row["direccion"]) <= $max){
+                        $soccer[] = $row;
+                    }
+                }
+            }
 
-
+            $query_americano = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =2 ORDER BY fecha";
+            $pre_americano = mysqli_query($BD,$query_americano);
+            while($row=mysqli_fetch_array($pre_americano)) {
+                if((strcmp($row['fecha'],$date) >= 0 && strcmp($row['hora_inicio'],$time) >= 0) || strcmp($row['fecha'],$date) > 0){
+                    if(distancia($lat,$lon,$row["direccion"]) <= $max){
+                        $americano[] = $row;
+                    }
+                }
+            }
+            $query_baloncesto = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =3 ORDER BY fecha";
+            $pre_baloncesto = mysqli_query($BD,$query_baloncesto);
+            while($row=mysqli_fetch_array($pre_baloncesto)) {
+                if((strcmp($row['fecha'],$date) >= 0 && strcmp($row['hora_inicio'],$time) >= 0) || strcmp($row['fecha'],$date) > 0){
+                    if(distancia($lat,$lon,$row["direccion"]) <= $max){
+                        $baloncesto[] = $row;
+                    }
+                }
+            }
+            $query_tenis = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =4 ORDER BY fecha";
+            $pre_tenis = mysqli_query($BD,$query_tenis);
+            while($row=mysqli_fetch_array($pre_tenis)) {
+                if((strcmp($row['fecha'],$date) >= 0 && strcmp($row['hora_inicio'],$time) >= 0) || strcmp($row['fecha'],$date) > 0){
+                    if(distancia($lat,$lon,$row["direccion"]) <= $max){
+                        $tenis[] = $row;
+                    }
+                }
+            }
+            $query_beisbol = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =5 ORDER BY fecha";
+            $pre_beisbol = mysqli_query($BD,$query_beisbol);
+            while($row=mysqli_fetch_array($pre_beisbol)) {
+                if((strcmp($row['fecha'],$date) >= 0 && strcmp($row['hora_inicio'],$time) >= 0) || strcmp($row['fecha'],$date) > 0){
+                    if(distancia($lat,$lon,$row["direccion"]) <= $max){
+                        $beisbol[] = $row;
+                    }
+                }
+            }
+            $query_petanca = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =6 ORDER BY fecha";
+            $pre_petanca = mysqli_query($BD,$query_petanca);
+            while($row=mysqli_fetch_array($pre_petanca)) {
+                if((strcmp($row['fecha'],$date) >= 0 && strcmp($row['hora_inicio'],$time) >= 0) || strcmp($row['fecha'],$date) > 0){
+                    if(distancia($lat,$lon,$row["direccion"]) <= $max){
+                        $petanca[] = $row;
+                    }
+                }
+            }
+            $query_voleibol = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =7 ORDER BY fecha";
+            $pre_voleibol = mysqli_query($BD,$query_voleibol);
+            while($row=mysqli_fetch_array($pre_voleibol)) {
+                if((strcmp($row['fecha'],$date) >= 0 && strcmp($row['hora_inicio'],$time) >= 0) || strcmp($row['fecha'],$date) > 0){
+                    if(distancia($lat,$lon,$row["direccion"]) <= $max){
+                        $voleibol[] = $row;
+                    }
+                }
+            }
+            $query_ciclismo = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =8 ORDER BY fecha";
+            $pre_ciclismo = mysqli_query($BD,$query_ciclismo);
+            while($row=mysqli_fetch_array($pre_ciclismo)) {
+                if((strcmp($row['fecha'],$date) >= 0 && strcmp($row['hora_inicio'],$time) >= 0) || strcmp($row['fecha'],$date) > 0){
+                    if(distancia($lat,$lon,$row["direccion"]) <= $max){
+                        $ciclismo[] = $row;
+                    }
+                }
+            }
+            $query_senderismo = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =9 ORDER BY fecha";
+            $pre_senderismo = mysqli_query($BD,$query_senderismo);
+            while($row=mysqli_fetch_array($pre_senderismo)) {
+                if((strcmp($row['fecha'],$date) >= 0 && strcmp($row['hora_inicio'],$time) >= 0) || strcmp($row['fecha'],$date) > 0){
+                    if(distancia($lat,$lon,$row["direccion"]) <= $max){
+                        $senderismo[] = $row;
+                    }
+                }
+            }
         ?>     
         <div class="contenido">
             <div class="division1">
@@ -89,7 +166,7 @@
             <div class="division2">
                 <?php if ($res):?>
                     <!-- SOCCER-->   
-                    <?php if ($soccer->num_rows):{?>
+                    <?php if ($soccer):{?>
                     <div class="soccer">
                         <h6>Futbol Soccer</h6>
                         <div class="contenedor">
@@ -97,14 +174,14 @@
                                 <div class="triangulo"></div>
                             </button>
                             <div class="eventos">
-                                <?php while($fila = mysqli_fetch_array($soccer)){?>
+                                <?php foreach($soccer as $fila){?>
                                 <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
                                     <img src="assets/static/soccer.png" styles="max-width: 100%;">
                                     <div class="cuerpo">
                                         <div class="descripciones">
                                             <h5><?php echo $fila['nombre'];?></h5>   
                                             <h5 style="color:orange;">Futbol Soccer</h5>
-                                            <h5><?php echo $fila['fecha'];?></h5>
+                                            <h5><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
                                             <h6><?php echo $fila['ciudad'];?></h6>
                                         </div>
                                         <div class="cantidad">
@@ -129,7 +206,7 @@
                     </div>
                     <?php }endif ?>
                         <!-- AMERICANO-->
-                    <?php if ($americano->num_rows):{?>
+                    <?php if ($americano):{?>
                     <div class="americano">
                         <h6>Futbol Americano</h6>
                         <div class="contenedor">
@@ -137,14 +214,14 @@
                             <div class="triangulo"></div>
                         </button>
                         <div class="eventos">
-                            <?php while($fila = mysqli_fetch_array($americano)){?>
+                            <?php foreach($americano as $fila){?>
                             <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
                                 <img src="assets/static/football.png" styles="max-width: 100%;">
                                 <div class="cuerpo">
                                     <div class="descripciones">
                                         <h5><?php echo $fila['nombre'];?></h5>    
                                         <h5 style="color:orange;">Futbol Americano</h5>
-                                        <h5><?php echo $fila['fecha'];?></h5>
+                                        <h5><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
                                         <h6><?php echo $fila['ciudad'];?></h6>
                                     </div>
                                     <div class="cantidad">
@@ -169,7 +246,7 @@
                 </div>
                 <?php }endif ?>
                     <!-- BALONCESTO-->
-                    <?php if ($baloncesto->num_rows):?>
+                    <?php if ($baloncesto):?>
                       <div class="baloncesto">
                         <h6>Baloncesto</h6>
                     <div class="contenedor">
@@ -177,14 +254,14 @@
                             <div class="triangulo"></div>
                         </button>
                         <div class="eventos">
-                            <?php while($fila = mysqli_fetch_array($baloncesto)){?>
+                            <?php foreach($baloncesto as $fila){?>
                             <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
                                 <img src="assets/static/basketball.png" styles="max-width: 100%;">
                                 <div class="cuerpo">
                                     <div class="descripciones">
                                         <h5><?php echo $fila['nombre'];?></h5>  
                                         <h5 style="color:orange;">Baloncesto</h5>
-                                        <h5><?php echo $fila['fecha'];?></h5>
+                                        <h5><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
                                         <h6><?php echo $fila['ciudad'];?></h6>
                                     </div>
                                     <div class="cantidad">
@@ -209,7 +286,7 @@
                     </div>
                     <?php endif ?>
                     <!-- TENIS-->
-                    <?php if ($tenis->num_rows):?>
+                    <?php if ($tenis):?>
                     <div class="tenis">
                         <h6>Tenis</h6>
                     <div class="contenedor">
@@ -217,14 +294,14 @@
                             <div class="triangulo"></div>
                         </button>
                         <div class="eventos">
-                            <?php while($fila = mysqli_fetch_array($tenis)){?>
+                            <?php foreach($tenis as $fila){?>
                             <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
                                 <img src="assets/static/tenis.png" styles="max-width: 100%;">
                                 <div class="cuerpo">
                                     <div class="descripciones">
                                         <h5><?php echo $fila['nombre'];?></h5>   
                                         <h5 style="color:orange;">Tenis</h5>
-                                        <h5><?php echo $fila['fecha'];?></h5>
+                                        <h5><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
                                         <h6><?php echo $fila['ciudad'];?></h6>
                                     </div>
                                     <div class="cantidad">
@@ -249,7 +326,7 @@
                     </div> 
                     <?php endif ?>  
                     <!-- BEISBOL-->
-                    <?php if ($beisbol->num_rows):?>
+                    <?php if ($beisbol):?>
                       <div class="beisbol">
                         <h6>Beisbol</h6>
                     <div class="contenedor">
@@ -257,14 +334,14 @@
                             <div class="triangulo"></div>
                         </button>
                         <div class="eventos">
-                            <?php while($fila = mysqli_fetch_array($beisbol)){?>
+                            <?php foreach($beisbol as $fila){?>
                             <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
                                 <img src="assets/static/beisbol.png" styles="max-width: 100%;">
                                 <div class="cuerpo">
                                     <div class="descripciones">
                                         <h5><?php echo $fila['nombre'];?></h5>    
                                         <h5 style="color:orange;">Beisbol</h5>
-                                        <h5><?php echo $fila['fecha'];?></h5>
+                                        <h5><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
                                         <h6><?php echo $fila['ciudad'];?></h6>
                                     </div>
                                     <div class="cantidad">
@@ -289,7 +366,7 @@
                     </div>  
                     <?php endif ?>
                     <!-- PETANCA-->
-                    <?php if ($petanca->num_rows):?>
+                    <?php if ($petanca):?>
                     <div class="petanca">
                         <h6>Petanca</h6>
                     <div class="contenedor">
@@ -297,14 +374,14 @@
                             <div class="triangulo"></div>
                         </button>
                         <div class="eventos">
-                            <?php while($fila = mysqli_fetch_array($petanca)){?>
+                            <?php foreach($petanca as $fila){?>
                             <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
                                 <img src="assets/static/petanca.png" styles="max-width: 100%;">
                                 <div class="cuerpo">
                                     <div class="descripciones">
                                         <h5><?php echo $fila['nombre'];?></h5>    
                                         <h5 style="color:orange;">Petanca</h5>
-                                        <h5><?php echo $fila['fecha'];?></h5>
+                                        <h5><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
                                         <h6><?php echo $fila['ciudad'];?></h6>
                                     </div>
                                     <div class="cantidad">
@@ -329,7 +406,7 @@
                     </div>
                     <?php endif ?>    
                     <!-- VOLEIBOL-->
-                    <?php if ($voleibol->num_rows):?>
+                    <?php if ($voleibol):?>
                       <div class="voleibol">
                         <h6>Voleibol</h6>
                     <div class="contenedor">
@@ -337,14 +414,14 @@
                             <div class="triangulo"></div>
                         </button>
                         <div class="eventos">
-                            <?php while($fila = mysqli_fetch_array($voleibol)){?>
+                            <?php foreach($voleibol as $fila){?>
                             <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
                                 <img src="assets/static/voleibol.png" styles="max-width: 100%;">
                                 <div class="cuerpo">
                                     <div class="descripciones">
                                         <h5><?php echo $fila['nombre'];?></h5>     
                                         <h5 style="color:orange;">Voleibol</h5>
-                                        <h5><?php echo $fila['fecha'];?></h5>
+                                        <h5><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
                                         <h6><?php echo $fila['ciudad'];?></h6>
                                     </div>
                                     <div class="cantidad">
@@ -369,7 +446,7 @@
                     </div>  
                     <?php endif ?>  
                     <!-- CICLISMO-->
-                    <?php if ($ciclismo->num_rows):?>
+                    <?php if ($ciclismo):?>
                       <div class="ciclismo">
                         <h6>Ciclismo</h6>
                     <div class="contenedor">
@@ -377,14 +454,14 @@
                             <div class="triangulo"></div>
                         </button>
                         <div class="eventos">
-                            <?php while($fila = mysqli_fetch_array($ciclismo)){?>
+                            <?php foreach($ciclismo as $fila){?>
                             <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
                                 <img src="assets/static/ciclismo.png" styles="max-width: 100%;">
                                 <div class="cuerpo">
                                     <div class="descripciones">
                                         <h5><?php echo $fila['nombre'];?></h5>  
                                         <h5 style="color:orange;">Ciclismo</h5>
-                                        <h5><?php echo $fila['fecha'];?></h5>
+                                        <h5><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
                                         <h6><?php echo $fila['ciudad'];?></h6>
                                     </div>
                                     <div class="cantidad">
@@ -409,7 +486,7 @@
                     </div>   
                     <?php endif ?>  
                     <!-- SENDERISMO--> 
-                    <?php if ($senderismo->num_rows):?>
+                    <?php if ($senderismo):?>
                     <div class="senderismo">
                         <h6>Senderismo</h6>
                     <div class="contenedor">
@@ -417,14 +494,14 @@
                             <div class="triangulo"></div>
                         </button>
                         <div class="eventos">
-                            <?php while($fila = mysqli_fetch_array($senderismo)){?>
+                            <?php foreach($senderismo as $fila){?>
                             <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
                                 <img src="assets/static/senderismo.png" styles="max-width: 100%;">
                                 <div class="cuerpo">
                                     <div class="descripciones">
                                         <h5><?php echo $fila['nombre'];?></h5>    
                                         <h5 style="color:orange;">Senderismo</h5>
-                                        <h5><?php echo $fila['fecha'];?></h5>
+                                        <h5><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
                                         <h6><?php echo $fila['ciudad'];?></h6>
                                     </div>
                                     <div class="cantidad">
@@ -774,9 +851,6 @@
                 });
 
         </script>
-
-        <script>
-        
-        </script>
+       
     </body>
 </html>
