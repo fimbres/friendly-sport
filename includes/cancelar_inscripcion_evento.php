@@ -46,7 +46,7 @@
                 }
             }
             else{
-                $response = array("response" => "Success","message" => "Eres el organizador del evento");
+                $response = array("response" => "Invalid","message" => "Eres el organizador del evento");
             }
         }else{
             $response = array("response" => "Invalid","message" => "Aun no estas inscrito a este evento");

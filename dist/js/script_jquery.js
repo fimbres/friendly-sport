@@ -33,6 +33,40 @@ function initMapa_edicion_evento() {
         $("#direccion").attr('value', str);
     }
 }
+
+
+function initMapa_info_evento() {
+    if (navigator.geolocation) {
+        let temp = ($('#txtDireccion').val()).split(',')
+        latitud = parseFloat(temp[0])
+        longitude = parseFloat(temp[1])
+
+        const myLating = new google.maps.LatLng(latitud, longitude);
+        map = new google.maps.Map(document.getElementById("mapa"), {
+            center: myLating,
+            mapTypeControl: true,
+            zoom: 13,
+            navigationControlOptions: {
+                style: google.maps.NavigationControlStyle.SMALL
+            },
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+        marcador = new google.maps.Marker({
+            position: myLating,
+            map: map,
+            title: "Mi seleccion",
+            draggable: false
+        })
+        google.maps.event.addListener(marcador, 'drag', function (event) {
+            let str = `${event.latLng.lat()},${event.latLng.lng()}`;
+            $("#direccion").attr('value', str)
+        })
+        let str = `${latitud},${longitude}`;
+        $("#direccion").attr('value', str);
+    }
+}
+
+
 function initMapa() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {

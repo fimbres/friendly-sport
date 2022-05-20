@@ -68,7 +68,7 @@
                 $filaDeportes = $nombreDeporteRes->fetch_assoc();
                 $nombre_deporte = $filaDeportes['nombre'];
 
-                $response = array("response" => "Success","Nombre_deporte" => $nombre_deporte,"Nombre_evento" => $info_evento['nombre'], "Fecha_evento" => $info_evento['fecha'], "Hora_inicio" => $h_hora_inicio, "Minutos_inicio" => $minutos_hora_inicio, "Segundos_inicio" => $segundos_hora_inicio,"Direccion_latitud" => $latitud,"Nombre_organizador" => $organizador_evento,"status_inscripcion" => $inscrito,"cantidad_inscritos"=>$cantidadInscritos,"lista_participantes"=>$stringParticipantes);
+                $response = array("response" => "Success","Nombre_deporte" => $nombre_deporte,"Nombre_evento" => $info_evento['nombre'], "Fecha_evento" => $info_evento['fecha'], "Hora_inicio" => $h_hora_inicio, "Minutos_inicio" => $minutos_hora_inicio, "Segundos_inicio" => $segundos_hora_inicio,"Direccion_latitud" => $latitud,"Nombre_organizador" => $organizador_evento,"status_inscripcion" => $inscrito,"cantidad_inscritos"=>$cantidadInscritos,"lista_participantes"=>$stringParticipantes,"direccion_completa"=>$direccion);
             }
 
         }else{

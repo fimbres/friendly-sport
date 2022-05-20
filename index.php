@@ -4,6 +4,8 @@
     if(! isset($_SESSION['usuario_Id'])){
         header("location: welcome.php");
     }
+
+    header("Access-Control-Allow-Origin: *");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,7 +66,7 @@
             $ciclismo = [];
             $senderismo = [];
 
-            $max = 6;
+            $max = 15;
 
             $query = "SELECT * FROM tb_evento";
             $res = mysqli_query($BD,$query);
@@ -556,10 +558,6 @@
                     <h1 id="info-inscribirse-notificacion" class="text-dark d-none p-4"></h1>
 
                     <div id="div-info-banner" class=" banner-event text-center d-none">
-                        <?php 
-                            //$ruta_imagen = 'assets/static/'.$nombre_deporte.'_banner_info.jpg';
-                            //echo '<img class="img-banner" src="'.$ruta_imagen.'" alt="">';
-                        ?>
                         <img id="img-info-banner" class="img-banner" src="" alt="">
                     </div>
                     <div id="div-info-body" class="card-body d-none">
@@ -585,7 +583,7 @@
 
                                     <div class="form-group mt-4">
                                         <div class="form-icon-wrapper">
-                                            <div class="container-fluid d-flex justify-content-center"><div class="container"><span class="fw-bold py-2">Lugar del evento:</span></div><div class="container ins-bg-info rounded-3"><input id="txtLatitud" class="d-none" type="text"><input id="txtLongitud" class="d-none" type="text"><div class="text-center col-12"  id="mapa" style="width: 100%; height: 200px;" ></div></div></div>
+                                            <div class="container-fluid d-flex justify-content-center"><div class="container"><span class="fw-bold py-2">Lugar del evento:</span></div><div class="container ins-bg-info rounded-3"><input id="txtDireccion" type="hidden" type="text" value=""><input id="txtLongitud" class="d-none" type="text"><div class="text-center col-12"  id="mapa" style="width: 100%; height: 200px;" ></div></div></div>
                                         </div>
                                     </div>
 
@@ -648,13 +646,12 @@
         <script src="dist/js/index.js"></script>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script defer src="https://maps.googleapis.com/maps/api/js?key=&callback=initMapa"></script>
-        <script src="dist/js/script_jquery.js"></script>
         <script src="dist/js/jquery-3.6.0.min.js"></script>
         <script>
             const closeEvent = document.querySelector("#btnCloseEvent");
             const containerEvent = document.querySelector("#container-show-event");
             
+            //SALIR DE LA INFORMACION DEL EVENTO
             closeEvent.addEventListener("click", function(evento){
                 $('#info-inscribirse-notificacion').text(" ");
                 $('#container-show-event').addClass('d-none');
@@ -664,6 +661,8 @@
             });
         </script>
         <script>
+
+            //MOSTRAR INFORMACION DEL EVENTO
             $('.tarjeta').on('click', function(event) 
             {
                 $('#container-show-event').removeClass('d-none');
@@ -697,10 +696,12 @@
                                     $('#span-info-organizador').text(data.Nombre_organizador);
                                     $('#span-cantidad-inscritos').text(data.cantidad_inscritos);
                                     $('#span-lista-inscritos').text(data.lista_participantes);
-
+                                    var direccion_completa = data.direccion_completa;
+                                    $('#txtDireccion').val(direccion_completa);
                                     $('#div-info-loading').addClass("d-none");
                                     $('#div-info-banner').removeClass('d-none');
                                     $('#div-info-body').removeClass('d-none');
+                                    mostrarmapa();
 
                                     if(data.status_inscripcion){
                                         $('#btnRetirarse').removeClass('d-none');
@@ -710,6 +711,7 @@
                                     }
 
                                     console.log(data);
+                                    console.log(data.direccion_completa)
                                 }   
                                 else if (data.response == "Invalid") {
                                    console.log(data.message);
@@ -725,6 +727,8 @@
 
             });
 
+
+            //INSCRIBIRSE A UN EVENTO
             $('#btnInscribirse').on('click', function(event) {
 
                     if(idEvento != "")
@@ -786,7 +790,7 @@
                 });
 
 
-
+                //RETIRARSE DE UN EVENTO
                 $('#btnRetirarse').on('click', function(event) {
                     console.log(idEvento);
 
@@ -844,13 +848,20 @@
                                 },
                                 error: function (xhr, exception) {
                                     console.log(exception);
-
                                 }
                             });
                     }
                 });
 
         </script>
+        <script>
+            function mostrarmapa(){
+                let script = document.createElement('script');
+                script.src = 'https://maps.googleapis.com/maps/api/js?key=&callback=initMapa_info_evento';
+                document.body.append(script);
+            }
+        </script>
+        <script src="dist/js/script_jquery.js"></script>
        
     </body>
 </html>
