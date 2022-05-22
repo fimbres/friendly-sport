@@ -3,13 +3,13 @@
     //si la ip es local 
     if($ip == "::1"){
         $link = 'https://api.ipgeolocation.io/ipgeo?apiKey=eae3ac17b17b41c0bac5061962032512&fields=latitude,longitude,city';
-         $ch = curl_init();
-         curl_setopt($ch, CURLOPT_URL, $link);
-         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $link);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $location = curl_exec($ch);
         $location = json_decode($location, true);
         $ip = $location["ip"];
-         curl_close($ch);  
+        curl_close($ch);  
     }
     $json = file_get_contents("http://ipinfo.io/$ip/geo");
     $json = json_decode($json, true);
