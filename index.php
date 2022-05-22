@@ -67,9 +67,6 @@
             $senderismo = [];
 
             $max = 15;
-
-            $query = "SELECT * FROM tb_evento";
-            $res = mysqli_query($BD,$query);
             
             $query_soccer = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =1 ORDER BY fecha";
             $pre_soccer = mysqli_query($BD,$query_soccer);
@@ -166,7 +163,7 @@
                 </div>
             </div>
             <div class="division2">
-                <?php if ($res):?>
+                <?php if ($soccer || $americano || $baloncesto || $tenis || $beisbol || $petanca || $voleibol || $ciclismo || $senderismo):?>
                     <!-- SOCCER-->   
                     <?php if ($soccer):{?>
                     <div class="soccer">
