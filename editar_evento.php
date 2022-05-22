@@ -183,6 +183,7 @@
                             <input type="hidden" id="fecha_max" name="fecha_max">
                             <input type="hidden" name="id_evento" value="<?php echo $evento['id_evento']?>">
                             <button type="submit" class="btn btn-primary">Editar evento</button>
+                            <input id="btnCancelEvent" class="btn btn-danger" type="button" value="Cancelar evento"/>
                         </div>
                     </form>
 

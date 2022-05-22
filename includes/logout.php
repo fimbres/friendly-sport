@@ -1,5 +1,5 @@
 <?php
     session_start();
     session_destroy();
-    header("location: /sport-php/welcome.php");
+    header("location: /friendly-sport/welcome.php");
 ?>
