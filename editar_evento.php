@@ -71,8 +71,9 @@
         <link href="dist/css/styles.css" rel="stylesheet" />
         <link href="dist/css/welcome_styles.css" rel="stylesheet" />
         <link href="dist/css/evento_agregar.css" rel="stylesheet" />
+        <link href="dist/css/editar_evento.css" rel="stylesheet" />
 
-        
+
     </head>
     <body id="page-top">
         <!-- barra de navegacion-->
@@ -186,6 +187,7 @@
                             <input id="btnCancelEvent" class="btn btn-danger" type="button" value="Cancelar evento"/>
                         </div>
                     </form>
+                    <div class="confirmar"></div>
 
                 </div>
 
@@ -205,6 +207,7 @@
                 </div>
             </div>
         </footer>
+        <script src="dist/js/editar_evento.js"></script>
         <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
         <script defer src="https://maps.googleapis.com/maps/api/js?key=&callback=initMapa_edicion_evento"></script>
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
