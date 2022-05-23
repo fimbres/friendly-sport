@@ -11,10 +11,27 @@
         header("location: index.php");
     }
     $id_evento = $_GET['evento'];
+
+    if(isset($_POST['eliminar'])){
+        echo "<script>console.log('Console: $id_evento' );</script>";
+        $BD = crear_conexion_clase();
+        $deletear1 = "CALL sp_eliminar_relacion_usuarios_eventos_e($id_evento)";
+        mysqli_query($BD,$deletear1);
+        $id_dep = $_POST['id_deporte'];
+        echo "<script>console.log('Console: $id_dep' );</script>";
+        $deletear2 = "CALL sp_eliminar_relacion_deportes_eventos_e($id_evento, $id_dep)";
+        mysqli_query($BD,$deletear2);
+        $deletear3 = "CALL sp_eliminar_evento($id_evento)";
+        mysqli_query($BD,$deletear3);
+        $BD->close();
+        header("location: index.php");
+    }
+
     $error = [];
     $exito = false;
     $BD = crear_conexion_clase();
     $BD->next_result();
+
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $resultado = evento_formulario_verificar($_POST,$BD);
         if($resultado[0]){
@@ -184,15 +201,74 @@
                             <input type="hidden" id="fecha_max" name="fecha_max">
                             <input type="hidden" name="id_evento" value="<?php echo $evento['id_evento']?>">
                             <button type="submit" class="btn btn-primary">Editar evento</button>
-                            <input id="btnCancelEvent" class="btn btn-danger" type="button" value="Cancelar evento"/>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Cancelar evento</button>
                         </div>
                     </form>
-                    <div class="confirmar"></div>
-
                 </div>
-
             </div>
         </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">AVISO!</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body modal1">
+                        <img src="assets/static/Warning.png" height="108px" alt="">
+                        <div class="textos">
+                            <P>Deseas cancelar el evento?</P>
+                            <p>la publicacion dejara de ser publica y todos los miembros dejaran de verla.</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <form method="post">
+                            <input type="hidden" id="id_deporte" name="id_deporte" value="<?php echo $eve_dep['id_deporte']?>">
+                            <input type="hidden" id="id_evento" name="id_evento" value="<?php echo $evento['id_evento']?>">
+                            <input name="eliminar" type="submit" class="btn btn-primary" value="Aceptar" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">
+                        </form>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="exampleModalToggle2" data-bs-backdrop="static" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalToggleLabel2">AVISO!</h5>
+                    </div>
+                    <div class="modal-body modal1">
+                        <img src="assets/static/Warning.png" height="108px" alt="">
+                        <div class="textos">
+                            <p>El evento se ha cancelado/borrado correctamente</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--
+            <div class="confirmar confirmar--close">
+                <div class="confirmar-ventana">
+                    <div class = "cuidado">
+                        <img src="assets/static/Warning.png" height="108px" alt="">
+                    </div>
+                    <div class="textos">
+                        <h1>AVISO!</h1>
+                        <P>Deseas cancelar el evento?</P>
+                        <p>la publicacion dejara de ser publica y todos los miembros dejaran de verla.</p>
+                        <div class="botones">
+                            <button class="btn btn-primary botoncito" id="">Aceptar</button>
+                            <button class="btn btn-danger botoncito" id="">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+                                                -->
         <!-- Footer-->
         <footer class="bg-black text-center py-3">
             <div class="container px-5">
