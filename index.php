@@ -178,7 +178,7 @@
                                     <img src="assets/static/soccer.png" styles="max-width: 100%;">
                                     <div class="cuerpo">
                                         <div class="descripciones">
-                                            <h5><?php echo $fila['nombre'];?></h5>   
+                                            <h5><?php echo $fila['nombre'];?> - <?php echo $fila['id_evento'];?></h5>   
                                             <h5 style="color:orange;">Futbol Soccer</h5>
                                             <h5><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
                                             <h6><?php echo $fila['ciudad'];?></h6>

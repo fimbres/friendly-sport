@@ -1,0 +1,76 @@
+.confirmar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+
+  background: rgba(0, 0, 0, 0.6);
+  box-shadow: 15px 15px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+
+  backdrop-filter: saturate(180%) blur(20px);
+  opacity: 1;
+  animation-name: confirmar---open;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.confirmar--close {
+  animation-name: confirmar---close;
+}
+
+@keyframes confirmar---close {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes confirmar---open {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.confirmar-ventana {
+  width: 688px;
+  height: 219px;
+
+  background: #d6d6d6;
+  box-shadow: 15px 15px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+}
+
+.cuidado {
+  display: flex;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.textos {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-direction: column;
+  padding-left: 30px;
+}
+
+.botoncito {
+  margin-left: 20px;
+}
+
+.modal1 {
+  display: flex;
+}
