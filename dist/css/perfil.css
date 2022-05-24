@@ -1,0 +1,71 @@
+.contenido_perfil {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  justify-content: center;
+
+  margin-top: 5rem;
+  margin-bottom: 3rem;
+
+  padding-left: 15vw;
+  padding-right: 15vw;
+}
+
+.division1_perfil {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  margin-bottom: 2rem;
+}
+
+.imagen_perfil {
+  margin-right: 3rem;
+  margin-left: 3rem;
+}
+
+.nombre_usuario {
+  margin-bottom: 3rem;
+}
+
+.division2_perfil {
+  margin-bottom: 0rem;
+}
+
+.eventos_perfil {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  height: 380px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  margin-bottom: 2rem;
+}
+
+.eventos_perfil::-webkit-scrollbar {
+  display: none;
+}
+.eventos_perfil > .tarjeta:hover {
+  transform: scale(1.05);
+}
+
+.cuidado {
+  display: flex;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.textos {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-direction: column;
+  padding-left: 30px;
+}
+
+.botoncito {
+  margin-left: 20px;
+}
+
+.modal1 {
+  display: flex;
+}

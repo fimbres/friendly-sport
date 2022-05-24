@@ -158,11 +158,13 @@
                                                     <?php foreach($evento_dep as $eve_dep){
                                                         if($eve_dep['id_deporte'] == $dep['id_deporte']){
                                                             echo 'selected';
+                                                            $id_dep2 = $eve_dep['id_deporte'];
                                                         }
                                                     }?> >
                                                     <?php echo $dep['nombre'];?>
                                                 </option>
-                                            <?php }?>
+                                            <?php }
+                                            echo "<script>console.log('Console: $id_dep2' );</script>";?>
                                         </select>
                                     </div>
                                     <div class="form-group col-6">
