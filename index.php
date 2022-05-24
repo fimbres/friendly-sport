@@ -5,6 +5,7 @@
         header("location: welcome.php");
     }
 
+    $usuario = $_SESSION['usuario_Id'];
     header("Access-Control-Allow-Origin: *");
 ?>
 <!DOCTYPE html>
@@ -532,7 +533,7 @@
                     </div>
 
                 <?php endif ?>
-                <?php $BD->close(); ?>
+                
                 
             </div>
         </div>
@@ -628,18 +629,11 @@
 
         <!-- Footer-->
         <footer class="bg-black text-center  mt-5 py-3">
-            <div class="container px-5">
-                <div class="text-white-50 small">
-                    <p>© FriendlySport, 2022. Todos los derechos reservados.</p>
-                    <p>Tel: 1234567890 | Email: ayuda@metafusions.com</p>
-                    <a href="#!">Privacidad</a>
-                    <span class="mx-1">&middot;</span>
-                    <a href="#!">Terminos</a>
-                    <span class="mx-1">&middot;</span>
-                    <a href="#!">Condiciones</a>
-                </div>
-            </div>
+            <?php
+            include 'includes/widgets/footer.php';
+            ?>
         </footer>
+        <?php $BD->close(); ?>
         <script src="dist/js/index.js"></script>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
