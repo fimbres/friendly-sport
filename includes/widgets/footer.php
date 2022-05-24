@@ -11,7 +11,7 @@
         <?php
             if(isset($_SESSION['usuario_Id'])){
                 $usuario = $_SESSION['usuario_Id'];
-                $busca_usuario_evaluacion = $BD -> query("SELECT * FROM tb_relacion_usuarios_calidad WHERE id_usuario='".$usuario."'");
+                $busca_usuario_evaluacion = $BD -> query("SELECT * FROM tb_evaluacion WHERE id_usuario='".$usuario."'");
                 $evaluaciones_encontradas = $busca_usuario_evaluacion -> num_rows;
 
                 if($evaluaciones_encontradas < 1){

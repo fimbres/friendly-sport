@@ -1,3 +1,23 @@
+<?php
+session_start();
+if(isset($_SESSION['usuario_Id'])){
+                include 'includes/funciones_BD.php';
+                $conexion = crear_conexion_variable();
+
+                $usuario = $_SESSION['usuario_Id'];
+                $busca_usuario_evaluacion = $conexion -> query("SELECT * FROM tb_evaluacion WHERE id_usuario='".$usuario."'");
+                $evaluaciones_encontradas = $busca_usuario_evaluacion -> num_rows;
+
+                if($evaluaciones_encontradas < 1){
+                    
+                }else{
+                    header("location: index.php");
+                }
+}else{
+    header("location: login.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
