@@ -96,6 +96,7 @@
             $result = mysqli_query($BD,$query_usuario);
             $usuario = mysqli_fetch_array($result);
 
+
             #SELECT * FROM tb_eventos WHERE id_evento =
             $contador = 0;
             $id_eventos_temp = [];
@@ -159,6 +160,13 @@
                 9 => "senderismo.png",
             ];
 
+            $preferidos = [];
+            $query_preferidos = "CALL sp_buscar_relacion_usuarios_deportes_u($id_user)";
+            $preferidos_result = mysqli_query($BD,$query_preferidos);
+            $BD->next_result();
+            while($row = mysqli_fetch_array($preferidos_result)) {
+                $preferidos[] = $nombres_deportes[$row['id_deporte']];
+            }
 
         ?>     
         
@@ -169,7 +177,15 @@
                 </div>
                 <div class="textos_perfil">
                     <h1 class="nombre-usuario"><?php echo $usuario['nombre_usuario'];?></h1>
-                    <h2>Deportes de interés: </h2>
+                    <h2>Deportes de interés: 
+                    <?php 
+                        $cadena = "| ";
+                        foreach($preferidos as $preferido){
+                            $cadena .= $preferido . " | ";
+                        }
+                        echo $cadena;
+                    ?>
+                    </h2>
                     <h2>Edad: <?php echo $usuario['edad'];?></h2>
                     <h2>Correo Electrónico: <?php echo $usuario['email'];?></h2>
                 </div>
