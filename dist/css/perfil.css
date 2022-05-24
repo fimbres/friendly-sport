@@ -1,4 +1,4 @@
-.contenido-perfil {
+.contenido_perfil {
   display: flex;
   flex-direction: column;
   align-content: flex-start;
@@ -11,7 +11,7 @@
   padding-right: 15vw;
 }
 
-.division1-perfil {
+.division1_perfil {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -19,16 +19,31 @@
   margin-bottom: 2rem;
 }
 
-.imagen-perfil {
+.imagen_perfil {
   margin-right: 3rem;
   margin-left: 3rem;
 }
 
-.nombre-usuario {
+.nombre_usuario {
   margin-bottom: 3rem;
 }
 
-.eventos-perfil {
+.division2_perfil {
+  margin-bottom: 0rem;
+}
+
+.eventos_perfil {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  height: 380px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  margin-bottom: 2rem;
+}
+
+.eventos_perfil::-webkit-scrollbar {
+  display: none;
+}
+.eventos_perfil > .tarjeta:hover {
+  transform: scale(1.05);
 }

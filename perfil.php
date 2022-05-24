@@ -90,21 +90,21 @@
             }
         ?>     
         
-        <div class="contenido-perfil">
-            <div class="division1-perfil">
-                <div class="imagen-perfil">
+        <div class="contenido_perfil">
+            <div class="division1_perfil">
+                <div class="imagen_perfil">
                     <img src="assets/static/user_icon2.png" alt="">
                 </div>
-                <div class="textos-perfil">
+                <div class="textos_perfil">
                     <h1 class="nombre-usuario"><?php echo $usuario['nombre_usuario'];?></h1>
                     <h2>Deportes de interés: </h2>
                     <h2>Edad: <?php echo $usuario['edad'];?></h2>
                     <h2>Correo Electrónico: <?php echo $usuario['email'];?></h2>
                 </div>
             </div>
-            <div class="division2-perfil">
+            <div class="division2_perfil">
                 <h4>Tus eventos: </h4>
-                <div class="eventos-perfil">
+                <div class="eventos_perfil">
                     <?php foreach($eventos as $fila){?>            
                                 
                     <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
@@ -216,7 +216,7 @@
 
                                     <div class="container-fluid mt-4">
                                         <input id="btnInscribirse" class="btn btn-custom-primary m-1 text-light w-100" type="button" value="Inscribirte"/>
-                                        <input id="btnRetirarse" class="btn btn-warning m-1 text-light w-100 d-none" type="button" value="Retirarse"/>
+                                        <input id="btnEditar" class="btn btn-primary m-1 text-light w-100 d-none" type="button" value="Editar"/>
                                         <input id="btnCloseEvent" class="btn btn-danger m-1 w-100" type="button" value="Salir"/>
                                     </div>
                                 </div>
@@ -253,7 +253,7 @@
                 $('#info-inscribirse-notificacion').text(" ");
                 $('#container-show-event').addClass('d-none');
                 $('#page-top').removeClass('overflow-hidden');
-                $('#btnRetirarse').addClass('d-none');
+                $('#btnEditar').addClass('d-none');
                 $('#btnInscribirse').removeClass('d-none');
             });
         </script>
@@ -301,7 +301,7 @@
                                     mostrarmapa();
 
                                     if(data.status_inscripcion){
-                                        $('#btnRetirarse').removeClass('d-none');
+                                        $('#btnEditar').removeClass('d-none');
                                         $('#btnInscribirse').addClass('d-none');
                                     }else{
 
@@ -353,7 +353,7 @@
                                             $('#div-info-banner').removeClass('d-none');
                                             $('#div-info-body').removeClass('d-none');
                                             $('#btnInscribirse').addClass('d-none');
-                                            $('#btnRetirarse').removeClass('d-none');
+                                            $('#btnEditar').removeClass('d-none');
                                             $('#span-lista-inscritos').text(data.lista_participantes);
                                         }, 2000);
                                         
@@ -387,66 +387,12 @@
                 });
 
 
-                //RETIRARSE DE UN EVENTO
-                $('#btnRetirarse').on('click', function(event) {
+                //EDITAR UN EVENTO
+                $('#btnEditar').on('click', function(event) {
                     console.log(idEvento);
-
                     if(idEvento != "")
                     {
-                        $.ajax({
-                                type:'POST',
-                                url:'includes/cancelar_inscripcion_evento.php',
-                                dataType:'JSON',
-                                data: {idEvento: idEvento},
-                                beforeSend:function(data){
-                                    $('#div-info-banner').addClass('d-none');
-                                    $('#div-info-body').addClass('d-none');
-                                    $('#div-info-loading').removeClass("d-none");
-                                    $('#btnInscribirse').attr('disabled');
-                                    $('#info-inscribirse-notificacion').text(" ");
-                                    console.log("BeforeSend");
-                                    console.log(data);
-                                },  
-                                success:function(data){
-                                    if(data.response == "Success"){  
-
-                                        $('#div-info-loading').addClass("d-none");
-                                        $('#info-inscribirse-notificacion').removeClass("d-none");
-                                        $('#info-inscribirse-notificacion').text(data.message);
-                                        setTimeout(function() { 
-                                            $('#info-inscribirse-notificacion').addClass("d-none");
-                                            $('#div-info-banner').removeClass('d-none');
-                                            $('#div-info-body').removeClass('d-none');
-                                            $('#btnInscribirse').removeClass('d-none');
-                                            $('#btnRetirarse').addClass('d-none');
-                                            $('#span-lista-inscritos').text(data.lista_participantes);
-                                        }, 2000);
-                                        
-                                        console.log("SUCCESS");
-                                        console.log(data);
-                                    }   
-                                    else{
-                                        console.log("INVALID DATA");
-                                        console.log(data);
-
-                                        $('#div-info-loading').addClass("d-none");
-                                        $('#info-inscribirse-notificacion').removeClass("d-none");
-                                        $('#info-inscribirse-notificacion').text(data.message);
-
-                                        setTimeout(function() { 
-                                            $('#info-inscribirse-notificacion').addClass("d-none");
-                                            $('#div-info-banner').removeClass('d-none');
-                                            $('#div-info-body').removeClass('d-none');
-                                            delete data;
-                                        }, 2000);
-                                    
-                                        
-                                    }
-                                },
-                                error: function (xhr, exception) {
-                                    console.log(exception);
-                                }
-                            });
+                        location.href = 'editar_evento.php?evento='+idEvento;
                     }
                 });
 
