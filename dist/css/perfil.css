@@ -47,3 +47,25 @@
 .eventos_perfil > .tarjeta:hover {
   transform: scale(1.05);
 }
+
+.cuidado {
+  display: flex;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.textos {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-direction: column;
+  padding-left: 30px;
+}
+
+.botoncito {
+  margin-left: 20px;
+}
+
+.modal1 {
+  display: flex;
+}

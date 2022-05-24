@@ -6,6 +6,41 @@
     }
     $id_user = $_SESSION['usuario_Id'];
     header("Access-Control-Allow-Origin: *");
+
+    include("includes/config.php");
+
+    if(isset($_POST['eliminar'])){
+        $id_evento = $_POST['id_evento'];
+        $nombre_deporte = $_POST['id_deporte'];
+        echo "<script>console.log('Consolexd1: $id_evento' );</script>";
+        echo "<script>console.log('Consolexd2: $nombre_deporte');</script>";
+        $BD = crear_conexion_clase();
+                
+        $buscar_dep = "CALL sp_buscar_deporte_n('$nombre_deporte')";
+        $BD->next_result();
+        $id_dep = mysqli_query($BD,$buscar_dep);
+        $id_dep2 = mysqli_fetch_array($id_dep);
+        $id_deporte = $id_dep2["id_deporte"];
+        echo "<script>console.log('Consolexd3: $id_deporte');</script>";
+
+                
+        $deletear12 = "CALL sp_eliminar_relacion_usuarios_eventos_e($id_evento)";
+        $BD->next_result();
+        mysqli_query($BD,$deletear12);
+
+        $deletear22 = "CALL sp_eliminar_relacion_deportes_eventos_e($id_evento, $id_deporte)";
+        $BD->next_result();
+        mysqli_query($BD,$deletear22);
+
+        $deletear32 = "CALL sp_eliminar_evento($id_evento)";
+        $BD->next_result();
+        mysqli_query($BD,$deletear32);
+                
+        $BD->close();
+        #header("location: perfil.php");
+    }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,6 +62,7 @@
         <link href="dist/css/styles.css" rel="stylesheet"/>
         <link href="dist/css/index.css" rel="stylesheet"/>
         <link href="dist/css/perfil.css" rel="stylesheet"/>
+
     </head>
     <body id="page-top" class="">
         <div class="barra">
@@ -53,9 +89,8 @@
             $date = date('Y-m-d');
             $time = date('H:i:s');
            //(31.870758, -116.619713, 31.861054, -116.585638)
-            include("includes/config.php");
-            $BD = crear_conexion_clase();
 
+            $BD = crear_conexion_clase();
             echo "<script>console.log('id_usuario: $id_user' );</script>";
             $query_usuario = "SELECT * FROM tb_usuario WHERE id_usuario = $id_user";
             $result = mysqli_query($BD,$query_usuario);
@@ -136,7 +171,49 @@
 
 
         </div>
-            
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">AVISO!</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body modal1">
+                        <img src="assets/static/Warning.png" height="108px" alt="">
+                        <div class="textos">
+                            <P>Deseas cancelar el evento?</P>
+                            <p>la publicacion dejara de ser publica y todos los miembros dejaran de verla.</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <form name="FormEliminar" method="post">
+                            <input type="hidden" id="id_deporte" name="id_deporte" >
+                            <input type="hidden" id="id_evento" name="id_evento" >
+                            <input id="eliminar" name="eliminar" type="submit" class="btn btn-primary" value="Aceptar" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">
+                        </form>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="exampleModalToggle2" data-bs-backdrop="static" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalToggleLabel2">AVISO!</h5>
+                    </div>
+                    <div class="modal-body modal1">
+                        <img src="assets/static/Warning.png" height="108px" alt="">
+                        <div class="textos">
+                            <p>El evento se ha cancelado/borrado correctamente</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>    
 
         <div id="container-show-event" class="z-index-bg bg-transparence position-fixed top-0 bottom-0 start-0 end-0 d-flex justify-content-center align-items-center align-self-center d-none">
             
@@ -217,7 +294,8 @@
                                     <div class="container-fluid mt-4">
                                         <input id="btnInscribirse" class="btn btn-custom-primary m-1 text-light w-100" type="button" value="Inscribirte"/>
                                         <input id="btnEditar" class="btn btn-primary m-1 text-light w-100 d-none" type="button" value="Editar"/>
-                                        <input id="btnCloseEvent" class="btn btn-danger m-1 w-100" type="button" value="Salir"/>
+                                        <button id="btnCloseEvent" type="button" class="btn btn-danger m-1 text-light w-100" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Cancelar evento</button>
+                                        <input id="btnCloseEvent" class="btn btn-warning m-1 w-100" type="button" value="Salir"/>
                                     </div>
                                 </div>
                             </div>
@@ -225,7 +303,6 @@
                 </div>
             </div>
         </div>
-
 
         <!-- Footer-->
         <footer class="bg-black text-center  mt-5 py-3">
@@ -306,9 +383,15 @@
                                     }else{
 
                                     }
+                                    
+                                    var Myelement1 = document.forms['FormEliminar']['id_deporte'];
+                                    var Myelement2 = document.forms['FormEliminar']['id_evento'];
+                                    Myelement1.setAttribute('value',data.Nombre_deporte);
+                                    Myelement2.setAttribute('value',idEvento);
+                                    
 
                                     console.log(data);
-                                    console.log(data.direccion_completa)
+                                    console.log(data.direccion_completa);
                                 }   
                                 else if (data.response == "Invalid") {
                                    console.log(data.message);
@@ -395,6 +478,8 @@
                         location.href = 'editar_evento.php?evento='+idEvento;
                     }
                 });
+                
+            
 
         </script>
         <script>
