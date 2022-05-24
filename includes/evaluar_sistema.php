@@ -6,7 +6,8 @@
     $calificacion = $_POST['calif'];
     $comentario = $_POST['comment'];
 
-    $caracteres_especiales = array('{','}','[',']','"',"'",'&','OR','or');
+    //ARREGLO CON CARACTERES QUE NO SE PERMITEN
+    $caracteres_especiales = array('{','}','[',']','"',"'",'&');
 
     //LIMPIAMOS LAS VARIABLES PARA EVITAR INYECCION SQL
     $calificacion_limpia = str_replace($caracteres_especiales,' ',$calificacion);
@@ -24,15 +25,14 @@
             $cantidad_caracteres = strlen($comentario_limpio);
 
             if($cantidad_caracteres <= 1000){
-                $evaluar_sistema = $conexion -> query("INSERT INTO tb_calidad (calificacion,comentario) VALUES ('".$calificacion_limpia."','".$comentario_limpio."')");
-                $obtener_evaluaciones = $conexion -> query("SELECT id_calidad FROM tb_calidad");
-                $cantidad_evaluacion = $obtener_evaluaciones -> num_rows;
-                $evaluar_sistema = $conexion -> query("INSERT INTO tb_relacion_usuarios_calidad (id_usuario,id_calidad) VALUES ('".$usuario."','".$cantidad_evaluacion."')");
-               
-                $busca_usuario_evaluacion = $conexion -> query("SELECT * FROM tb_relacion_usuarios_calidad WHERE id_usuario='".$usuario."'");
+
+                //BUSCAMOS SI EL USUARIO YA LLENO LA EVALUACION PREVIAMENTE
+                $busca_usuario_evaluacion = $conexion -> query("SELECT * FROM tb_evaluacion WHERE id_usuario='".$usuario."'");
                 $evaluaciones_encontradas = $busca_usuario_evaluacion -> num_rows;
 
                 if($evaluaciones_encontradas < 1){
+                    //REGISTRAMOS LA EVALUACION DEL USUARIO
+                    $evaluar_sistema = $conexion -> query("INSERT INTO tb_evaluacion (id_usuario,calificacion,comentario) VALUES ('".$usuario."','".$calificacion_limpia."','".$comentario_limpio."')");
                     $response = array("response" => "Success","message" => "Gracias por enviarnos tu opinion");
                 }else{
                     $response = array("response" => "Invalid","message" => "Ya has enviado la evaluación anteriormente");
