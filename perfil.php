@@ -108,7 +108,9 @@
                 $contador = $contador + 1;
             }
             echo "<script>console.log($contador);</script>"; 
+
             $eventos = [];
+            $deportes = [];
             if($contador == 0){
                 echo "<script>console.log('Console: entre al 0');</script>"; 
             }
@@ -122,7 +124,42 @@
                     echo "<script>console.log($id_temp2);</script>"; 
                     $eventos[] = $row;
                 }
+
+                foreach($eventos as $fila){
+                    $id_evento_temp = $fila['id_evento'];
+                    $query_deportes = "CALL sp_buscar_relacion_deportes_eventos_e($id_evento_temp)";
+                    $deportes_result = mysqli_query($BD,$query_deportes);
+                    $BD->next_result();
+                    $row = mysqli_fetch_array($deportes_result);
+                    $deportes[$fila['id_evento']] = $row;
+                }
             }
+
+            $nombres_deportes = [
+                1 => "Futbol soccer",
+                2 => "Futbol americano",
+                3 => "Baloncesto",
+                4 => "Tenis",
+                5 => "Beisbol",
+                6 => "Petanca",
+                7 => "Voleibol",
+                8 => "Ciclismo",
+                9 => "Senderismo",
+            ];
+
+            $nombres_imagenes = [
+                1 => "soccer.png",
+                2 => "football.png",
+                3 => "basketball.png",
+                4 => "tenis.png",
+                5 => "beisbol.png",
+                6 => "petanca.png",
+                7 => "voleibol.png",
+                8 => "ciclismo.png",
+                9 => "senderismo.png",
+            ];
+
+
         ?>     
         
         <div class="contenido_perfil">
@@ -143,11 +180,11 @@
                     <?php foreach($eventos as $fila){?>            
                                 
                     <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
-                        <img src="assets/static/soccer.png" styles="max-width: 100%;">
+                        <img src="assets/static/<?php echo $nombres_imagenes[$deportes[$fila['id_evento']]['id_deporte']] ?>" styles="max-width: 100%;">
                         <div class="cuerpo">
                             <div class="descripciones">
                                 <h5><?php echo $fila['nombre'];?> - <?php echo $fila['id_evento'];?></h5>   
-                                <h5 style="color:orange;">Futbol Soccer</h5>
+                                <h5 style="color:orange;"><?php echo $nombres_deportes[$deportes[$fila['id_evento']]['id_deporte']] ?></h5>
                                 <h5><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
                                 <h6><?php echo $fila['ciudad'];?></h6>
                             </div>
@@ -294,8 +331,8 @@
                                     <div class="container-fluid mt-4">
                                         <input id="btnInscribirse" class="btn btn-custom-primary m-1 text-light w-100" type="button" value="Inscribirte"/>
                                         <input id="btnEditar" class="btn btn-primary m-1 text-light w-100 d-none" type="button" value="Editar"/>
-                                        <button id="btnCloseEvent" type="button" class="btn btn-danger m-1 text-light w-100" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Cancelar evento</button>
-                                        <input id="btnCloseEvent" class="btn btn-warning m-1 w-100" type="button" value="Salir"/>
+                                        <button id="btnCloseEvent1" type="button" class="btn btn-danger m-1 text-light w-100" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Cancelar evento</button>
+                                        <input id="btnCloseEvent2" class="btn btn-warning m-1 w-100" type="button" value="Salir"/>
                                     </div>
                                 </div>
                             </div>
@@ -322,11 +359,20 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="dist/js/jquery-3.6.0.min.js"></script>
         <script>
-            const closeEvent = document.querySelector("#btnCloseEvent");
+            const closeEvent1 = document.querySelector("#btnCloseEvent1");
+            const closeEvent2 = document.querySelector("#btnCloseEvent2");
             const containerEvent = document.querySelector("#container-show-event");
             
             //SALIR DE LA INFORMACION DEL EVENTO
-            closeEvent.addEventListener("click", function(evento){
+            closeEvent1.addEventListener("click", function(evento){
+                $('#info-inscribirse-notificacion').text(" ");
+                $('#container-show-event').addClass('d-none');
+                $('#page-top').removeClass('overflow-hidden');
+                $('#btnEditar').addClass('d-none');
+                $('#btnInscribirse').removeClass('d-none');
+            });
+
+            closeEvent2.addEventListener("click", function(evento){
                 $('#info-inscribirse-notificacion').text(" ");
                 $('#container-show-event').addClass('d-none');
                 $('#page-top').removeClass('overflow-hidden');
