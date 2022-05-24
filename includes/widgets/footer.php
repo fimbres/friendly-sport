@@ -10,8 +10,14 @@
 
         <?php
             if(isset($_SESSION['usuario_Id'])){
-                echo '<span class="mx-1">&middot;</span>
+                $usuario = $_SESSION['usuario_Id'];
+                $busca_usuario_evaluacion = $BD -> query("SELECT * FROM tb_relacion_usuarios_calidad WHERE id_usuario='".$usuario."'");
+                $evaluaciones_encontradas = $busca_usuario_evaluacion -> num_rows;
+
+                if($evaluaciones_encontradas < 1){
+                    echo '<span class="mx-1">&middot;</span>
                       <a href="calificanos.php">Calificanos</a>';
+                }
             }
             else{
 
