@@ -628,17 +628,9 @@
 
         <!-- Footer-->
         <footer class="bg-black text-center  mt-5 py-3">
-            <div class="container px-5">
-                <div class="text-white-50 small">
-                    <p>© FriendlySport, 2022. Todos los derechos reservados.</p>
-                    <p>Tel: 1234567890 | Email: ayuda@metafusions.com</p>
-                    <a href="#!">Privacidad</a>
-                    <span class="mx-1">&middot;</span>
-                    <a href="#!">Terminos</a>
-                    <span class="mx-1">&middot;</span>
-                    <a href="#!">Condiciones</a>
-                </div>
-            </div>
+            <?php
+            include 'includes/widgets/footer.php';
+            ?>
         </footer>
         <script src="dist/js/index.js"></script>
         <!-- Bootstrap core JS-->
