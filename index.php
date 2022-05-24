@@ -40,7 +40,7 @@
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
                             <li class="nav-item"><a class="boton_salir" href="includes/logout.php">Salir de la Sesion</a></li>
-                            <li class="nav-item"><a class="boton_perfil" href="#">Mostrar Perfil</a></li>
+                            <li class="nav-item"><a class="boton_perfil" href="perfil.php">Mostrar Perfil</a></li>
                         </ul>
                     </div>
                 </div>
@@ -71,6 +71,8 @@
             $query_soccer = "SELECT * FROM tb_evento LEFT JOIN tb_relacion_deportes_eventos ON tb_evento.id_evento = tb_relacion_deportes_eventos.id_evento WHERE tb_relacion_deportes_eventos.id_deporte =1 ORDER BY fecha";
             $pre_soccer = mysqli_query($BD,$query_soccer);
             while($row=mysqli_fetch_array($pre_soccer)) {
+                $prueba = $row['id_evento'];
+                echo "<script>console.log('Console: $prueba' );</script>";
                 if((strcmp($row['fecha'],$date) >= 0 && strcmp($row['hora_inicio'],$time) >= 0) || strcmp($row['fecha'],$date) > 0){
                     if(distancia($lat,$lon,$row["direccion"]) <= $max){
                         $soccer[] = $row;
@@ -164,6 +166,7 @@
             </div>
             <div class="division2">
                 <?php if ($soccer || $americano || $baloncesto || $tenis || $beisbol || $petanca || $voleibol || $ciclismo || $senderismo):?>
+                    <?php echo '<script>console.log(distancia($lat,$lon,$row["direccion"] );</script>'; ?>
                     <!-- SOCCER-->   
                     <?php if ($soccer):{?>
                     <div class="soccer">
