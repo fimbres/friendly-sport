@@ -68,6 +68,10 @@ a.boton_perfil:hover {
   align-items: center;
 }
 
+.custom-bg-white{
+  background: #bbbbbb;
+}
+
 .icono {
   background: #c4c4c4;
   display: flex;
@@ -76,33 +80,25 @@ a.boton_perfil:hover {
   border-radius: 50%;
   align-items: center;
   justify-content: center;
-  margin-left: 5%;
 }
 
 a.boton_crear {
-  width: 557px;
-  height: 82px;
-
   background: #6c27e9;
   border-radius: 15px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
-
   font-family: "Open Sans";
   font-style: normal;
   color: #ffffff;
-  font-size: 2.5rem;
   text-decoration: none;
-
   transition: all 0.2s;
 }
 
 a.boton_crear:hover {
-  color: #000000;
-  background-color: #ffffff;
+  color: #fff;
+  background-color: #4e1ca9;
+}
+
+.boton_crear{
+  font-size:40px;
 }
 
 .vacio {
@@ -124,9 +120,6 @@ a.boton_crear:hover {
   display: grid;
   gap: 1rem;
   grid-template-columns: 70px calc(100vw - calc(140px + 5rem)) 70px;
-
-  margin: 1rem;
-
   overflow: hidden;
 }
 
@@ -146,7 +139,6 @@ a.boton_crear:hover {
   height: 0;
   border-top: 40px solid transparent;
   border-bottom: 40px solid transparent;
-
   border-left: 40px solid white;
 }
 
@@ -196,6 +188,17 @@ a.boton_crear:hover {
 .icono-mini {
   width: 26px;
   height: 26px;
+}
+
+.enfrente,.atras{
+  border:none;
+}
+
+footer{
+  width:100%;
+  bottom:0;
+  left:0;
+  position:relative;
 }
 
 /*Comienzan los estilos de inscribirse a evento*/
@@ -342,3 +345,42 @@ a.boton_crear:hover {
 .ldio-z7v55d2fuwm div { box-sizing: content-box; }
 
 /*Terminan los estilos de inscribirse a evento*/
+
+.container-user-image{
+  justify-content:end;
+}
+
+.container-user-buttons{
+  justify-content:start;
+}
+
+
+@media screen and (max-width: 768px){
+  .container-user-image,.container-user-buttons{
+      justify-content:center;
+  }
+}
+
+@media screen and (max-width: 500px){
+  .boton_crear{
+    font-size:30px;
+  }
+}
+
+/*MOBILE*/
+@media screen and (max-width: 499px){
+  .contenedor-principal-tarjeta{
+    display:flex;
+    justify-content: center;
+    align-content:center;
+    margin:0;
+  }
+
+  .swiper{
+    width: 20px;
+  }
+
+  .eventos{
+    width:auto;
+  }
+}

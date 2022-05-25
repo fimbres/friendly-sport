@@ -154,38 +154,82 @@
                 }
             }
         ?>     
-        <div class="contenido">
-            <div class="division1">
-                <div class="rectangulo">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="mt-3 col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 d-flex align-items-center container-user-image">
                     <div class="icono">
                         <img src="assets/static/user_icon.png" alt="">
                     </div>
-                    <a class="boton_crear" href="crear_evento.php">
+                    
+                </div>
+                <div class="mt-3 col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12 d-flex align-items-center container-user-buttons">
+                    <a class="boton_crear pt-2 pb-2 ps-4 pe-4" href="crear_evento.php">
                         Organizar un evento
                     </a>
                 </div>
             </div>
-            <div class="division2">
-                <?php if ($soccer || $americano || $baloncesto || $tenis || $beisbol || $petanca || $voleibol || $ciclismo || $senderismo):?>
-                    <?php echo '<script>console.log(distancia($lat,$lon,$row["direccion"] );</script>'; ?>
-                    <!-- SOCCER-->   
-                    <?php if ($soccer):{?>
-                    <div class="soccer">
-                        <h6>Futbol Soccer</h6>
-                        <div class="contenedor">
+            <div class="row mt-4">
+                <div class="col-12">
+                    <?php if ($soccer || $americano || $baloncesto || $tenis || $beisbol || $petanca || $voleibol || $ciclismo || $senderismo):?>
+                        <?php echo '<script>console.log(distancia($lat,$lon,$row["direccion"] );</script>'; ?>
+                        <!-- SOCCER-->   
+                        <?php if ($soccer):{?>
+                        <div class="soccer">
+                            <h5 class="pt-3 ps-3">Futbol Soccer</h5>
+                            <div class="contenedor contenedor-principal-tarjeta">
+                                <button class="swiper atras">
+                                    <div class="triangulo"></div>
+                                </button>
+                                <div class="eventos">
+                                    <?php foreach($soccer as $fila){?>
+                                    <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
+                                        <img src="assets/static/soccer.png" styles="max-width: 100%;">
+                                        <div class="cuerpo">
+                                            <div class="descripciones">
+                                                <h5 class="pt-3 ps-2 pe-2"><?php echo $fila['nombre'];?> - <?php echo $fila['id_evento'];?></h5>   
+                                                <h5 class="pt-1 ps-2 pe-2" style="color:orange;">Futbol Soccer</h5>
+                                                <h5 class="pt-1 ps-2 pe-2 fs-6"><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
+                                                <h6 class="pt-1 ps-2 pe-2"><?php echo $fila['ciudad'];?></h6>
+                                            </div>
+                                            <div class="cantidad">
+                                                <?php  
+                                                    $id_evento2 = $fila['id_evento'];
+                                                    $query2 = "SELECT COUNT(id_usuario) FROM tb_relacion_usuarios_eventos WHERE id_evento = $id_evento2";
+                                                    $res2 = mysqli_query($BD,$query2);
+                                                    $row2 = $res2->fetch_array();
+                                                    $out2 = $row2[0]; 
+                                                ?>     
+                                                <img class="icono-mini ms-3" src="assets/static/user_icon.png" alt="">
+                                                <h6 class="pt-1 ps-2 pe-2"><?php echo $out2?></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php }?>
+                                </div>
+                                <button class="swiper enfrente">
+                                    <div class="triangulo"></div>
+                                </button>
+                            </div>
+                        </div>
+                        <?php }endif ?>
+                            <!-- AMERICANO-->
+                        <?php if ($americano):{?>
+                        <div class="americano">
+                            <h5 class="pt-3 ps-3">Futbol Americano</h5>
+                            <div class="contenedor contenedor-principal-tarjeta">
                             <button class="swiper atras">
                                 <div class="triangulo"></div>
                             </button>
                             <div class="eventos">
-                                <?php foreach($soccer as $fila){?>
+                                <?php foreach($americano as $fila){?>
                                 <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
-                                    <img src="assets/static/soccer.png" styles="max-width: 100%;">
+                                    <img src="assets/static/football.png" styles="max-width: 100%;">
                                     <div class="cuerpo">
                                         <div class="descripciones">
-                                            <h5><?php echo $fila['nombre'];?> - <?php echo $fila['id_evento'];?></h5>   
-                                            <h5 style="color:orange;">Futbol Soccer</h5>
-                                            <h5><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
-                                            <h6><?php echo $fila['ciudad'];?></h6>
+                                            <h5 class="pt-3 ps-2 pe-2"><?php echo $fila['nombre'];?></h5>    
+                                            <h5 class="pt-1 ps-2 pe-2" style="color:orange;">Futbol Americano</h5>
+                                            <h5 class="pt-1 ps-2 pe-2 fs-6"><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
+                                            <h6 class="pt-1 ps-2 pe-2"><?php echo $fila['ciudad'];?></h6>
                                         </div>
                                         <div class="cantidad">
                                             <?php  
@@ -195,8 +239,8 @@
                                                 $row2 = $res2->fetch_array();
                                                 $out2 = $row2[0]; 
                                             ?>     
-                                            <img class="icono-mini" src="assets/static/user_icon.png" alt="">
-                                            <h6><?php echo $out2?></h6>
+                                            <img class="icono-mini ms-3" src="assets/static/user_icon.png" alt="">
+                                            <h6 class="pt-1 ps-2 pe-2"><?php echo $out2?></h6>
                                         </div>
                                     </div>
                                 </div>
@@ -208,334 +252,295 @@
                         </div>
                     </div>
                     <?php }endif ?>
-                        <!-- AMERICANO-->
-                    <?php if ($americano):{?>
-                    <div class="americano">
-                        <h6>Futbol Americano</h6>
-                        <div class="contenedor">
-                        <button class="swiper atras">
-                            <div class="triangulo"></div>
-                        </button>
-                        <div class="eventos">
-                            <?php foreach($americano as $fila){?>
-                            <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
-                                <img src="assets/static/football.png" styles="max-width: 100%;">
-                                <div class="cuerpo">
-                                    <div class="descripciones">
-                                        <h5><?php echo $fila['nombre'];?></h5>    
-                                        <h5 style="color:orange;">Futbol Americano</h5>
-                                        <h5><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
-                                        <h6><?php echo $fila['ciudad'];?></h6>
-                                    </div>
-                                    <div class="cantidad">
-                                        <?php  
-                                            $id_evento2 = $fila['id_evento'];
-                                            $query2 = "SELECT COUNT(id_usuario) FROM tb_relacion_usuarios_eventos WHERE id_evento = $id_evento2";
-                                            $res2 = mysqli_query($BD,$query2);
-                                            $row2 = $res2->fetch_array();
-                                            $out2 = $row2[0]; 
-                                        ?>     
-                                        <img class="icono-mini" src="assets/static/user_icon.png" alt="">
-                                        <h6><?php echo $out2?></h6>
+                        <!-- BALONCESTO-->
+                        <?php if ($baloncesto):?>
+                        <div class="baloncesto">
+                            <h5 class="pt-3 ps-3">Baloncesto</h5>
+                        <div class="contenedor contenedor-principal-tarjeta">
+                            <button class="swiper atras">
+                                <div class="triangulo"></div>
+                            </button>
+                            <div class="eventos">
+                                <?php foreach($baloncesto as $fila){?>
+                                <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
+                                    <img src="assets/static/basketball.png" styles="max-width: 100%;">
+                                    <div class="cuerpo">
+                                        <div class="descripciones">
+                                            <h5 class="pt-3 ps-2 pe-2"><?php echo $fila['nombre'];?></h5>  
+                                            <h5 class="pt-1 ps-2 pe-2" style="color:orange;">Baloncesto</h5>
+                                            <h5 class="pt-1 ps-2 pe-2 fs-6"><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
+                                            <h6 class="pt-1 ps-2 pe-2"><?php echo $fila['ciudad'];?></h6>
+                                        </div>
+                                        <div class="cantidad">
+                                            <?php  
+                                                $id_evento2 = $fila['id_evento'];
+                                                $query2 = "SELECT COUNT(id_usuario) FROM tb_relacion_usuarios_eventos WHERE id_evento = $id_evento2";
+                                                $res2 = mysqli_query($BD,$query2);
+                                                $row2 = $res2->fetch_array();
+                                                $out2 = $row2[0]; 
+                                            ?>     
+                                            <img class="icono-mini ms-3" src="assets/static/user_icon.png" alt="">
+                                            <h6 class="pt-1 ps-2 pe-2"><?php echo $out2?></h6>
+                                        </div>
                                     </div>
                                 </div>
+                                <?php }?>
                             </div>
-                            <?php }?>
+                            <button class="swiper enfrente">
+                                <div class="triangulo"></div>
+                            </button>
                         </div>
-                        <button class="swiper enfrente">
-                            <div class="triangulo"></div>
-                        </button>
-                    </div>
+                        </div>
+                        <?php endif ?>
+                        <!-- TENIS-->
+                        <?php if ($tenis):?>
+                        <div class="tenis">
+                            <h5 class="pt-3 ps-3">Tenis</h5>
+                        <div class="contenedor contenedor-principal-tarjeta">
+                            <button class="swiper atras">
+                                <div class="triangulo"></div>
+                            </button>
+                            <div class="eventos">
+                                <?php foreach($tenis as $fila){?>
+                                <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
+                                    <img src="assets/static/tenis.png" styles="max-width: 100%;">
+                                    <div class="cuerpo">
+                                        <div class="descripciones">
+                                            <h5 class="pt-3 ps-2 pe-2"><?php echo $fila['nombre'];?></h5>   
+                                            <h5 class="pt-1 ps-2 pe-2" style="color:orange;">Tenis</h5>
+                                            <h5 class="pt-1 ps-2 pe-2 fs-6"><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
+                                            <h6 class="pt-1 ps-2 pe-2"><?php echo $fila['ciudad'];?></h6>
+                                        </div>
+                                        <div class="cantidad">
+                                            <?php  
+                                                $id_evento2 = $fila['id_evento'];
+                                                $query2 = "SELECT COUNT(id_usuario) FROM tb_relacion_usuarios_eventos WHERE id_evento = $id_evento2";
+                                                $res2 = mysqli_query($BD,$query2);
+                                                $row2 = $res2->fetch_array();
+                                                $out2 = $row2[0]; 
+                                            ?>     
+                                            <img class="icono-mini ms-3" src="assets/static/user_icon.png" alt="">
+                                            <h6 class="pt-1 ps-2 pe-2"><?php echo $out2?></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php }?>
+                            </div>
+                            <button class="swiper enfrente">
+                                <div class="triangulo"></div>
+                            </button>
+                        </div>
+                        </div> 
+                        <?php endif ?>  
+                        <!-- BEISBOL-->
+                        <?php if ($beisbol):?>
+                        <div class="beisbol">
+                            <h5 class="pt-3 ps-3">Beisbol</h5>
+                        <div class="contenedor contenedor-principal-tarjeta">
+                            <button class="swiper atras">
+                                <div class="triangulo"></div>
+                            </button>
+                            <div class="eventos">
+                                <?php foreach($beisbol as $fila){?>
+                                <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
+                                    <img src="assets/static/beisbol.png" styles="max-width: 100%;">
+                                    <div class="cuerpo">
+                                        <div class="descripciones">
+                                            <h5 class="pt-3 ps-2 pe-2"><?php echo $fila['nombre'];?></h5>    
+                                            <h5 class="pt-1 ps-2 pe-2" style="color:orange;">Beisbol</h5>
+                                            <h5 class="pt-1 ps-2 pe-2 fs-6"><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
+                                            <h6 class="pt-1 ps-2 pe-2"><?php echo $fila['ciudad'];?></h6>
+                                        </div>
+                                        <div class="cantidad">
+                                            <?php  
+                                                $id_evento2 = $fila['id_evento'];
+                                                $query2 = "SELECT COUNT(id_usuario) FROM tb_relacion_usuarios_eventos WHERE id_evento = $id_evento2";
+                                                $res2 = mysqli_query($BD,$query2);
+                                                $row2 = $res2->fetch_array();
+                                                $out2 = $row2[0]; 
+                                            ?>     
+                                            <img class="icono-mini ms-3" src="assets/static/user_icon.png" alt="">
+                                            <h6 class="pt-1 ps-2 pe-2"><?php echo $out2?></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php }?>
+                            </div>
+                            <button class="swiper enfrente">
+                                <div class="triangulo"></div>
+                            </button>
+                        </div>
+                        </div>  
+                        <?php endif ?>
+                        <!-- PETANCA-->
+                        <?php if ($petanca):?>
+                        <div class="petanca">
+                            <h5 class="pt-3 ps-3">Petanca</h5>
+                        <div class="contenedor contenedor-principal-tarjeta">
+                            <button class="swiper atras">
+                                <div class="triangulo"></div>
+                            </button>
+                            <div class="eventos">
+                                <?php foreach($petanca as $fila){?>
+                                <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
+                                    <img src="assets/static/petanca.png" styles="max-width: 100%;">
+                                    <div class="cuerpo">
+                                        <div class="descripciones">
+                                            <h5 class="pt-3 ps-2 pe-2"><?php echo $fila['nombre'];?></h5>    
+                                            <h5 class="pt-1 ps-2 pe-2" style="color:orange;">Petanca</h5>
+                                            <h5 class="pt-1 ps-2 pe-2 fs-6"><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
+                                            <h6 class="pt-1 ps-2 pe-2"><?php echo $fila['ciudad'];?></h6>
+                                        </div>
+                                        <div class="cantidad">
+                                            <?php  
+                                                $id_evento2 = $fila['id_evento'];
+                                                $query2 = "SELECT COUNT(id_usuario) FROM tb_relacion_usuarios_eventos WHERE id_evento = $id_evento2";
+                                                $res2 = mysqli_query($BD,$query2);
+                                                $row2 = $res2->fetch_array();
+                                                $out2 = $row2[0]; 
+                                            ?>     
+                                            <img class="icono-mini ms-3" src="assets/static/user_icon.png" alt="">
+                                            <h6 class="pt-1 ps-2 pe-2"><?php echo $out2?></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php }?>
+                            </div>
+                            <button class="swiper enfrente">
+                                <div class="triangulo"></div>
+                            </button>
+                        </div>
+                        </div>
+                        <?php endif ?>    
+                        <!-- VOLEIBOL-->
+                        <?php if ($voleibol):?>
+                        <div class="voleibol">
+                            <h5 class="pt-3 ps-3">Voleibol</h5>
+                        <div class="contenedor contenedor-principal-tarjeta">
+                            <button class="swiper atras">
+                                <div class="triangulo"></div>
+                            </button>
+                            <div class="eventos">
+                                <?php foreach($voleibol as $fila){?>
+                                <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
+                                    <img src="assets/static/voleibol.png" styles="max-width: 100%;">
+                                    <div class="cuerpo">
+                                        <div class="descripciones">
+                                            <h5 class="pt-3 ps-2 pe-2"><?php echo $fila['nombre'];?></h5>     
+                                            <h5 class="pt-1 ps-2 pe-2" style="color:orange;">Voleibol</h5>
+                                            <h5 class="pt-1 ps-2 pe-2 fs-6"><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
+                                            <h6 class="pt-1 ps-2 pe-2"><?php echo $fila['ciudad'];?></h6>
+                                        </div>
+                                        <div class="cantidad">
+                                            <?php  
+                                                $id_evento2 = $fila['id_evento'];
+                                                $query2 = "SELECT COUNT(id_usuario) FROM tb_relacion_usuarios_eventos WHERE id_evento = $id_evento2";
+                                                $res2 = mysqli_query($BD,$query2);
+                                                $row2 = $res2->fetch_array();
+                                                $out2 = $row2[0]; 
+                                            ?>     
+                                            <img class="icono-mini ms-3" src="assets/static/user_icon.png" alt="">
+                                            <h6 class="pt-1 ps-2 pe-2"><?php echo $out2?></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php }?>
+                            </div>
+                            <button class="swiper enfrente">
+                                <div class="triangulo"></div>
+                            </button>
+                        </div>
+                        </div>  
+                        <?php endif ?>  
+                        <!-- CICLISMO-->
+                        <?php if ($ciclismo):?>
+                        <div class="ciclismo">
+                            <h5 class="pt-3 ps-3">Ciclismo</h5>
+                        <div class="contenedor contenedor-principal-tarjeta">
+                            <button class="swiper atras">
+                                <div class="triangulo"></div>
+                            </button>
+                            <div class="eventos">
+                                <?php foreach($ciclismo as $fila){?>
+                                <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
+                                    <img src="assets/static/ciclismo.png" styles="max-width: 100%;">
+                                    <div class="cuerpo">
+                                        <div class="descripciones">
+                                            <h5 class="pt-3 ps-2 pe-2"><?php echo $fila['nombre'];?></h5>  
+                                            <h5 class="pt-1 ps-2 pe-2" style="color:orange;">Ciclismo</h5>
+                                            <h5 class="pt-1 ps-2 pe-2 fs-6"><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
+                                            <h6 class="pt-1 ps-2 pe-2"><?php echo $fila['ciudad'];?></h6>
+                                        </div>
+                                        <div class="cantidad">
+                                            <?php  
+                                                $id_evento2 = $fila['id_evento'];
+                                                $query2 = "SELECT COUNT(id_usuario) FROM tb_relacion_usuarios_eventos WHERE id_evento = $id_evento2";
+                                                $res2 = mysqli_query($BD,$query2);
+                                                $row2 = $res2->fetch_array();
+                                                $out2 = $row2[0]; 
+                                            ?>     
+                                            <img class="icono-mini ms-3" src="assets/static/user_icon.png" alt="">
+                                            <h6 class="pt-1 ps-2 pe-2"><?php echo $out2?></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php }?>
+                            </div>
+                            <button class="swiper enfrente">
+                                <div class="triangulo"></div>
+                            </button>
+                        </div>
+                        </div>   
+                        <?php endif ?>  
+                        <!-- SENDERISMO--> 
+                        <?php if ($senderismo):?>
+                        <div class="senderismo">
+                            <h5 class="pt-3 ps-3">Senderismo</h5>
+                        <div class="contenedor contenedor-principal-tarjeta">
+                            <button class="swiper atras">
+                                <div class="triangulo"></div>
+                            </button>
+                            <div class="eventos">
+                                <?php foreach($senderismo as $fila){?>
+                                <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
+                                    <img src="assets/static/senderismo.png" styles="max-width: 100%;">
+                                    <div class="cuerpo">
+                                        <div class="descripciones">
+                                            <h5 class="pt-3 ps-2 pe-2"><?php echo $fila['nombre'];?></h5>    
+                                            <h5 class="pt-1 ps-2 pe-2" style="color:orange;">Senderismo</h5>
+                                            <h5 class="pt-1 ps-2 pe-2 fs-6"><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
+                                            <h6 class="pt-1 ps-2 pe-2"><?php echo $fila['ciudad'];?></h6>
+                                        </div>
+                                        <div class="cantidad">
+                                            <?php  
+                                                $id_evento2 = $fila['id_evento'];
+                                                $query2 = "SELECT COUNT(id_usuario) FROM tb_relacion_usuarios_eventos WHERE id_evento = $id_evento2";
+                                                $res2 = mysqli_query($BD,$query2);
+                                                $row2 = $res2->fetch_array();
+                                                $out2 = $row2[0]; 
+                                            ?>     
+                                            <img class="icono-mini ms-3" src="assets/static/user_icon.png" alt="">
+                                            <h6 class="pt-1 ps-2 pe-2"><?php echo $out2?></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php }?>
+                            </div>
+                            <button class="swiper enfrente">
+                                <div class="triangulo"></div>
+                            </button>
+                        </div>
+                        </div> 
+                        <?php endif ?>           
+                    <?php else: ?>
+
+                        <div class="vacio">
+                            <img class="imagen" src="assets/static/lupa.png" alt="">
+                            <p>Vaya!, no pudimos encontrar eventos en tu zona 😢, ¿Te gustaría crear uno?</p>
+                        </div>
+
+                    <?php endif ?>
                 </div>
-                <?php }endif ?>
-                    <!-- BALONCESTO-->
-                    <?php if ($baloncesto):?>
-                      <div class="baloncesto">
-                        <h6>Baloncesto</h6>
-                    <div class="contenedor">
-                        <button class="swiper atras">
-                            <div class="triangulo"></div>
-                        </button>
-                        <div class="eventos">
-                            <?php foreach($baloncesto as $fila){?>
-                            <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
-                                <img src="assets/static/basketball.png" styles="max-width: 100%;">
-                                <div class="cuerpo">
-                                    <div class="descripciones">
-                                        <h5><?php echo $fila['nombre'];?></h5>  
-                                        <h5 style="color:orange;">Baloncesto</h5>
-                                        <h5><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
-                                        <h6><?php echo $fila['ciudad'];?></h6>
-                                    </div>
-                                    <div class="cantidad">
-                                        <?php  
-                                            $id_evento2 = $fila['id_evento'];
-                                            $query2 = "SELECT COUNT(id_usuario) FROM tb_relacion_usuarios_eventos WHERE id_evento = $id_evento2";
-                                            $res2 = mysqli_query($BD,$query2);
-                                            $row2 = $res2->fetch_array();
-                                            $out2 = $row2[0]; 
-                                        ?>     
-                                        <img class="icono-mini" src="assets/static/user_icon.png" alt="">
-                                        <h6><?php echo $out2?></h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php }?>
-                        </div>
-                        <button class="swiper enfrente">
-                            <div class="triangulo"></div>
-                        </button>
-                    </div>
-                    </div>
-                    <?php endif ?>
-                    <!-- TENIS-->
-                    <?php if ($tenis):?>
-                    <div class="tenis">
-                        <h6>Tenis</h6>
-                    <div class="contenedor">
-                        <button class="swiper atras">
-                            <div class="triangulo"></div>
-                        </button>
-                        <div class="eventos">
-                            <?php foreach($tenis as $fila){?>
-                            <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
-                                <img src="assets/static/tenis.png" styles="max-width: 100%;">
-                                <div class="cuerpo">
-                                    <div class="descripciones">
-                                        <h5><?php echo $fila['nombre'];?></h5>   
-                                        <h5 style="color:orange;">Tenis</h5>
-                                        <h5><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
-                                        <h6><?php echo $fila['ciudad'];?></h6>
-                                    </div>
-                                    <div class="cantidad">
-                                        <?php  
-                                            $id_evento2 = $fila['id_evento'];
-                                            $query2 = "SELECT COUNT(id_usuario) FROM tb_relacion_usuarios_eventos WHERE id_evento = $id_evento2";
-                                            $res2 = mysqli_query($BD,$query2);
-                                            $row2 = $res2->fetch_array();
-                                            $out2 = $row2[0]; 
-                                        ?>     
-                                        <img class="icono-mini" src="assets/static/user_icon.png" alt="">
-                                        <h6><?php echo $out2?></h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php }?>
-                        </div>
-                        <button class="swiper enfrente">
-                            <div class="triangulo"></div>
-                        </button>
-                    </div>
-                    </div> 
-                    <?php endif ?>  
-                    <!-- BEISBOL-->
-                    <?php if ($beisbol):?>
-                      <div class="beisbol">
-                        <h6>Beisbol</h6>
-                    <div class="contenedor">
-                        <button class="swiper atras">
-                            <div class="triangulo"></div>
-                        </button>
-                        <div class="eventos">
-                            <?php foreach($beisbol as $fila){?>
-                            <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
-                                <img src="assets/static/beisbol.png" styles="max-width: 100%;">
-                                <div class="cuerpo">
-                                    <div class="descripciones">
-                                        <h5><?php echo $fila['nombre'];?></h5>    
-                                        <h5 style="color:orange;">Beisbol</h5>
-                                        <h5><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
-                                        <h6><?php echo $fila['ciudad'];?></h6>
-                                    </div>
-                                    <div class="cantidad">
-                                        <?php  
-                                            $id_evento2 = $fila['id_evento'];
-                                            $query2 = "SELECT COUNT(id_usuario) FROM tb_relacion_usuarios_eventos WHERE id_evento = $id_evento2";
-                                            $res2 = mysqli_query($BD,$query2);
-                                            $row2 = $res2->fetch_array();
-                                            $out2 = $row2[0]; 
-                                        ?>     
-                                        <img class="icono-mini" src="assets/static/user_icon.png" alt="">
-                                        <h6><?php echo $out2?></h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php }?>
-                        </div>
-                        <button class="swiper enfrente">
-                            <div class="triangulo"></div>
-                        </button>
-                    </div>
-                    </div>  
-                    <?php endif ?>
-                    <!-- PETANCA-->
-                    <?php if ($petanca):?>
-                    <div class="petanca">
-                        <h6>Petanca</h6>
-                    <div class="contenedor">
-                        <button class="swiper atras">
-                            <div class="triangulo"></div>
-                        </button>
-                        <div class="eventos">
-                            <?php foreach($petanca as $fila){?>
-                            <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
-                                <img src="assets/static/petanca.png" styles="max-width: 100%;">
-                                <div class="cuerpo">
-                                    <div class="descripciones">
-                                        <h5><?php echo $fila['nombre'];?></h5>    
-                                        <h5 style="color:orange;">Petanca</h5>
-                                        <h5><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
-                                        <h6><?php echo $fila['ciudad'];?></h6>
-                                    </div>
-                                    <div class="cantidad">
-                                        <?php  
-                                            $id_evento2 = $fila['id_evento'];
-                                            $query2 = "SELECT COUNT(id_usuario) FROM tb_relacion_usuarios_eventos WHERE id_evento = $id_evento2";
-                                            $res2 = mysqli_query($BD,$query2);
-                                            $row2 = $res2->fetch_array();
-                                            $out2 = $row2[0]; 
-                                        ?>     
-                                        <img class="icono-mini" src="assets/static/user_icon.png" alt="">
-                                        <h6><?php echo $out2?></h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php }?>
-                        </div>
-                        <button class="swiper enfrente">
-                            <div class="triangulo"></div>
-                        </button>
-                    </div>
-                    </div>
-                    <?php endif ?>    
-                    <!-- VOLEIBOL-->
-                    <?php if ($voleibol):?>
-                      <div class="voleibol">
-                        <h6>Voleibol</h6>
-                    <div class="contenedor">
-                        <button class="swiper atras">
-                            <div class="triangulo"></div>
-                        </button>
-                        <div class="eventos">
-                            <?php foreach($voleibol as $fila){?>
-                            <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
-                                <img src="assets/static/voleibol.png" styles="max-width: 100%;">
-                                <div class="cuerpo">
-                                    <div class="descripciones">
-                                        <h5><?php echo $fila['nombre'];?></h5>     
-                                        <h5 style="color:orange;">Voleibol</h5>
-                                        <h5><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
-                                        <h6><?php echo $fila['ciudad'];?></h6>
-                                    </div>
-                                    <div class="cantidad">
-                                        <?php  
-                                            $id_evento2 = $fila['id_evento'];
-                                            $query2 = "SELECT COUNT(id_usuario) FROM tb_relacion_usuarios_eventos WHERE id_evento = $id_evento2";
-                                            $res2 = mysqli_query($BD,$query2);
-                                            $row2 = $res2->fetch_array();
-                                            $out2 = $row2[0]; 
-                                        ?>     
-                                        <img class="icono-mini" src="assets/static/user_icon.png" alt="">
-                                        <h6><?php echo $out2?></h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php }?>
-                        </div>
-                        <button class="swiper enfrente">
-                            <div class="triangulo"></div>
-                        </button>
-                    </div>
-                    </div>  
-                    <?php endif ?>  
-                    <!-- CICLISMO-->
-                    <?php if ($ciclismo):?>
-                      <div class="ciclismo">
-                        <h6>Ciclismo</h6>
-                    <div class="contenedor">
-                        <button class="swiper atras">
-                            <div class="triangulo"></div>
-                        </button>
-                        <div class="eventos">
-                            <?php foreach($ciclismo as $fila){?>
-                            <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
-                                <img src="assets/static/ciclismo.png" styles="max-width: 100%;">
-                                <div class="cuerpo">
-                                    <div class="descripciones">
-                                        <h5><?php echo $fila['nombre'];?></h5>  
-                                        <h5 style="color:orange;">Ciclismo</h5>
-                                        <h5><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
-                                        <h6><?php echo $fila['ciudad'];?></h6>
-                                    </div>
-                                    <div class="cantidad">
-                                        <?php  
-                                            $id_evento2 = $fila['id_evento'];
-                                            $query2 = "SELECT COUNT(id_usuario) FROM tb_relacion_usuarios_eventos WHERE id_evento = $id_evento2";
-                                            $res2 = mysqli_query($BD,$query2);
-                                            $row2 = $res2->fetch_array();
-                                            $out2 = $row2[0]; 
-                                        ?>     
-                                        <img class="icono-mini" src="assets/static/user_icon.png" alt="">
-                                        <h6><?php echo $out2?></h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php }?>
-                        </div>
-                        <button class="swiper enfrente">
-                            <div class="triangulo"></div>
-                        </button>
-                    </div>
-                    </div>   
-                    <?php endif ?>  
-                    <!-- SENDERISMO--> 
-                    <?php if ($senderismo):?>
-                    <div class="senderismo">
-                        <h6>Senderismo</h6>
-                    <div class="contenedor">
-                        <button class="swiper atras">
-                            <div class="triangulo"></div>
-                        </button>
-                        <div class="eventos">
-                            <?php foreach($senderismo as $fila){?>
-                            <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
-                                <img src="assets/static/senderismo.png" styles="max-width: 100%;">
-                                <div class="cuerpo">
-                                    <div class="descripciones">
-                                        <h5><?php echo $fila['nombre'];?></h5>    
-                                        <h5 style="color:orange;">Senderismo</h5>
-                                        <h5><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
-                                        <h6><?php echo $fila['ciudad'];?></h6>
-                                    </div>
-                                    <div class="cantidad">
-                                        <?php  
-                                            $id_evento2 = $fila['id_evento'];
-                                            $query2 = "SELECT COUNT(id_usuario) FROM tb_relacion_usuarios_eventos WHERE id_evento = $id_evento2";
-                                            $res2 = mysqli_query($BD,$query2);
-                                            $row2 = $res2->fetch_array();
-                                            $out2 = $row2[0]; 
-                                        ?>     
-                                        <img class="icono-mini" src="assets/static/user_icon.png" alt="">
-                                        <h6><?php echo $out2?></h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php }?>
-                        </div>
-                        <button class="swiper enfrente">
-                            <div class="triangulo"></div>
-                        </button>
-                    </div>
-                    </div> 
-                    <?php endif ?>           
-                <?php else: ?>
-
-                    <div class="vacio">
-                        <img class="imagen" src="assets/static/lupa.png" alt="">
-                        <p>Vaya!, no pudimos encontrar eventos en tu zona 😢, ¿Te gustaría crear uno?</p>
-                    </div>
-
-                <?php endif ?>
                 
                 
             </div>
