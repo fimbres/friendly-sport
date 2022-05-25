@@ -198,6 +198,13 @@ a.boton_crear:hover {
   height: 26px;
 }
 
+footer{
+  width:100%;
+  bottom:0;
+  left:0;
+  position:relative;
+}
+
 /*Comienzan los estilos de inscribirse a evento*/
 
 .banner-event

@@ -195,11 +195,19 @@
                     </div>
                 </div>
             </div>
-            <div class="container d-flex align-items-center justify-content-center mt-5">
+            <div class="container d-flex align-items-center justify-content-center mt-5 container-eventos">
                 <div class="row justify-content-center mt-2">
-                    <h4 class="ps-4 txtEtiqueta">Tus eventos</h4>
+                    <h4 class="ps-4 txtEtiqueta text-center">Tus eventos</h4>
+                    <?php
+                        if(empty($eventos)){
+                            echo '<h1 class="text-center">Aun no tienes eventos</h1>';
+                        }
+                    ?>
                     <div class="col-12 container container-tarjetas">
-                        <?php foreach($eventos as $fila){?>            
+                        <?php 
+                        
+                            foreach($eventos as $fila){
+                        ?>            
                         
                         <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
                             <img src="assets/static/<?php echo $nombres_imagenes[$deportes[$fila['id_evento']]['id_deporte']] ?>" styles="max-width: 100%;">

@@ -81,6 +81,17 @@
 
 }
 
+.container-eventos{
+  min-height:200px;
+}
+
+footer{
+  width:100%;
+  bottom:0;
+  left:0;
+  position:relative;
+}
+
 @media screen and (max-width: 600px){
   .container-tarjetas{
     flex-direction: row;

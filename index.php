@@ -182,10 +182,10 @@
                                     <img src="assets/static/soccer.png" styles="max-width: 100%;">
                                     <div class="cuerpo">
                                         <div class="descripciones">
-                                            <h5><?php echo $fila['nombre'];?> - <?php echo $fila['id_evento'];?></h5>   
-                                            <h5 style="color:orange;">Futbol Soccer</h5>
-                                            <h5><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
-                                            <h6><?php echo $fila['ciudad'];?></h6>
+                                            <h5 class="pt-3 ps-2 pe-2"><?php echo $fila['nombre'];?> - <?php echo $fila['id_evento'];?></h5>   
+                                            <h5 class="pt-1 ps-2 pe-2" style="color:orange;">Futbol Soccer</h5>
+                                            <h5 class="pt-1 ps-2 pe-2 fs-6"><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
+                                            <h6 class="pt-1 ps-2 pe-2"><?php echo $fila['ciudad'];?></h6>
                                         </div>
                                         <div class="cantidad">
                                             <?php  
@@ -195,8 +195,8 @@
                                                 $row2 = $res2->fetch_array();
                                                 $out2 = $row2[0]; 
                                             ?>     
-                                            <img class="icono-mini" src="assets/static/user_icon.png" alt="">
-                                            <h6><?php echo $out2?></h6>
+                                            <img class="icono-mini ms-3" src="assets/static/user_icon.png" alt="">
+                                            <h6 class="pt-1 ps-2 pe-2"><?php echo $out2?></h6>
                                         </div>
                                     </div>
                                 </div>
@@ -222,10 +222,10 @@
                                 <img src="assets/static/football.png" styles="max-width: 100%;">
                                 <div class="cuerpo">
                                     <div class="descripciones">
-                                        <h5><?php echo $fila['nombre'];?></h5>    
-                                        <h5 style="color:orange;">Futbol Americano</h5>
-                                        <h5><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
-                                        <h6><?php echo $fila['ciudad'];?></h6>
+                                        <h5 class="pt-3 ps-2 pe-2"><?php echo $fila['nombre'];?></h5>    
+                                        <h5 class="pt-1 ps-2 pe-2" style="color:orange;">Futbol Americano</h5>
+                                        <h5 class="pt-1 ps-2 pe-2 fs-6"><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
+                                        <h6 class="pt-1 ps-2 pe-2"><?php echo $fila['ciudad'];?></h6>
                                     </div>
                                     <div class="cantidad">
                                         <?php  
@@ -235,8 +235,8 @@
                                             $row2 = $res2->fetch_array();
                                             $out2 = $row2[0]; 
                                         ?>     
-                                        <img class="icono-mini" src="assets/static/user_icon.png" alt="">
-                                        <h6><?php echo $out2?></h6>
+                                        <img class="icono-mini ms-3" src="assets/static/user_icon.png" alt="">
+                                        <h6 class="pt-1 ps-2 pe-2"><?php echo $out2?></h6>
                                     </div>
                                 </div>
                             </div>
@@ -262,10 +262,10 @@
                                 <img src="assets/static/basketball.png" styles="max-width: 100%;">
                                 <div class="cuerpo">
                                     <div class="descripciones">
-                                        <h5><?php echo $fila['nombre'];?></h5>  
-                                        <h5 style="color:orange;">Baloncesto</h5>
-                                        <h5><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
-                                        <h6><?php echo $fila['ciudad'];?></h6>
+                                        <h5 class="pt-3 ps-2 pe-2"><?php echo $fila['nombre'];?></h5>  
+                                        <h5 class="pt-1 ps-2 pe-2" style="color:orange;">Baloncesto</h5>
+                                        <h5 class="pt-1 ps-2 pe-2 fs-6"><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
+                                        <h6 class="pt-1 ps-2 pe-2"><?php echo $fila['ciudad'];?></h6>
                                     </div>
                                     <div class="cantidad">
                                         <?php  
@@ -275,8 +275,8 @@
                                             $row2 = $res2->fetch_array();
                                             $out2 = $row2[0]; 
                                         ?>     
-                                        <img class="icono-mini" src="assets/static/user_icon.png" alt="">
-                                        <h6><?php echo $out2?></h6>
+                                        <img class="icono-mini ms-3" src="assets/static/user_icon.png" alt="">
+                                        <h6 class="pt-1 ps-2 pe-2"><?php echo $out2?></h6>
                                     </div>
                                 </div>
                             </div>
@@ -302,10 +302,10 @@
                                 <img src="assets/static/tenis.png" styles="max-width: 100%;">
                                 <div class="cuerpo">
                                     <div class="descripciones">
-                                        <h5><?php echo $fila['nombre'];?></h5>   
-                                        <h5 style="color:orange;">Tenis</h5>
-                                        <h5><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
-                                        <h6><?php echo $fila['ciudad'];?></h6>
+                                        <h5 class="pt-3 ps-2 pe-2"><?php echo $fila['nombre'];?></h5>   
+                                        <h5 class="pt-1 ps-2 pe-2" style="color:orange;">Tenis</h5>
+                                        <h5 class="pt-1 ps-2 pe-2 fs-6"><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
+                                        <h6 class="pt-1 ps-2 pe-2"><?php echo $fila['ciudad'];?></h6>
                                     </div>
                                     <div class="cantidad">
                                         <?php  
@@ -315,8 +315,8 @@
                                             $row2 = $res2->fetch_array();
                                             $out2 = $row2[0]; 
                                         ?>     
-                                        <img class="icono-mini" src="assets/static/user_icon.png" alt="">
-                                        <h6><?php echo $out2?></h6>
+                                        <img class="icono-mini ms-3" src="assets/static/user_icon.png" alt="">
+                                        <h6 class="pt-1 ps-2 pe-2"><?php echo $out2?></h6>
                                     </div>
                                 </div>
                             </div>
@@ -342,10 +342,10 @@
                                 <img src="assets/static/beisbol.png" styles="max-width: 100%;">
                                 <div class="cuerpo">
                                     <div class="descripciones">
-                                        <h5><?php echo $fila['nombre'];?></h5>    
-                                        <h5 style="color:orange;">Beisbol</h5>
-                                        <h5><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
-                                        <h6><?php echo $fila['ciudad'];?></h6>
+                                        <h5 class="pt-3 ps-2 pe-2"><?php echo $fila['nombre'];?></h5>    
+                                        <h5 class="pt-1 ps-2 pe-2" style="color:orange;">Beisbol</h5>
+                                        <h5 class="pt-1 ps-2 pe-2 fs-6"><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
+                                        <h6 class="pt-1 ps-2 pe-2"><?php echo $fila['ciudad'];?></h6>
                                     </div>
                                     <div class="cantidad">
                                         <?php  
@@ -355,8 +355,8 @@
                                             $row2 = $res2->fetch_array();
                                             $out2 = $row2[0]; 
                                         ?>     
-                                        <img class="icono-mini" src="assets/static/user_icon.png" alt="">
-                                        <h6><?php echo $out2?></h6>
+                                        <img class="icono-mini ms-3" src="assets/static/user_icon.png" alt="">
+                                        <h6 class="pt-1 ps-2 pe-2"><?php echo $out2?></h6>
                                     </div>
                                 </div>
                             </div>
@@ -382,10 +382,10 @@
                                 <img src="assets/static/petanca.png" styles="max-width: 100%;">
                                 <div class="cuerpo">
                                     <div class="descripciones">
-                                        <h5><?php echo $fila['nombre'];?></h5>    
-                                        <h5 style="color:orange;">Petanca</h5>
-                                        <h5><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
-                                        <h6><?php echo $fila['ciudad'];?></h6>
+                                        <h5 class="pt-3 ps-2 pe-2"><?php echo $fila['nombre'];?></h5>    
+                                        <h5 class="pt-1 ps-2 pe-2" style="color:orange;">Petanca</h5>
+                                        <h5 class="pt-1 ps-2 pe-2 fs-6"><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
+                                        <h6 class="pt-1 ps-2 pe-2"><?php echo $fila['ciudad'];?></h6>
                                     </div>
                                     <div class="cantidad">
                                         <?php  
@@ -395,8 +395,8 @@
                                             $row2 = $res2->fetch_array();
                                             $out2 = $row2[0]; 
                                         ?>     
-                                        <img class="icono-mini" src="assets/static/user_icon.png" alt="">
-                                        <h6><?php echo $out2?></h6>
+                                        <img class="icono-mini ms-3" src="assets/static/user_icon.png" alt="">
+                                        <h6 class="pt-1 ps-2 pe-2"><?php echo $out2?></h6>
                                     </div>
                                 </div>
                             </div>
@@ -422,10 +422,10 @@
                                 <img src="assets/static/voleibol.png" styles="max-width: 100%;">
                                 <div class="cuerpo">
                                     <div class="descripciones">
-                                        <h5><?php echo $fila['nombre'];?></h5>     
-                                        <h5 style="color:orange;">Voleibol</h5>
-                                        <h5><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
-                                        <h6><?php echo $fila['ciudad'];?></h6>
+                                        <h5 class="pt-3 ps-2 pe-2"><?php echo $fila['nombre'];?></h5>     
+                                        <h5 class="pt-1 ps-2 pe-2" style="color:orange;">Voleibol</h5>
+                                        <h5 class="pt-1 ps-2 pe-2 fs-6"><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
+                                        <h6 class="pt-1 ps-2 pe-2"><?php echo $fila['ciudad'];?></h6>
                                     </div>
                                     <div class="cantidad">
                                         <?php  
@@ -435,8 +435,8 @@
                                             $row2 = $res2->fetch_array();
                                             $out2 = $row2[0]; 
                                         ?>     
-                                        <img class="icono-mini" src="assets/static/user_icon.png" alt="">
-                                        <h6><?php echo $out2?></h6>
+                                        <img class="icono-mini ms-3" src="assets/static/user_icon.png" alt="">
+                                        <h6 class="pt-1 ps-2 pe-2"><?php echo $out2?></h6>
                                     </div>
                                 </div>
                             </div>
@@ -462,10 +462,10 @@
                                 <img src="assets/static/ciclismo.png" styles="max-width: 100%;">
                                 <div class="cuerpo">
                                     <div class="descripciones">
-                                        <h5><?php echo $fila['nombre'];?></h5>  
-                                        <h5 style="color:orange;">Ciclismo</h5>
-                                        <h5><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
-                                        <h6><?php echo $fila['ciudad'];?></h6>
+                                        <h5 class="pt-3 ps-2 pe-2"><?php echo $fila['nombre'];?></h5>  
+                                        <h5 class="pt-1 ps-2 pe-2" style="color:orange;">Ciclismo</h5>
+                                        <h5 class="pt-1 ps-2 pe-2 fs-6"><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
+                                        <h6 class="pt-1 ps-2 pe-2"><?php echo $fila['ciudad'];?></h6>
                                     </div>
                                     <div class="cantidad">
                                         <?php  
@@ -475,8 +475,8 @@
                                             $row2 = $res2->fetch_array();
                                             $out2 = $row2[0]; 
                                         ?>     
-                                        <img class="icono-mini" src="assets/static/user_icon.png" alt="">
-                                        <h6><?php echo $out2?></h6>
+                                        <img class="icono-mini ms-3" src="assets/static/user_icon.png" alt="">
+                                        <h6 class="pt-1 ps-2 pe-2"><?php echo $out2?></h6>
                                     </div>
                                 </div>
                             </div>
@@ -502,10 +502,10 @@
                                 <img src="assets/static/senderismo.png" styles="max-width: 100%;">
                                 <div class="cuerpo">
                                     <div class="descripciones">
-                                        <h5><?php echo $fila['nombre'];?></h5>    
-                                        <h5 style="color:orange;">Senderismo</h5>
-                                        <h5><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
-                                        <h6><?php echo $fila['ciudad'];?></h6>
+                                        <h5 class="pt-3 ps-2 pe-2"><?php echo $fila['nombre'];?></h5>    
+                                        <h5 class="pt-1 ps-2 pe-2" style="color:orange;">Senderismo</h5>
+                                        <h5 class="pt-1 ps-2 pe-2 fs-6"><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
+                                        <h6 class="pt-1 ps-2 pe-2"><?php echo $fila['ciudad'];?></h6>
                                     </div>
                                     <div class="cantidad">
                                         <?php  
@@ -515,8 +515,8 @@
                                             $row2 = $res2->fetch_array();
                                             $out2 = $row2[0]; 
                                         ?>     
-                                        <img class="icono-mini" src="assets/static/user_icon.png" alt="">
-                                        <h6><?php echo $out2?></h6>
+                                        <img class="icono-mini ms-3" src="assets/static/user_icon.png" alt="">
+                                        <h6 class="pt-1 ps-2 pe-2"><?php echo $out2?></h6>
                                     </div>
                                 </div>
                             </div>
