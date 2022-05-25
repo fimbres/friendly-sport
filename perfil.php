@@ -172,56 +172,60 @@
         ?>     
         
         <!--Info de usuario-->
-        <div class="contenido_perfil">
-            <div class="division1_perfil">
-                <div class="imagen_perfil">
-                    <img src="assets/static/user_icon2.png" alt="">
-                </div>
-                <div class="textos_perfil">
-                    <h1 class="nombre-usuario"><?php echo $usuario['nombre_usuario'];?></h1>
-                    <h4>Deportes de interés: 
-                    <?php 
-                        $cadena = "| ";
-                        foreach($preferidos as $preferido){
-                            $cadena .= $preferido . " | ";
-                        }
-                        
-                    ?>
-                        <span class="fs-6"><?php echo $cadena;?></span>
-                    </h4>
-                    <h4>Edad:<span class="fs-6"> <?php echo $usuario['edad'];?></span></h4>
-                    <h4>Correo Electrónico:<span class="fs-6"> <?php echo $usuario['email'];?></span></h4>
+        <div class="container">
+            <div class="container d-flex align-items-center justify-content-center">
+                <div class="row justify-content-center">
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 d-flex align-items-center justify-content-center">
+                        <img src="assets/static/user_icon2.png" alt="">
+                    </div>
+                    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12">
+                        <h1 class="nombre-usuario pt-3 ps-4"><?php echo $usuario['nombre_usuario'];?></h1>
+                        <h4 class="ps-4">Deportes de interés: 
+                        <?php 
+                            $cadena = "| ";
+                            foreach($preferidos as $preferido){
+                                $cadena .= $preferido . " | ";
+                            }
+                            
+                        ?>
+                            <span class="fs-6"><?php echo $cadena;?></span>
+                        </h4>
+                        <h4 class="ps-4">Edad:<span class="fs-6"> <?php echo $usuario['edad'];?></span></h4>
+                        <h4 class="ps-4">Correo Electrónico:<span class="fs-6"> <?php echo $usuario['email'];?></span></h4>
+                    </div>
                 </div>
             </div>
-            <div class="division2_perfil">
-                <h4>Tus eventos: </h4>
-                <div class="eventos_perfil">
-                    <?php foreach($eventos as $fila){?>            
-                                
-                    <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
-                        <img src="assets/static/<?php echo $nombres_imagenes[$deportes[$fila['id_evento']]['id_deporte']] ?>" styles="max-width: 100%;">
-                        <div class="cuerpo">
-                            <div class="descripciones">
-                                <h5><?php echo $fila['nombre'];?> - <?php echo $fila['id_evento'];?></h5>   
-                                <h5 style="color:orange;"><?php echo $nombres_deportes[$deportes[$fila['id_evento']]['id_deporte']] ?></h5>
-                                <h5><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
-                                <h6><?php echo $fila['ciudad'];?></h6>
-                            </div>
-                            <div class="cantidad">
-                                <?php  
-                                $id_evento2 = $fila['id_evento'];
-                                $query2 = "SELECT COUNT(id_usuario) FROM tb_relacion_usuarios_eventos WHERE id_evento = $id_evento2";
-                                $res2 = mysqli_query($BD,$query2);
-                                $row2 = $res2->fetch_array();
-                                $out2 = $row2[0]; 
-                                ?>     
-                                <img class="icono-mini" src="assets/static/user_icon.png" alt="">
-                                <h6><?php echo $out2?></h6>
+            <div class="container d-flex align-items-center justify-content-center mt-5">
+                <div class="row justify-content-center mt-2">
+                    <h4 class="ps-4 txtEtiqueta">Tus eventos</h4>
+                    <div class="col-12 container container-tarjetas">
+                        <?php foreach($eventos as $fila){?>            
+                        
+                        <div <?php echo 'id="'.$fila['id_evento'].'"';?> class="tarjeta">
+                            <img src="assets/static/<?php echo $nombres_imagenes[$deportes[$fila['id_evento']]['id_deporte']] ?>" styles="max-width: 100%;">
+                            <div class="cuerpo">
+                                <div class="descripciones">
+                                    <h5 class="pt-3 ps-2 pe-2"><?php echo $fila['nombre'];?> - <?php echo $fila['id_evento'];?></h5>   
+                                    <h5 class="pt-1 ps-2 pe-2" style="color:orange;"><?php echo $nombres_deportes[$deportes[$fila['id_evento']]['id_deporte']] ?></h5>
+                                    <h5 class="pt-1 ps-2 pe-2 fs-6"><?php echo $fila['fecha'];?> - <?php echo $fila['hora_inicio'];?></h5>
+                                    <h6><?php echo $fila['ciudad'];?></h6>
+                                </div>
+                                <div class="cantidad">
+                                    <?php  
+                                    $id_evento2 = $fila['id_evento'];
+                                    $query2 = "SELECT COUNT(id_usuario) FROM tb_relacion_usuarios_eventos WHERE id_evento = $id_evento2";
+                                    $res2 = mysqli_query($BD,$query2);
+                                    $row2 = $res2->fetch_array();
+                                    $out2 = $row2[0]; 
+                                    ?>     
+                                    <img class="icono-mini ms-3" src="assets/static/user_icon.png" alt="">
+                                    <h6 class="pt-1 ps-2 pe-2"><?php echo $out2?></h6>
+                                </div>
                             </div>
                         </div>
+                        <?php }
+                        $BD->close();?>
                     </div>
-                    <?php }
-                    $BD->close();?>
                 </div>
             </div>
         </div>

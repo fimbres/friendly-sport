@@ -44,7 +44,8 @@
 .eventos_perfil::-webkit-scrollbar {
   display: none;
 }
-.eventos_perfil > .tarjeta:hover {
+
+.container-tarjetas > .tarjeta:hover {
   transform: scale(1.05);
 }
 
@@ -68,4 +69,25 @@
 
 .modal1 {
   display: flex;
+}
+
+.container-tarjetas{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.txtEtiqueta{
+
+}
+
+@media screen and (max-width: 600px){
+  .container-tarjetas{
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .txtEtiqueta{
+    text-align:center;
+  }
 }
