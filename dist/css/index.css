@@ -198,6 +198,10 @@ a.boton_crear:hover {
   height: 26px;
 }
 
+.enfrente,.atras{
+  border:none;
+}
+
 footer{
   width:100%;
   bottom:0;

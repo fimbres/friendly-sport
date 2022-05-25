@@ -171,7 +171,7 @@
                     <!-- SOCCER-->   
                     <?php if ($soccer):{?>
                     <div class="soccer">
-                        <h6>Futbol Soccer</h6>
+                        <h5 class="pt-3 ps-3">Futbol Soccer</h5>
                         <div class="contenedor">
                             <button class="swiper atras">
                                 <div class="triangulo"></div>
@@ -211,7 +211,7 @@
                         <!-- AMERICANO-->
                     <?php if ($americano):{?>
                     <div class="americano">
-                        <h6>Futbol Americano</h6>
+                        <h5 class="pt-3 ps-3">Futbol Americano</h5>
                         <div class="contenedor">
                         <button class="swiper atras">
                             <div class="triangulo"></div>
@@ -251,7 +251,7 @@
                     <!-- BALONCESTO-->
                     <?php if ($baloncesto):?>
                       <div class="baloncesto">
-                        <h6>Baloncesto</h6>
+                        <h5 class="pt-3 ps-3">Baloncesto</h5>
                     <div class="contenedor">
                         <button class="swiper atras">
                             <div class="triangulo"></div>
@@ -291,7 +291,7 @@
                     <!-- TENIS-->
                     <?php if ($tenis):?>
                     <div class="tenis">
-                        <h6>Tenis</h6>
+                        <h5 class="pt-3 ps-3">Tenis</h5>
                     <div class="contenedor">
                         <button class="swiper atras">
                             <div class="triangulo"></div>
@@ -331,7 +331,7 @@
                     <!-- BEISBOL-->
                     <?php if ($beisbol):?>
                       <div class="beisbol">
-                        <h6>Beisbol</h6>
+                        <h5 class="pt-3 ps-3">Beisbol</h5>
                     <div class="contenedor">
                         <button class="swiper atras">
                             <div class="triangulo"></div>
@@ -371,7 +371,7 @@
                     <!-- PETANCA-->
                     <?php if ($petanca):?>
                     <div class="petanca">
-                        <h6>Petanca</h6>
+                        <h5 class="pt-3 ps-3">Petanca</h5>
                     <div class="contenedor">
                         <button class="swiper atras">
                             <div class="triangulo"></div>
@@ -411,7 +411,7 @@
                     <!-- VOLEIBOL-->
                     <?php if ($voleibol):?>
                       <div class="voleibol">
-                        <h6>Voleibol</h6>
+                        <h5 class="pt-3 ps-3">Voleibol</h5>
                     <div class="contenedor">
                         <button class="swiper atras">
                             <div class="triangulo"></div>
@@ -451,7 +451,7 @@
                     <!-- CICLISMO-->
                     <?php if ($ciclismo):?>
                       <div class="ciclismo">
-                        <h6>Ciclismo</h6>
+                        <h5 class="pt-3 ps-3">Ciclismo</h5>
                     <div class="contenedor">
                         <button class="swiper atras">
                             <div class="triangulo"></div>
@@ -491,7 +491,7 @@
                     <!-- SENDERISMO--> 
                     <?php if ($senderismo):?>
                     <div class="senderismo">
-                        <h6>Senderismo</h6>
+                        <h5 class="pt-3 ps-3">Senderismo</h5>
                     <div class="contenedor">
                         <button class="swiper atras">
                             <div class="triangulo"></div>
