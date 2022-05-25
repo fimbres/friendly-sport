@@ -86,6 +86,7 @@
         <!-- Google fonts-->
          <!-- Core theme CSS (includes Bootstrap)-->
         <link href="dist/css/styles.css" rel="stylesheet" />
+        <link href="dist/css/index.css" rel="stylesheet" />
         <link href="dist/css/welcome_styles.css" rel="stylesheet" />
         <link href="dist/css/evento_agregar.css" rel="stylesheet" />
         <link href="dist/css/editar_evento.css" rel="stylesheet" />
@@ -105,7 +106,7 @@
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
                             <li class="nav-item"><a class="boton_sesion" href="perfil.php">Mi cuenta</a></li>
-                            <li class="nav-item"><a class="boton_registro" href="includes/utils/cerrar_sesion.php">Cerrar sesion</a></li>
+                            <li class="nav-item"><a class="boton_salir" href="includes/logout.php">Cerrar sesion</a></li>
                         </ul>
                     </div>
                 </div>
