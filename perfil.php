@@ -77,6 +77,7 @@
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
                             <li class="nav-item"><a class="boton_perfil" href="index.php">Homepage</a></li>
+                            <li class="nav-item"><a class="boton_salir" href="includes/logout.php">Cerrar sesion</a></li>
                         </ul>
                     </div>
                 </div>
@@ -170,6 +171,7 @@
 
         ?>     
         
+        <!--Info de usuario-->
         <div class="contenido_perfil">
             <div class="division1_perfil">
                 <div class="imagen_perfil">
@@ -177,17 +179,18 @@
                 </div>
                 <div class="textos_perfil">
                     <h1 class="nombre-usuario"><?php echo $usuario['nombre_usuario'];?></h1>
-                    <h2>Deportes de interés: 
+                    <h4>Deportes de interés: 
                     <?php 
                         $cadena = "| ";
                         foreach($preferidos as $preferido){
                             $cadena .= $preferido . " | ";
                         }
-                        echo $cadena;
+                        
                     ?>
-                    </h2>
-                    <h2>Edad: <?php echo $usuario['edad'];?></h2>
-                    <h2>Correo Electrónico: <?php echo $usuario['email'];?></h2>
+                        <span class="fs-6"><?php echo $cadena;?></span>
+                    </h4>
+                    <h4>Edad:<span class="fs-6"> <?php echo $usuario['edad'];?></span></h4>
+                    <h4>Correo Electrónico:<span class="fs-6"> <?php echo $usuario['email'];?></span></h4>
                 </div>
             </div>
             <div class="division2_perfil">
@@ -221,9 +224,9 @@
                     $BD->close();?>
                 </div>
             </div>
-
-
         </div>
+
+        <!--MODAL CANCELAR EVENTO-->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -249,6 +252,8 @@
                 </div>
             </div>
         </div>
+
+        <!--MODAL EVENTO CANCELADO-->
         <div class="modal fade" id="exampleModalToggle2" data-bs-backdrop="static" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -268,11 +273,9 @@
             </div>
         </div>    
 
+        <!--TARJETA INFORMACION DEL EVENTO-->
         <div id="container-show-event" class="z-index-bg bg-transparence position-fixed top-0 bottom-0 start-0 end-0 d-flex justify-content-center align-items-center align-self-center d-none">
-            
-
             <div class="z-index-form form-wrapper">
-
                 <div class="card card-max-h-custom scroll">
 
                     <div id="div-info-loading" class="container-fluid bg-light d-flex align-items-center justify-content-center d-none">
