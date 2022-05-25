@@ -104,7 +104,7 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-                            <li class="nav-item"><a class="boton_sesion" href="">Mi cuenta</a></li>
+                            <li class="nav-item"><a class="boton_sesion" href="perfil.php">Mi cuenta</a></li>
                             <li class="nav-item"><a class="boton_registro" href="includes/utils/cerrar_sesion.php">Cerrar sesion</a></li>
                         </ul>
                     </div>
