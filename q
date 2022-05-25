@@ -1,0 +1,120 @@
+[33m20b87ce[m[33m ([m[1;36mHEAD -> [m[1;32mfeat/fixes[m[33m, [m[1;32mmaster[m[33m)[m Merge branch 'feat/fixes'
+[33m36f2e23[m Merge branch 'master' of https://github.com/fimbres/sport-php
+[33m9c8a4e6[m[33m ([m[1;31morigin/feat/fixes[m[33m)[m fixes: responsive design index
+[33ma8c456f[m fixes: mejoras en el desplazamiento de tarjetas y estilos visuales
+[33m18229b3[m fixes: footer arreglado, estilos tarjetas
+[33mdcf6ed1[m fixes: perfil - responsive design
+[33meaea7a4[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m Merge pull request #50 from fimbres/feat/mostrar-perfil
+[33m5170d0a[m[33m ([m[1;31morigin/feat/mostrar-perfil[m[33m)[m boton mi cuenta
+[33ma8b022d[m Correcion de rutas, y estilos
+[33m92045c7[m Merge pull request #49 from fimbres/feat/evaluar_sistema
+[33mfdaf200[m[33m ([m[1;31morigin/feat/evaluar_sistema[m[33m, [m[1;32mfeat/evaluar_sistema[m[33m)[m Evaluar sistema: correcciones en consultas a base de datos y verificacion de evaluaciones
+[33m03ce5bb[m Merge pull request #48 from fimbres/feat/mostrar-perfil
+[33m7fe7635[m commit final
+[33m33a7717[m commit final a eventos
+[33mf8c49ab[m borrar evento desde perfil
+[33m881ccd5[m Merge pull request #47 from fimbres/feat/evaluar_sistema
+[33mf60cbea[m Evalur_sistema: se programo la evaluacion del sistema, mensajes de error y validacion
+[33m5ecac0d[m boton de editar
+[33m87e9e0b[m commit largo
+[33m41f2ec6[m Evaluar sistema: diseno de formulario para evaluar el sistema
+[33m3a6c716[m Merge pull request #46 from fimbres/feat/cancelar-evento
+[33m3c50e73[m[33m ([m[1;31morigin/feat/cancelar-evento[m[33m)[m commit final
+[33m30fb9f9[m Update geolocation.php
+[33mfe04bd2[m fix: caso de no eventos
+[33m1ff310d[m archivos creados
+[33m208cde6[m primer commit
+[33me609d05[m Modificacion del archivo README
+[33m5933215[m Merge pull request #43 from fimbres/feat/evento_inscribirse
+[33m9e88f08[m[33m ([m[1;31morigin/feat/evento_inscribirse[m[33m, [m[1;32mfeat/evento_inscribirse[m[33m)[m Evento inscribirse: se implemento mostrar la ubicacion del evento
+[33m325dd42[m Merge pull request #42 from fimbres/feat/evento_inscribirse
+[33mb7d57ac[m Evento inscribirse: se agregaron las imagenes banner de la tarjeta donde se muestra el evento
+[33md611524[m Merge pull request #41 from fimbres/feat/editar-evento
+[33ma227ab4[m Merge pull request #40 from fimbres/feat/index
+[33md8ed541[m[33m ([m[1;31morigin/feat/editar-evento[m[33m)[m Edicion completa del evento
+[33m3aed0c7[m Formulario terminado
+[33m610d390[m[33m ([m[1;31morigin/feat/index[m[33m)[m filtro de eventos lejanos
+[33m37066ec[m Código base para editar evento
+[33ma3873aa[m Merge pull request #39 from fimbres/feat/crear-evento
+[33m539acf9[m[33m ([m[1;31morigin/feat/crear-evento[m[33m)[m Corrección de errores
+[33mc68149b[m fix: fechas de eventos
+[33ma0d131e[m Merge pull request #38 from fimbres/feat/evento_inscribirse
+[33m6cbe031[m Evento inscribirse
+[33mca41245[m Evento inscribirse: Correccion de errores en mostrar informacion de eventos
+[33m468b373[m Merge pull request #37 from fimbres/feat/fix-vertti
+[33m3ec40e1[m[33m ([m[1;31morigin/feat/fix-vertti[m[33m)[m fixes varios
+[33m9a00b20[m fix crear
+[33mcd11e95[m fix css
+[33m41f7d4f[m Merge pull request #36 from fimbres/feat/index
+[33m569e325[m[33m ([m[1;32mfeat/index[m[33m)[m Merge branch 'master' into feat/index
+[33m1bd5823[m ultimo
+[33mc67e574[m ancho de visa arreglado
+[33m9cddcd0[m[33m ([m[1;32mfeat/crear-evento[m[33m)[m Merge pull request #35 from fimbres/feat/evento_inscribirse
+[33m32df991[m evento_inscribirse: se agrego la funcionalidad de cancelar subscripcion, actualizar la lista de usuario inscritos al cancelar e inscribirse al evento
+[33mb357c8e[m ultimo commit antes de push
+[33m4f1246a[m inscribirse evento: correcion de errores al inscribirse, mostrar lista de usuarios inscritos y cantidad
+[33mb390bfb[m tarjetas funcionando completo
+[33m56f5c1a[m inscribirse evento: limpieza codigo solicitar datos - informacion_evento.php
+[33mb52ad4e[m inscribirse evento: correccion desbordamiento
+[33mcc6405c[m Merge pull request #34 from fimbres/feat/evento_inscribirse
+[33me677bd6[m Inscribirse_evento: nuevas funcionalidades, mostrar informacion de evento
+[33m6ed83a2[m Inscribirse a evento: Se agregaron funcionalidades,banner, informacion de los campos
+[33mbb25fc3[m[33m ([m[1;32mfeat/crear-cuenta[m[33m, [m[1;32mcrear-evento[m[33m)[m Merge branch 'feat/index' of https://github.com/fimbres/sport-php into feat/index
+[33mbc989d3[m Inscribirse: Programacion para obtener informacion de la base de datos
+[33m9f20dd8[m layout de tarjetas
+[33mc382ab4[m Merge pull request #33 from fimbres/feat/crear-evento
+[33m79ff22b[m Agregado de coordenadas
+[33m5872e3f[m eventos obtenidos
+[33m4b55224[m Creación de la parte google maps
+[33md500d93[m Diseño inscribirse a evento
+[33mb40db29[m commit final 5/10
+[33m3cad5f6[m pagina sin eventos basica
+[33ma14b75c[m Merge branch 'feat/crear-evento' of https://github.com/fimbres/sport-php into feat/crear-evento
+[33mba65037[m primer commit
+[33mbbb17eb[m Creacion de evento
+[33m77736b3[m Validación simple
+[33mae2b245[m Creación del formulario
+[33m88b45b1[m Merge pull request #32 from fimbres/feat/reestablecer-contrasea
+[33me25e7cb[m[33m ([m[1;31morigin/feat/reestablecer-contrasea[m[33m)[m Merge para resolver conflicts
+[33m4cdf548[m 2 - Agregado completo de PHPMailer
+[33md37865c[m Merge pull request #28 from fimbres/feat/crear-cuenta
+[33m2c19cd7[m[33m ([m[1;31morigin/feat/crear-cuenta[m[33m)[m Merge remote-tracking branch 'origin/master' into feat/crear-cuenta
+[33md9b9227[m 1 - Agregado del PHPMailer
+[33m550c02e[m Merge branch 'master' into feat/reestablecer-contrasea
+[33m6205e30[m Merge pull request #29 from fimbres/feat/login
+[33m9ed09b1[m[33m ([m[1;31morigin/feat/login[m[33m)[m Login: Correccion de pruebas, se cambio el requisito para inicio de sesion de email a usuario
+[33m359dac7[m Error 3 - solucionado
+[33m9da8e19[m Merge pull request #27 from fimbres/feat/login
+[33m07cbdc1[m Login: diseño responsive, verificacion de sesiones
+[33m4629d9d[m Error 1 - solucionado
+[33mca2c395[m Formato html del correo
+[33m899d5ad[m Envio de email
+[33mfbf4a0f[m Formulario
+[33mb3adaac[m Merge pull request #26 from fimbres/feat/login
+[33m116404b[m Login: se corrigio el nombre de los archivos y se valido el tamaño de caracteres de los campos
+[33ma65901f[m Login: Correccion de archivos de conexion
+[33m4958dc2[m Merge branch 'master' into feat/login
+[33me8aa950[m Login: Correccion de variables de sesion
+[33mda347a7[m Login: programacion Backend
+[33m79201ad[m Merge pull request #25 from fimbres/feat/crear-cuenta
+[33m7153789[m Merge pull request #24 from fimbres/feat/welcome
+[33md1894c3[m Agregado a la base de datos
+[33m63e7057[m[33m ([m[1;31morigin/feat/welcome[m[33m)[m fix: margen de gradiante
+[33m2557e9f[m Arreglos a la verificación de formulario
+[33m1732b66[m Verificación del formulario - 2
+[33m4d96ba4[m Verificacion del formulario - 1
+[33m61f01b7[m Creacion del formulario
+[33m080d4c1[m Diseño del Login
+[33m59a15f2[m Merge remote-tracking branch 'origin/master' into feat/crear-cuenta
+[33m7a08935[m Base de la pagina
+[33m6b9fd7b[m Test creacion de la rama feat/login
+[33m3a0bffb[m Merge pull request #23 from fimbres/feat/welcome
+[33m1671f9c[m footer de la pagina
+[33m378ea0b[m fix: pagina no era resposiva
+[33m295a9a9[m cuerpo del landing
+[33mb1aa846[m navbar y botones
+[33mffb244b[m primer commit, bootstrap y staticos agregados
+[33m6e44ce2[m Update README.md
+[33mcd2e376[m Update README.md
+[33mc14f4a4[m Create README.md
+[33m5628277[m First version of the system
