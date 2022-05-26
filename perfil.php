@@ -351,7 +351,7 @@
 
                                 <div class="col-md-3 col-xs-12 col-lg-3 col-xl-3 col-sm-12">
                                     <div class="container-fluid d-flex justify-content-center align-items-center">
-                                        <img class="rounded-circle p-2" src="assets/static/user_example_image.jpg" width="120px"  height="120px" alt=""/>
+                                        <img class="rounded-circle p-2" src="assets/static/user_icon2.png" width="120px"  height="120px" alt=""/>
                                     </div>
                                     
                                     <div class="container-fluid">
