@@ -477,12 +477,15 @@ $(document).ready(function () {
         let segundos = fecha.getSeconds();
 
         let hora_min;
+        let mes_max = mes;
+        let anio_max = anio;
         if (hora > 21) {
             hora_min = (hora - 24) + 3;
         } else {
             hora_min = hora + 3;
         }
         let dia_max;
+        
         switch (mes) {
             //31
             case 1:
@@ -492,7 +495,11 @@ $(document).ready(function () {
             case 8:
             case 10:
             case 12:
+                mes_max = 1 + mes;
                 if (dia >= 27) {
+                    if(mes == 12){
+                        anio_max = anio + 1;
+                    }
                     dia_max = (dia - 31) + 5;
                 } else {
                     dia_max = dia + 5;
@@ -503,6 +510,7 @@ $(document).ready(function () {
             case 6:
             case 9:
             case 11:
+                mes_max = 1 + mes;
                 if (dia >= 26) {
                     dia_max = (dia - 30) + 5;
                 } else {
@@ -510,6 +518,7 @@ $(document).ready(function () {
                 }
                 break;
             case 2:
+                mes_max = 1 + mes;
                 if ((anio % 4) == 0) {
                     if (dia >= 25) {
                         dia_max = (dia - 29) + 5;
@@ -527,6 +536,9 @@ $(document).ready(function () {
         }
         if (mes < 10) {
             mes = "0" + mes;
+        }
+        if(mes_max < 10){
+            mes_max = "0"+mes_max;
         }
         if (dia < 10) {
             dia = "0" + dia;
@@ -547,7 +559,8 @@ $(document).ready(function () {
             dia_max = "0" + dia_max;
         }
         let fecha_min = anio + '-' + mes + '-' + dia + 'T' + hora_min + ':' + minutos;
-        let fecha_max = anio + '-' + mes + '-' + dia_max + 'T' + hora + ':' + minutos;
+        let fecha_max = anio_max + '-' + mes_max + '-' + dia_max + 'T' + hora + ':' + minutos;
+        
         $('.form-dia-hora').attr('min', fecha_min);
         $('.form-dia-hora').attr('max', fecha_max);
         $('#fecha_min').attr('value', fecha_min);
