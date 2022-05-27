@@ -150,15 +150,15 @@
             ];
 
             $nombres_imagenes = [
-                1 => "soccer.png",
-                2 => "football.png",
-                3 => "basketball.png",
-                4 => "tenis.png",
-                5 => "beisbol.png",
-                6 => "petanca.png",
-                7 => "voleibol.png",
-                8 => "ciclismo.png",
-                9 => "senderismo.png",
+                1 => "Futbol_soccer.png",
+                2 => "Futbol_americano.png",
+                3 => "Baloncesto.png",
+                4 => "Tenis.png",
+                5 => "Beisbol.png",
+                6 => "Petanca.png",
+                7 => "Voleibol.png",
+                8 => "Ciclismo.png",
+                9 => "Senderismo.png",
             ];
 
             $preferidos = [];
