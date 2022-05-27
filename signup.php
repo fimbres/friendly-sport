@@ -175,12 +175,12 @@ $BD->close();
                                 <h3 class="text-center pt-4" style="font-family: 'Abel', sans-serif;">
                                     Selecciona mínimo un deporte de tu interés
                                 </h3>
-                                <div class="form-row row check-deportes pt-4">
+                                <div class="check-deportes">
                                     <?php 
                                         foreach($deportes as $dep){
                                             if(!empty($dep)){
                                     ?>
-                                        <div class="form-check col-3 text-center">
+                                        <div class="form-check">
                                         <label class="form-check-label">
                                             <input class="form-check-input" 
                                             type="checkbox" value="<?php echo $dep['id_deporte'];?>"
