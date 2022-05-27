@@ -3,6 +3,228 @@ let marcador
 let geoLoc
 let latitud
 let longitude
+
+function init_tarjeta(){
+    const closeEvent = document.querySelector("#btnCloseEvent");
+            const containerEvent = document.querySelector("#container-show-event");
+            
+            //SALIR DE LA INFORMACION DEL EVENTO
+            closeEvent.addEventListener("click", function(evento){
+                $('#info-inscribirse-notificacion').text(" ");
+                $('#container-show-event').addClass('d-none');
+                $('#page-top').removeClass('overflow-hidden');
+                $('#btnRetirarse').addClass('d-none');
+                $('#btnInscribirse').removeClass('d-none');
+            });
+    //MOSTRAR INFORMACION DEL EVENTO
+    $('.tarjeta').on('click', function(event) 
+    {
+        $('#container-show-event').removeClass('d-none');
+
+        window.idEvento = jQuery(this).attr("id");
+
+
+        if(idEvento != "")
+        {
+            $.ajax({
+                    type:'POST',
+                    url:'includes/informacion_evento.php',
+                    dataType:'JSON',
+                    data: {idEvento: idEvento},
+                    beforeSend:function(data){
+                        $('#div-info-banner').addClass('d-none');
+                        $('#div-info-body').addClass('d-none');
+                        $('#div-info-loading').removeClass("d-none");
+                        $('#page-top').addClass('overflow-hidden');
+                        console.log(idEvento);
+                    },  
+                    success:function(data){
+                        if(data.response == "Success"){     
+                            $('#img-info-banner').attr("src","assets/static/"+data.Nombre_deporte+"_banner_info.jpg");
+                            $('#span-info-name').text(data.Nombre_evento);
+                            $('#span-info-deporte').text(data.Nombre_deporte);
+                            $('#span-info-fecha').text(data.Fecha_evento);
+                            $('#span-info-hora-inicio').text(data.Hora_inicio);
+                            $('#span-info-minutos-inicio').text(data.Minutos_inicio);
+                            $('#span-info-segundos-inicio').text(data.Segundos_inicio);
+                            $('#span-info-organizador').text(data.Nombre_organizador);
+                            $('#span-cantidad-inscritos').text(data.cantidad_inscritos);
+                            $('#span-lista-inscritos').text(data.lista_participantes);
+                            var direccion_completa = data.direccion_completa;
+                            $('#txtDireccion').val(direccion_completa);
+                            $('#div-info-loading').addClass("d-none");
+                            $('#div-info-banner').removeClass('d-none');
+                            $('#div-info-body').removeClass('d-none');
+                            mostrarmapa();
+
+                            if(data.status_inscripcion){
+                                $('#btnRetirarse').removeClass('d-none');
+                                $('#btnInscribirse').addClass('d-none');
+                            }else{
+
+                            }
+
+                            console.log(data);
+                            console.log(data.direccion_completa)
+                        }   
+                        else if (data.response == "Invalid") {
+                           console.log(data.message);
+                        }
+                    },
+                    error: function (xhr, exception) {
+                        console.log(exception);
+
+                    }
+            });
+        }
+        
+
+    });
+
+
+    //INSCRIBIRSE A UN EVENTO
+    $('#btnInscribirse').on('click', function(event) {
+
+            if(idEvento != "")
+            {
+                $.ajax({
+                        type:'POST',
+                        url:'includes/inscribirse_evento.php',
+                        dataType:'JSON',
+                        data: {idEvento: idEvento},
+                        beforeSend:function(data){
+                            $('#div-info-banner').addClass('d-none');
+                            $('#div-info-body').addClass('d-none');
+                            $('#div-info-loading').removeClass("d-none");
+                            $('#btnInscribirse').attr('disabled');
+                            $('#info-inscribirse-notificacion').text(" ");
+                        },  
+                        success:function(data){
+                            if(data.response == "Success"){  
+
+                                $('#div-info-loading').addClass("d-none");
+                                $('#info-inscribirse-notificacion').removeClass("d-none");
+                                $('#info-inscribirse-notificacion').text(data.message);
+                                setTimeout(function() { 
+                                    $('#info-inscribirse-notificacion').addClass("d-none");
+                                    $('#div-info-banner').removeClass('d-none');
+                                    $('#div-info-body').removeClass('d-none');
+                                    $('#btnInscribirse').addClass('d-none');
+                                    $('#btnRetirarse').removeClass('d-none');
+                                    $('#span-lista-inscritos').text(data.lista_participantes);
+                                }, 2000);
+                                
+                                console.log("SUCCESS");
+                                console.log(data);
+                            }   
+                            else{
+                                console.log("INVALID DATA");
+                                console.log(data);
+
+                                $('#div-info-loading').addClass("d-none");
+                                $('#info-inscribirse-notificacion').removeClass("d-none");
+                                $('#info-inscribirse-notificacion').text(data.message);
+
+                                setTimeout(function() { 
+                                    $('#info-inscribirse-notificacion').addClass("d-none");
+                                    $('#div-info-banner').removeClass('d-none');
+                                    $('#div-info-body').removeClass('d-none');
+                                    delete data;
+                                }, 2000);
+                            
+                                
+                            }
+                        },
+                        error: function (xhr, exception) {
+                            console.log(exception);
+
+                        }
+                    });
+            }
+        });
+
+
+        //RETIRARSE DE UN EVENTO
+        $('#btnRetirarse').on('click', function(event) {
+            console.log(idEvento);
+
+            if(idEvento != "")
+            {
+                $.ajax({
+                        type:'POST',
+                        url:'includes/cancelar_inscripcion_evento.php',
+                        dataType:'JSON',
+                        data: {idEvento: idEvento},
+                        beforeSend:function(data){
+                            $('#div-info-banner').addClass('d-none');
+                            $('#div-info-body').addClass('d-none');
+                            $('#div-info-loading').removeClass("d-none");
+                            $('#btnInscribirse').attr('disabled');
+                            $('#info-inscribirse-notificacion').text(" ");
+                            console.log("BeforeSend");
+                            console.log(data);
+                        },  
+                        success:function(data){
+                            if(data.response == "Success"){  
+
+                                $('#div-info-loading').addClass("d-none");
+                                $('#info-inscribirse-notificacion').removeClass("d-none");
+                                $('#info-inscribirse-notificacion').text(data.message);
+                                setTimeout(function() { 
+                                    $('#info-inscribirse-notificacion').addClass("d-none");
+                                    $('#div-info-banner').removeClass('d-none');
+                                    $('#div-info-body').removeClass('d-none');
+                                    $('#btnInscribirse').removeClass('d-none');
+                                    $('#btnRetirarse').addClass('d-none');
+                                    $('#span-lista-inscritos').text(data.lista_participantes);
+                                }, 2000);
+                                
+                                console.log("SUCCESS");
+                                console.log(data);
+                            }   
+                            else{
+                                console.log("INVALID DATA");
+                                console.log(data);
+
+                                $('#div-info-loading').addClass("d-none");
+                                $('#info-inscribirse-notificacion').removeClass("d-none");
+                                $('#info-inscribirse-notificacion').text(data.message);
+
+                                setTimeout(function() { 
+                                    $('#info-inscribirse-notificacion').addClass("d-none");
+                                    $('#div-info-banner').removeClass('d-none');
+                                    $('#div-info-body').removeClass('d-none');
+                                    delete data;
+                                }, 2000);
+                            
+                                
+                            }
+                        },
+                        error: function (xhr, exception) {
+                            console.log(exception);
+                        }
+                    });
+            }
+        });
+        const contenedorTarjetas = [...document.querySelectorAll(".eventos")];
+        const enfrente = [...document.querySelectorAll(".enfrente")];
+        const atras = [...document.querySelectorAll(".atras")];
+
+        contenedorTarjetas.forEach((item, i) => {
+        //let dimensiones = item.getBoundingClientRect();
+        let ancho = 311.85;
+        console.log(ancho);
+
+        enfrente[i].addEventListener("click", () => {
+            item.scrollLeft += ancho;
+        });
+
+        atras[i].addEventListener("click", () => {
+            item.scrollLeft -= ancho;
+        });
+        });
+
+}
 function initMapa_edicion_evento() {
     if (navigator.geolocation) {
         let temp = ($('#direccion').val()).split(',')
@@ -70,6 +292,7 @@ function initMapa_info_evento() {
 function initMapa() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
+            
             latitud = position.coords.latitude;
             longitude = position.coords.longitude;
 
@@ -130,11 +353,120 @@ function showLocationOnMap(position) {
     mapa.setCenter(myLating);
 }
 
+function configurar_radio(){
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position){
+            let latitud = position.coords.latitude;
+            let longitude = position.coords.longitude;
+            let myLating = new google.maps.LatLng(latitud, longitude)
+            $.ajax({
+                type:'POST',
+                url:'includes/utils/conseguir_eventos.php',
+                dataType:'JSON',  
+                success:function(data){
+                    if(data.response == "Success"){
+                        if(data.tarjeta){
+                            let eventos = [];
+                            $.each(data.tarjeta,function (){
+                                let la_le = this.coordenadas.split(',')
+                                let coor = new google.maps.LatLng(la_le[0], la_le[1])
+                                let metros = google.maps.geometry.spherical.computeDistanceBetween(myLating,coor)
+                                if(metros <= 15000){
+                                    let array_fecha = this.fecha.split('-')
+                                    let array_hora = this.hora.split(':')
+                                    let fecha_act = new Date()
+                                    let fecha_tarj = new Date(array_fecha[0],array_fecha[1]-1,array_fecha[2]);
+                                    fecha_tarj.setHours(array_hora[0],array_hora[1],array_hora[2])
+                                    if(fecha_tarj > fecha_act)
+                                        eventos.push(this);
+                                }
+                            })
+                            if(eventos){
+                                $.each(eventos,function(){
+                                    let nom_dep = this.deporte.replace(/\s+/g, '_');
+                                    let row = $('#contenido_col_index').find('.'+ nom_dep );
+                                    if(row.length > 0){
+                                        row.find('.eventos').append(`
+                                        <div id="${this.id_evento}" class="tarjeta">
+                                            <img src="assets/static/${nom_dep}.png" styles="max-width: 100%;">
+                                            <div class="cuerpo">
+                                                <div class="descripciones">
+                                                    <h5 class="pt-3 ps-2 pe-2">${this.titulo}</h5>   
+                                                    <h5 class="pt-1 ps-2 pe-2" style="color:orange;">${this.deporte}</h5>
+                                                    <h5 class="pt-1 ps-2 pe-2 fs-6">${this.fecha} - ${this.hora}</h5>
+                                                    
+                                                </div>
+                                                <div class="cantidad">    
+                                                    <img class="icono-mini ms-3" src="assets/static/user_icon.png" alt="">
+                                                    <h6 class="pt-1 ps-2 pe-2">${this.num_usuarios}</h6>
+                                                </div>
+                                            </div>
+                                        </div>`)
+                                    } else{
+                                        $('#contenido_col_index').append(`
+                                        <div class="${nom_dep} soccer">
+                                            <h5 class="pt-3 ps-3">${this.deporte}</h5>
+                                            <div class="contenedor contenedor-principal-tarjeta">
+                                                <button class="swiper atras">
+                                                    <div class="triangulo"></div>
+                                                </button>
+                                                <div class="eventos">
+                                                    
+                                                    <div id="${this.id_evento}" class="tarjeta">
+                                                        <img src="assets/static/${nom_dep}.png" styles="max-width: 100%;">
+                                                        <div class="cuerpo">
+                                                            <div class="descripciones">
+                                                                <h5 class="pt-3 ps-2 pe-2">${this.titulo}</h5>   
+                                                                <h5 class="pt-1 ps-2 pe-2" style="color:orange;">${this.deporte}</h5>
+                                                                <h5 class="pt-1 ps-2 pe-2 fs-6">${this.fecha} - ${this.hora}</h5>
+                                                                
+                                                            </div>
+                                                            <div class="cantidad">    
+                                                                <img class="icono-mini ms-3" src="assets/static/user_icon.png" alt="">
+                                                                <h6 class="pt-1 ps-2 pe-2">${this.num_usuarios}</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <button class="swiper enfrente">
+                                                    <div class="triangulo"></div>
+                                                </button>
+                                            </div>
+                                    </div>`)
+                                    }
+                                })
+                            } else{
+                                $('#contenido_col_index').html(`<div class="vacio">
+                                    <img class="imagen" src="assets/static/lupa.png" alt="">
+                                    <p>Vaya!, no pudimos encontrar eventos en tu zona 😢, ¿Te gustaría crear uno?</p>
+                                </div>`);
+                            }
+                            
+                        }
+                        init_tarjeta()
+                        
+                    } else{
+                        $('#contenido_col_index').html(`<div class="vacio">
+                        <img class="imagen" src="assets/static/lupa.png" alt="">
+                        <p>Vaya!, no pudimos encontrar eventos en tu zona 😢, ¿Te gustaría crear uno?</p>
+                    </div>`);
+                    }
+                }
+            });
+
+        }, function(){
+            alert("NECESITAS PERMITIR EL USO DE TU UBICACIÓN")
+            location.reload();
+        })
+    } else{
+        alert("NECESITAS PERMITIR EL USO DE TU UBICACIÓN")
+        location.reload();
+    }
+}
+
 //window.iniciar_mapa = iniciar_mapa;
 $(document).ready(function () {
-    if (navigator.geolocation) {
-        //initMapa()
-    }
     if ($('.form-dia-hora').length) {
         let fecha = new Date();
         let anio = fecha.getFullYear();
@@ -261,3 +593,5 @@ $(document).ready(function () {
         }
     }
 });
+
+
