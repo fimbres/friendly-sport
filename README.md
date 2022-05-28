@@ -1,5 +1,5 @@
 # [Friendly Sport - Unete a eventos deportivos](https://sports.cleverapps.io)
-**Friendly Sport** es un nuevo proyecto web que esta basado en el lenguaje **[PHP 8.1](https://www.php.net/releases/8.0/es.php)**, junto con el uso del framework **[Bootstrap 4.6](https://getbootstrap.com/)**, ademas se uso **[JavaScript](https://www.javascript.com/)** junto al framework de **[JQuery](https://jquery.com/)**.
+**Friendly Sport** es un nuevo proyecto web que esta basado en los lenguajes **[PHP 8.1](https://www.php.net/releases/8.0/es.php)** y **[JavaScript](https://www.javascript.com/)**, empleando los framework **[Bootstrap 4.6](https://getbootstrap.com/)** y **[JQuery](https://jquery.com/)**.
 
 ## ¿Que es Friendly Sport?
 
