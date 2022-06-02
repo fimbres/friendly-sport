@@ -457,7 +457,6 @@ function configurar_radio(){
 
         }, function(){
             alert("NECESITAS PERMITIR EL USO DE TU UBICACIÓN")
-            location.reload();
         })
     } else{
         alert("NECESITAS PERMITIR EL USO DE TU UBICACIÓN")
