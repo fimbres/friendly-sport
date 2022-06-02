@@ -495,8 +495,9 @@ $(document).ready(function () {
             case 8:
             case 10:
             case 12:
-                mes_max = 1 + mes;
+                
                 if (dia >= 27) {
+                    mes_max = 1 + mes;
                     if(mes == 12){
                         anio_max = anio + 1;
                     }
@@ -510,23 +511,25 @@ $(document).ready(function () {
             case 6:
             case 9:
             case 11:
-                mes_max = 1 + mes;
                 if (dia >= 26) {
+                    mes_max = 1 + mes;
                     dia_max = (dia - 30) + 5;
                 } else {
                     dia_max = dia + 5;
                 }
                 break;
             case 2:
-                mes_max = 1 + mes;
+                
                 if ((anio % 4) == 0) {
                     if (dia >= 25) {
+                        mes_max = 1 + mes;
                         dia_max = (dia - 29) + 5;
                     } else {
                         dia_max = dia + 5;
                     }
                 } else {
                     if (dia >= 24) {
+                        mes_max = 1 + mes;
                         dia_max = (dia - 28) + 5;
                     } else {
                         dia_max = dia + 5;
